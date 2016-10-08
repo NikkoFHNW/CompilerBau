@@ -1,6 +1,6 @@
 package ch.fhnw.compiler;
 
-public class IToken implements ITokenList{
+public class TokenList implements ITokenList{
 
 	
 
