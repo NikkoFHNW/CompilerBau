@@ -6,7 +6,7 @@ public class TokenList implements ITokenList{
 
 
 	@Override
-	public void add(Base token) {
+	public void add(Token token) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -18,28 +18,14 @@ public class TokenList implements ITokenList{
 	}
 
 	@Override
-	public Base nextToken() {
+	public Token nextToken() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	public static class Base{
-		private final Terminals terminal;
-		
-		Base(Terminals t){
-			terminal=t;
-		}
-		
-		Terminals getTerminal(){
-			return terminal;
-		}
-		
-		public String toString(){
-			return terminal.toString();
-		}
-	}
+
 	
-	public static class Literals extends Base{
+	public static class Literals extends Token{
 		private final int value;
 
 		Literals(Terminals t) {
@@ -62,7 +48,7 @@ public class TokenList implements ITokenList{
 		
 	}
 	
-	public static class AddOpr extends Base{
+	public static class AddOpr extends Token{
 		private final Operators o;
 
 		AddOpr(Terminals t) {
@@ -86,13 +72,8 @@ public class TokenList implements ITokenList{
 		
 	}
 
-	public static class Ident extends Base{
+	public static class Ident extends Token{
 		private final String ident;
-		
-		Ident(Terminals t){
-			super(Terminals.IDENT);
-			ident = null;
-		}
 		
 		Ident(Terminals t,String ident){
 			super(Terminals.IDENT);
@@ -110,16 +91,10 @@ public class TokenList implements ITokenList{
 	}
 	
 	
-	public static class RelOpr extends Base{
+	public static class RelOpr extends Token{
 		private final Operators o;
-
-		RelOpr(Terminals t) {
-			super(Terminals.RELOPR);
-			this.o=null;
-			// TODO Auto-generated constructor stub
-		}
 		
-		RelOpr(Terminals t, Operators o){
+		RelOpr( Operators o){
 			super(Terminals.RELOPR);
 			this.o=o;
 		}
@@ -136,7 +111,7 @@ public class TokenList implements ITokenList{
 		
 	}
 	
-	public static class MultOpr extends Base{
+	public static class MultOpr extends Token{
 		private final Operators o;
 
 		MultOpr(Terminals t) {

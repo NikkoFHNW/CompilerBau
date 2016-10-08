@@ -2,8 +2,8 @@ package ch.fhnw.compiler;
 
 public interface ITokenList {
 
-	void add(TokenList.Base token);
+	void add(Token token);
 	void reset();
-	TokenList.Base nextToken();
+	Token nextToken();
 	String toString();
 }
