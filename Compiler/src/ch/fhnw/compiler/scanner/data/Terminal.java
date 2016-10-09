@@ -1,6 +1,6 @@
-package ch.fhnw.compiler;
+package ch.fhnw.compiler.scanner.data;
 
-public enum Terminals {
+public enum Terminal {
  LITERAL,IDENT,LEXERROR,RELOPR,
  BOOLOPR,TYPE,SENTINEL,ADDOPR,MULTOPR,
  LPAREN,RPAREN,COMMA,SEMICOLON,COLON,BECOMES,FLOWMODE,CHANGEMODE,MECHMODE,DO,

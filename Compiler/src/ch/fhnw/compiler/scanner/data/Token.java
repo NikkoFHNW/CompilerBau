@@ -1,13 +1,13 @@
-package ch.fhnw.compiler;
+package ch.fhnw.compiler.scanner.data;
 
 public class Token {
-	private final Terminals terminal;
+	private final Terminal terminal;
 	
-	Token(Terminals t){
+	public Token(Terminal t){
 		terminal=t;
 	}
 	
-	Terminals getTerminal(){
+	public Terminal getTerminal(){
 		return terminal;
 	}
 	

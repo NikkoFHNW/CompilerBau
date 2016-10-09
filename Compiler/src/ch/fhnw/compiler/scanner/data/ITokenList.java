@@ -1,4 +1,4 @@
-package ch.fhnw.compiler;
+package ch.fhnw.compiler.scanner.data;
 
 public interface ITokenList {
 
