@@ -54,6 +54,7 @@ public class Scanner {
 	}
 
 	public ITokenList scan(CharSequence cs) throws Exception {
+        assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
 
 		for (int i = 0; i < cs.length(); i++) {
 			char c = cs.charAt(i);
@@ -177,6 +178,9 @@ public class Scanner {
 			}
 
 		}
+        assert state == 0;
+
+		tList.add(new Token(Terminal.SENTINEL));
 		return tList;
 
 	}
