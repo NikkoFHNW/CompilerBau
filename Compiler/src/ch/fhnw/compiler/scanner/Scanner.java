@@ -83,7 +83,7 @@ public class Scanner {
 						tList.add(keywords.get(lexAccu.toString()));
 					}
 					tList.add(new TokenTupel(Terminal.IDENT, lexAccu.toString()));
-					lexAccu = new StringBuffer();
+					clearLexAccu();
 					i = i - 1;
 					state = 0;
 				}
@@ -104,22 +104,22 @@ public class Scanner {
 					switch (tempc) {
 					case '<':
 						tList.add(new TokenTupel(Terminal.RELOPR, Operator.LE));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						break;
 					case '>':
 						tList.add(new TokenTupel(Terminal.RELOPR, Operator.GE));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						break;
 					case ':':
 						tList.add(new Token(Terminal.BECOMES));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						break;
 					case '/':
 						tList.add(new TokenTupel(Terminal.RELOPR, Operator.NE));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						break;
 					}
@@ -128,42 +128,61 @@ public class Scanner {
 					switch (tempc) {
 					case '<':
 						tList.add(new TokenTupel(Terminal.RELOPR, Operator.LT));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						i=i-1;
 						break;
 					case '>':
 						tList.add(new TokenTupel(Terminal.RELOPR, Operator.GT));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						i=i-1;
 						break;
 					case ':':
 						tList.add(new Token(Terminal.COLON));
-						lexAccu = new StringBuffer();
+						clearLexAccu();
 						state = 0;
 						i=i-1;
 						break;
 					case '/':
-						i=i-1;
-						lexAccu = new StringBuffer();
-						state = 0;
 						throw new LexicalError("no such symbol '/' ");
 					}
 				}
 				break;
 			case 4:
-                // TODO state 4
-			    break;
+                if (c == '?') {
+					char tempc = lexAccu.charAt(0);
+					switch (tempc) {
+						case '&':
+							tList.add(new TokenTupel(Terminal.BOOLOPR, Operator.CAND));
+							clearLexAccu();
+							state = 0;
+							break;
+
+						case '|':
+							tList.add(new TokenTupel(Terminal.BOOLOPR, Operator.COR));
+							clearLexAccu();
+							state = 0;
+							break;
+					}
+				} else {
+					throw new LexicalError("no such symbol & or |");
+
+				}
+
+				break;
 
 			default:
 				throw new Exception("Default in Scanner");
 			}
 
 		}
-
 		return tList;
 
+	}
+
+	private void clearLexAccu() {
+		lexAccu = new StringBuffer();
 	}
 
 }
