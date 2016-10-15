@@ -14,6 +14,8 @@ public class Scanner {
 
 	public Scanner() {
 		initKeywords();
+		 lexAccu = new StringBuffer();
+		 tList = new TokenList();
 	}
 
 	private void initKeywords() {
@@ -55,6 +57,7 @@ public class Scanner {
 
 	public ITokenList scan(CharSequence cs) throws Exception {
         assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
+       
 
 		for (int i = 0; i < cs.length(); i++) {
 			char c = cs.charAt(i);
@@ -72,7 +75,13 @@ public class Scanner {
 				} else if (c == '&' || c == '|') {
 					state = 4; // Combines symbol with ?
 					lexAccu.append(c);
-				} else if (!Character.isWhitespace(c)) {
+				}else if(c == '('){
+					tList.add(new Token(Terminal.LPAREN));
+				}
+				else if(c==')'){
+					tList.add(new Token(Terminal.RPAREN));
+				}
+				else if (!Character.isWhitespace(c)) {
 					throw new LexicalError("state 0, other Input");
 				}
 				break;
@@ -82,8 +91,10 @@ public class Scanner {
 				} else {
 					if (keywords.containsKey(lexAccu.toString())) {
 						tList.add(keywords.get(lexAccu.toString()));
+					}else{
+						tList.add(new TokenTupel(Terminal.IDENT, lexAccu.toString()));
 					}
-					tList.add(new TokenTupel(Terminal.IDENT, lexAccu.toString()));
+
 					clearLexAccu();
 					i = i - 1;
 					state = 0;

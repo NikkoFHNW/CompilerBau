@@ -1,10 +1,43 @@
 package ch.fhnw.compiler;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import ch.fhnw.compiler.scanner.Scanner;
+import ch.fhnw.compiler.scanner.data.*;
 
 public class Compiler {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner();
+    	StringBuilder code = new StringBuilder();
+    	ITokenList tList = new TokenList();
+    	BufferedReader br;
+        try {
+			br = new BufferedReader(new FileReader("imlCodes/Factorial.iml"));
+			
+        	String line = br.readLine();
+			while(line!=null){
+				code.append(line);
+				line = br.readLine();
+			}
+			 tList=scanner.scan(code);
+			 br.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+       System.out.println(tList.toString());
     }
 }
