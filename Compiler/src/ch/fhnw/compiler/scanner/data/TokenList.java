@@ -25,6 +25,23 @@ public class TokenList implements ITokenList{
 		return list.get(index++);
 	}
 	
+	@Override
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		int c =0;
+		for(Token t : list){
+			if(c==5){
+				sb.append('\n');
+				c=-1;
+			}
+			sb.append(t.toString()+",");
+			c++;
+			
+		}
+		sb.deleteCharAt(sb.length()-1);
+		return sb.toString();
+	}
+	
 
 
 	

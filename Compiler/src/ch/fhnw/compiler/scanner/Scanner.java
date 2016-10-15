@@ -80,13 +80,27 @@ public class Scanner {
 				}
 				else if(c==')'){
 					tList.add(new Token(Terminal.RPAREN));
+				}else if(c=='*'){
+					tList.add(new TokenTupel(Terminal.MULTOPR, Operator.TIMES));
+				}else if(c=='+'){
+					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.PLUS));
+				}else if(c=='-'){
+					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.MINUS));
+				}else if(c==','){
+					tList.add(new Token(Terminal.COMMA));
+				}else if(c==';'){
+					tList.add(new Token(Terminal.SEMICOLON));
+				}else if(c=='^'){
+					tList.add(new TokenTupel(Terminal.MULTOPR,Operator.POW));
+				}else if(c=='='){
+					tList.add(new TokenTupel(Terminal.RELOPR,Operator.EQ));
 				}
 				else if (!Character.isWhitespace(c)) {
 					throw new LexicalError("state 0, other Input");
 				}
 				break;
 			case 1:
-				if (Character.isLetter(c) || Character.isDigit(c)) {
+				if (Character.isLetter(c) || Character.isDigit(c) || c=='\'') {
 					lexAccu.append(c);
 				} else {
 					if (keywords.containsKey(lexAccu.toString())) {
@@ -103,7 +117,7 @@ public class Scanner {
 			case 2:
 				if (Character.isDigit(c)) {
 					numAccu = numAccu * 10 + Character.getNumericValue(c);
-				} else {
+				} else if(c!='\''){
 					tList.add(new TokenTupel(Terminal.LITERAL, numAccu));
 					i = i - 1;
 					state = 0;
@@ -135,7 +149,14 @@ public class Scanner {
 						state = 0;
 						break;
 					}
-				}else{
+				}else if(c=='/'){
+					while(c!='\n'){
+						i++;
+						c=cs.charAt(i);
+					}
+					state=0;
+				}				
+				else{
 					char tempc = lexAccu.charAt(0);
 					switch (tempc) {
 					case '<':
