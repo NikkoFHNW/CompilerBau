@@ -30,6 +30,7 @@ public class Scanner {
         keywords.put("in", new TokenTupel(Terminal.FLOWMODE, Mode.IN));
         keywords.put("inout", new TokenTupel(Terminal.FLOWMODE, Mode.INOUT));
         keywords.put("int32", new TokenTupel(Terminal.TYPE, Type.INT32));
+        keywords.put("int64", new TokenTupel(Terminal.TYPE, Type.INT64));
         keywords.put("modE", new TokenTupel(Terminal.MULTOPR, Operator.MOD));
         keywords.put("out", new TokenTupel(Terminal.FLOWMODE, Mode.OUT));
         keywords.put("ref", new TokenTupel(Terminal.MECHMODE, Mode.REF));
