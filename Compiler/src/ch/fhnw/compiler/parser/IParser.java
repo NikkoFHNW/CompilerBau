@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser;
 
+import ch.fhnw.compiler.parser.concSynTree.Program;
 import ch.fhnw.compiler.scanner.data.Terminal;
 
 public interface IParser {
@@ -15,5 +16,5 @@ public interface IParser {
 		}
 	}
 	
-	IConcSyn.IProgram parse() throws GrammarError;
+	Program parse() throws GrammarError;
 }

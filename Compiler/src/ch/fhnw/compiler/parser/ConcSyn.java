@@ -1,12 +1,14 @@
 package ch.fhnw.compiler.parser;
 
+import ch.fhnw.compiler.parser.concSynTree.Program;
+
 public class ConcSyn implements IConcSyn{
 
 	
-	private IProgram program;
+	private Program program;
 
 	@Override
-	public void setProgram(IProgram program) {
+	public void setProgram(Program program) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -16,7 +18,7 @@ public class ConcSyn implements IConcSyn{
 		// TODO Auto-generated method stub
 		
 	}
-     public IProgram getProgram() {
+     public Program getProgram() {
 	    return this.program;
 	  }
 }

@@ -1,6 +1,7 @@
 package ch.fhnw.compiler.parser;
 
 import ch.fhnw.compiler.parser.IConcSyn.IProgram;
+import ch.fhnw.compiler.parser.concSynTree.Program;
 import ch.fhnw.compiler.scanner.data.ITokenList;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
@@ -25,18 +26,18 @@ public class Parser implements IParser {
 	
 	
 	@Override
-	public IProgram parse() throws GrammarError {
+	public Program parse() throws GrammarError {
 		// TODO Auto-generated method stub
 //		ConcSyn.IProgram  program = program();
 //		ConcSyn.consume(Terminal.SENTINEL);
 //		return program;
-		ConcSyn.IProgram program = program();
+		Program program = program();
 		consume(Terminal.SENTINEL);
 		return program;
 
 	}
 	
-	private IProgram program() throws GrammarError{
+	private Program program() throws GrammarError{
 		// TODO Auto-generated method stub
 			consume(Terminal.PROGRAM);
 			Token t =consume(Terminal.IDENT);
