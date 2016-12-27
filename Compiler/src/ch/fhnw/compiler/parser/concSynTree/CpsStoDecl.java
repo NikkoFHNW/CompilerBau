@@ -2,15 +2,13 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
 
-public class Decl implements IConcSynWrapper{
+public class CpsStoDecl implements IConcSynWrapper {
     StoDecl stoDecl;
-    FunDecl funDecl;
-    ProcDecl procDecl;
+    RepSemicolonStoDecl repSemicolonStoDecl;
 
-    public Decl(StoDecl stoDecl, FunDecl funDecl, ProcDecl procDecl) {
+    public CpsStoDecl(StoDecl stoDecl, RepSemicolonStoDecl repSemicolonStoDecl) {
         this.stoDecl = stoDecl;
-        this.funDecl = funDecl;
-        this.procDecl = procDecl;
+        this.repSemicolonStoDecl = repSemicolonStoDecl;
     }
 
     @Override

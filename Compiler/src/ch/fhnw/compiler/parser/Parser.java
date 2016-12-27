@@ -1,6 +1,5 @@
 package ch.fhnw.compiler.parser;
 
-import ch.fhnw.compiler.parser.IConcSyn.IProgram;
 import ch.fhnw.compiler.parser.concSynTree.Program;
 import ch.fhnw.compiler.scanner.data.ITokenList;
 import ch.fhnw.compiler.scanner.data.Terminal;
@@ -50,8 +49,7 @@ public class Parser implements IParser {
 
 
 	private Token consume(Terminal expectedTerm) throws GrammarError{
-	
-		
+
 		if(terminal==expectedTerm){
 			Token consumedToken = token;
 			if(terminal!=Terminal.SENTINEL){

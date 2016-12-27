@@ -1,20 +1,20 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 
+import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class Program implements IConcSynWrapper {
-    Terminal program;
-    Terminal ident;
+    Token program;
+    Token ident;
     ProgParamList progParamList;
     OptGlobalCpsDecl optGlobalCpsDecl;
     CpsCmd cpsCmd;
-    Terminal _do;
-    Terminal endProg;
+    Token _do;
+    Token endProg;
 
-
-    public Program(Terminal program, Terminal ident, ProgParamList progParamList, OptGlobalCpsDecl optGlobalCpsDecl, CpsCmd cpsCmd, Terminal _do, Terminal endProg) {
+    public Program(Token program, Token ident, ProgParamList progParamList, OptGlobalCpsDecl optGlobalCpsDecl, CpsCmd cpsCmd, Token _do, Token endProg) {
         this.program = program;
         this.ident = ident;
         this.progParamList = progParamList;
@@ -24,6 +24,8 @@ public class Program implements IConcSynWrapper {
         this.endProg = endProg;
     }
 
-
-
+    @Override
+    public IAbstractSynTree toAbstractSynTree() {
+        return null;
+    }
 }

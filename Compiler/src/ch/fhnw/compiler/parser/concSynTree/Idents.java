@@ -4,13 +4,13 @@ import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class OptGlobalCpsDecl implements IConcSynWrapper {
-    Token global;
-    CpsDecl cpsDecl;
+public class Idents implements IConcSynWrapper {
+    Token ident;
+    RepCommaIdent repCommaIdent;
 
-    public OptGlobalCpsDecl(Token global, CpsDecl cpsDecl) {
-        this.global = global;
-        this.cpsDecl = cpsDecl;
+    public Idents(Token ident, RepCommaIdent repCommaIdent) {
+        this.ident = ident;
+        this.repCommaIdent = repCommaIdent;
     }
 
     @Override

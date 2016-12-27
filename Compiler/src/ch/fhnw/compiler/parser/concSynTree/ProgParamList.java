@@ -1,19 +1,23 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.scanner.data.Token;
 
 public class ProgParamList implements IConcSynWrapper{
+	Token lparen;
+	OptProgParamRepCommaProgParam optProgParamRepCommaProgParam;
+	Token rparen;
 
-	Terminal lparen;
-	Terminal rparen;
-	OptProgParamRepCommaProgParam opro;
-	
-	public ProgParamList(Terminal lp, Terminal rp, OptProgParamRepCommaProgParam opr) {
-		// TODO Auto-generated constructor stub
+	public ProgParamList(Token lp, Token rp, OptProgParamRepCommaProgParam opr) {
 		this.lparen=lp;
 		this.rparen=rp;
-		this.opro=opr;
+		this.optProgParamRepCommaProgParam=opr;
 	}
-	
-	
+
+
+	@Override
+	public IAbstractSynTree toAbstractSynTree() {
+		return null;
+	}
 }
