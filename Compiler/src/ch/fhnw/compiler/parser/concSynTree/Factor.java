@@ -1,6 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class Factor implements IConcSynWrapper {
@@ -37,6 +38,7 @@ class FactorIdent extends AbstractFactor implements IConcSynWrapper {
 
     public FactorIdent(Token ident, OptInitOrExprList optInitOrExprList) {
         this.ident = ident;
+        ident.getTerminal()==Terminal.IDENT
         this.optInitOrExprList = optInitOrExprList;
     }
 
