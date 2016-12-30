@@ -62,7 +62,7 @@ public class Parser implements IParser {
 	}
 	
 	
-	private Decl decl() throws GrammarError {
+	private IConcSynWrapper decl() throws GrammarError {
 		switch(terminal) {
 			case FUN:
 				System.out.println("decl ::= funDecl");
@@ -84,7 +84,7 @@ public class Parser implements IParser {
 	}
 	
 	
-	private StoDecl stoDecl() throws GrammarError {
+	private IConcSynWrapper stoDecl() throws GrammarError {
 		switch(terminal) {
 		case REC: System.out.println("stoDecl ::= recordDecl");
 		return recordDecl();
@@ -98,9 +98,10 @@ public class Parser implements IParser {
 	}
 	
 	
-	private FunDecl funDecl() throws ch.fhnw.compiler.error.GrammarError{
+	private IConcSynWrapper funDecl() throws ch.fhnw.compiler.error.GrammarError{
 		switch(terminal){
 		case FUN:
+			System.out.println("funDecl ::= FUN ident ParamList Returns StoDecl OptGlobalglobImps OptLocalcpsStoDecl");
 			consume(Terminal.FUN);
 			TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 			ParamList paramList = ParamList();
