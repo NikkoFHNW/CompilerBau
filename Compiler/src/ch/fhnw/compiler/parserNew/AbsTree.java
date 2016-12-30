@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ch.fhnw.compiler.error.CodeTooSmallError;
 import ch.fhnw.compiler.error.ContextError;
+import ch.fhnw.compiler.error.HeapTooSmallError;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 //import ch.fhnw.cpib.compiler.scanner.enums.ModeAttribute;
@@ -94,12 +96,16 @@ public interface AbsTree {
 	}
 	
 	public class ProgramParameter {
-		private final FlowMode flowMode;
-		private final ChangeMode changeMode;
+//		private final FlowMode flowMode;
+		private final TokenTupel flowMode;
+//		private final ChangeMode changeMode;
+		private final TokenTupel changeMode;
 		private final TypedIdent typedIdent;
+//		private final TokenTupel typedIdent;
 		private final ProgramParameter nextProgramParameter;
+//		private final TokenTupel nextProgramParameter;
 		
-		public ProgramParameter(FlowMode flowMode, ChangeMode changeMode, TypedIdent typedIdent, ProgramParameter next){
+		public ProgramParameter(TokenTupel flowMode, TokenTupel changeMode, TypedIdent typedIdent, ProgramParameter next){
 			this.flowMode = flowMode;
 			this.changeMode = changeMode;
 			this.typedIdent = typedIdent;
@@ -109,16 +115,16 @@ public interface AbsTree {
 		public String toString(String indent) {
 			return indent
 					+ "<ProgramParameter>\n"
-					+ flowMode.toString(indent + '\t')
-					+ changeMode.toString(indent + '\t')
+					+ flowMode.toString()
+					+ changeMode.toString()
 					+ typedIdent.toString(indent + '\t')
 					+ (nextProgramParameter!=null?nextProgramParameter.toString(indent + '\t'):"\t<noNextProgramParameter/>\n")
 					+ indent
 					+ "</ProgramParameter>\n";
 		}
 		
-		public FlowMode getFlowMode() { return flowMode; }
-		public ChangeMode getChangeMode() { return changeMode; }
+		public TokenTupel getFlowMode() { return flowMode; }
+		public TokenTupel getChangeMode() { return changeMode; }
 		public TypedIdent getTypedIdent() { return typedIdent; }
 		public ProgramParameter getNextProgramParameter() { return nextProgramParameter; }
 		
@@ -216,7 +222,7 @@ public interface AbsTree {
 	}
 	
 	public class DeclarationFunction extends Declaration{
-		private final Ident ident;
+		private final TokenTupel ident;
 		private final Parameter param;
 		private final DeclarationStore returnDecl;
 		private final GlobalImport globImp;
@@ -224,7 +230,7 @@ public interface AbsTree {
 		private final Declaration nextDecl;
 		private final Cmd cmd;
 		
-		public DeclarationFunction(Ident ident, Parameter param, DeclarationStore returnDecl, GlobalImport globImp, Declaration dcl, Cmd cmd, Declaration nextDecl){
+		public DeclarationFunction(TokenTupel ident, Parameter param, DeclarationStore returnDecl, GlobalImport globImp, Declaration dcl, Cmd cmd, Declaration nextDecl){
 			super(nextDecl);
 			this.ident = ident;
 			this.param = param;
@@ -238,7 +244,7 @@ public interface AbsTree {
 		public String toString(String indent){
 			return indent
 					+ "<DeclFun>\n"
-					+ ident.toString(indent + '\t')
+					+ ident.toString()
 					+ param.toString(indent + '\t')
 					+ returnDecl.toString(indent + '\t')
 					+ globImp.toString(indent + '\t')
@@ -250,7 +256,7 @@ public interface AbsTree {
 		}
 		
 		public Cmd getCmd() { return cmd;}
-		public Ident getIdent() {return ident;}
+		public TokenTupel getIdent() {return ident;}
 		public Declaration getDecl() { return dcl;}
 		public Parameter getParam() { return param;}
 		public GlobalImport getGlobImp() { return globImp;}
@@ -274,7 +280,7 @@ public interface AbsTree {
 	}
 	
 	public class DeclarationProcedure extends Declaration {
-		private final Ident ident;
+		private final TokenTupel ident;
 		private final Parameter param;
 		private final GlobalImport globalImport;
 		private final Declaration decl;
@@ -282,7 +288,7 @@ public interface AbsTree {
 		private final Cmd cmd;
 		private int countDecls = 0;
 
-		public DeclarationProcedure(Ident ident, Parameter parameter, GlobalImport globalImport, Declaration decl, Cmd cmd, Declaration nextDecl) {
+		public DeclarationProcedure(TokenTupel ident, Parameter parameter, GlobalImport globalImport, Declaration decl, Cmd cmd, Declaration nextDecl) {
 			super(nextDecl);
 			this.ident = ident;
 			this.param = parameter;
@@ -301,7 +307,7 @@ public interface AbsTree {
 		public String toString(final String indent) {
 			return indent
 					+ "<DeclarationProcedure>\n"
-					+ ident.toString(indent + '\t')
+					+ ident.toString()
 					+ param.toString(indent + '\t')
 					+ (globalImport!=null?globalImport.toString(indent + '\t'):"")
 					+ (decl!=null?decl.toString(indent + '\t'):"")
@@ -315,7 +321,7 @@ public interface AbsTree {
 			return countDecls;
 		}
 		
-		public Ident getIdent() { return ident;}
+		public TokenTupel getIdent() { return ident;}
 		public Parameter getParam() { return param;}
 		public GlobalImport getGlobImp() { return globalImport;}
 		public Declaration getDecl() { return decl;}

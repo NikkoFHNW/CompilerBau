@@ -6,12 +6,10 @@ import ch.fhnw.compiler.scanner.data.Terminal;
 public class StoDecl implements IConcSynWrapper{
     OptChangeMode optChangeMode;
     TypedIdent typedIdent;
-    RecordDecl recordDecl;
 
-    public StoDecl(OptChangeMode optChangeMode, TypedIdent typedIdent, RecordDecl recordDecl) {
+    public StoDecl(OptChangeMode optChangeMode, TypedIdent typedIdent) {
         this.optChangeMode = optChangeMode;
         this.typedIdent = typedIdent;
-        this.recordDecl = recordDecl;
     }
     @Override
     public IAbstractSynTree toAbstractSynTree() {
