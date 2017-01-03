@@ -5,12 +5,10 @@ import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class RepCommaProgParam implements IConcSynWrapper{
-    Token comma;
     ProgramParam programParam;
     RepCommaProgParam repCommaProgParam;
 
-    public RepCommaProgParam(Token comma, ProgramParam programParam, RepCommaProgParam repCommaProgParam) {
-        this.comma = comma;
+    public RepCommaProgParam(ProgramParam programParam, RepCommaProgParam repCommaProgParam) {
         this.programParam = programParam;
         this.repCommaProgParam = repCommaProgParam;
     }

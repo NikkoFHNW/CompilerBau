@@ -4,13 +4,11 @@ import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class RepCommaGlobImpl implements IConcSynWrapper{
-    Token comma;
+public class RepCommaGlobImp implements IConcSynWrapper{
     GlobImp globImp;
-    RepCommaGlobImpl repCommaGlob;
+    RepCommaGlobImp repCommaGlob;
 
-    public RepCommaGlobImpl(Token comma, GlobImp globImp, RepCommaGlobImpl repCommaGlob) {
-        this.comma = comma;
+    public RepCommaGlobImp(GlobImp globImp, RepCommaGlobImp repCommaGlob) {
         this.globImp = globImp;
         this.repCommaGlob = repCommaGlob;
     }

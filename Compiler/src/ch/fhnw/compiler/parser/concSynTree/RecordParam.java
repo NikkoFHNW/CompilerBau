@@ -3,18 +3,15 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RecordParam implements IConcSynWrapper{
-    Token dot;
-    Token ident;
-    Token colon;
-    Token recident;
+    TokenTupel ident;
+    TokenTupel recident;
 
-    public RecordParam(Token dot, Token ident, Token colon, Token recident) {
-        this.dot = dot;
+    public RecordParam(TokenTupel ident, TokenTupel recIdent) {
         this.ident = ident;
-        this.colon = colon;
-        this.recident = recident;
+        this.recident = recIdent;
     }
 
     @Override
