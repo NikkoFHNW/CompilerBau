@@ -67,19 +67,15 @@ public class Parser implements IParser {
 			case FUN:
 				System.out.println("decl ::= funDecl");
 				return funDecl();
-				break;
 			case PROC:
 				System.out.println("decl ::= procDecl");
 				return procDecl();
-				break;
 			case CHANGEMODE:
 			case IDENT:
 				System.out.println("decl ::= storeDecl");
-				return storeDecl();
-				break;
+				return stoDecl();
 			default:
 				throw new ch.fhnw.compiler.error.GrammarError("decl got ",0);
-				break;
 		}
 	}
 	
@@ -88,12 +84,10 @@ public class Parser implements IParser {
 		switch(terminal) {
 		case REC: System.out.println("stoDecl ::= recordDecl");
 		return recordDecl();
-		break;
 		default: System.out.println("stoDecl ::= OptChangeMode Ident");
-		OptChangeMode optChangeMode = optChangeMode();
-		TypedIdent ident = typedIdent();
+		OptChangeMode optChangeMode = (OptChangeMode) optChangeMode();
+		TypedIdent ident = (TypedIdent) typedIdent();
 		return new StoDecl(optChangeMode,ident);
-		break;
 		}
 	}
 	
@@ -110,12 +104,11 @@ public class Parser implements IParser {
 			OptGlobalglobImps optGlobalglobImps = (OptGlobalglobImps) optGlobalglobImps();
 			OptLocalcpsStoDecl optLocalcpsStoDecl = (OptLocalcpsStoDecl) optLocalcpsStoDecl();
 			consume(Terminal.DO);
-			CpsCmd cpsCmd = cpsCmd();
+			CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 			consume(Terminal.ENDFUN);
 			
 			return new FunDecl(ident, paramList, optGlobalglobImps, optLocalcpsStoDecl, cpsCmd);
-			break;
-			
+
 		default: throw new ch.fhnw.compiler.error.GrammarError("decl got ",0);
 		}
 	}
@@ -180,7 +173,7 @@ public class Parser implements IParser {
 		OptGlobalglobImps optggi = (OptGlobalglobImps) optGlobalglobImps();
 		OptLocalcpsStoDecl olcsd = (OptLocalcpsStoDecl) optLocalcpsStoDecl();
 		consume(Terminal.DO);
-		CpsCmd cpsCmd = CpsCmd();
+		CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 		consume(Terminal.ENDPROC);
 		return new ProcDecl(proc, ident, param, optggi, olcsd,cpsCmd);
 	}
@@ -389,11 +382,11 @@ public class Parser implements IParser {
 			case IF:
 				System.out.println("cmd ::= IF");
 				consume(Terminal.IF);
-				Expr expr = expr();
+				Expr expr = (Expr) expr();
 				consume(Terminal.THEN);
-				CpsCmd cpsCmd1 = cpsCmd();
+				CpsCmd cpsCmd1 = (CpsCmd) cpsCmd();
 				consume(Terminal.ELSE);
-				CpsCmd cpsCmd2 = cpsCmd();
+				CpsCmd cpsCmd2 = (CpsCmd) cpsCmd();
 				consume(Terminal.ENDIF);
 				result = new CmdIf(expr, cpsCmd1, cpsCmd2);
 				break;
@@ -401,9 +394,9 @@ public class Parser implements IParser {
 			case WHILE:
 				System.out.println("cmd ::= WHILE");
 				consume(Terminal.WHILE);
-				expr = expr();
+				expr = (Expr) expr();
 				consume(Terminal.DO);
-				CpsCmd cpsCmd = cpsCmd();
+				CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 				consume(Terminal.ENDWHILE);
 				result = new CmdWhile(expr, cpsCmd);
 				break;
@@ -412,22 +405,22 @@ public class Parser implements IParser {
 				System.out.println("cmd ::= CALL");
 				consume(Terminal.CALL);
 				TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-				ExprList exprList = exprList();
-				OptGlobInits optGlobInits = optGlobInits();
+				ExprList exprList = (ExprList) exprList();
+				OptGlobInits optGlobInits = (OptGlobInits) optGlobInits();
 				result = new CmdCall(ident, exprList, optGlobInits);
 				break;
 
 			case DEBUGIN:
 				System.out.println("cmd ::= DEBUGIN");
 				consume(Terminal.DEBUGIN);
-				expr = expr();
+				expr = (Expr) expr();
 				result = new CmdDebugIn(expr);
 				break;
 
 			case DEBUGOUT:
 				System.out.println("cmd ::= DEBUGOUT");
 				consume(Terminal.DEBUGOUT);
-				expr = expr();
+				expr = (Expr) expr();
 				result = new CmdDebugOut(expr);
 				break;
 
@@ -689,7 +682,7 @@ public class Parser implements IParser {
 	private IConcSynWrapper recordDecl() throws GrammarError {
 		System.out.println("recordDecl");
 		consume(Terminal.REC);
-		TokenTupel recident = consume(Terminal.RECIDENT);
+		TokenTupel recident = (TokenTupel) consume(Terminal.RECIDENT);
 		consume(Terminal.COLON);
 		consume(Terminal.LCURL);
 		RecordData recordData = (RecordData) recordData();
@@ -707,6 +700,7 @@ public class Parser implements IParser {
 	}
 
 	private IConcSynWrapper repRecordData() throws GrammarError {
+        //TODO
 		RepRecordData head = null, current = null;
 		while (terminal == Terminal.COMMA) {
 			consume(Terminal.COMMA);
