@@ -5,12 +5,10 @@ import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class RepSemicolonDecl implements IConcSynWrapper {
-    Token semicolon;
     Decl decl;
     RepSemicolonDecl repSemicolonDecl;
 
-    public RepSemicolonDecl(Token semicolon, Decl decl, RepSemicolonDecl repSemicolonDecl) {
-        this.semicolon = semicolon;
+    public RepSemicolonDecl(Decl decl, RepSemicolonDecl repSemicolonDecl) {
         this.decl = decl;
         this.repSemicolonDecl = repSemicolonDecl;
     }

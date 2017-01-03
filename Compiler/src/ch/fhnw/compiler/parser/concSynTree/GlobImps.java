@@ -4,9 +4,9 @@ import ch.fhnw.compiler.parser.IAbstractSynTree;
 
 public class GlobImps implements IConcSynWrapper {
     GlobImp globImps;
-    RepCommaGlobImpl repCommaGlobImpl;
+    RepCommaGlobImp repCommaGlobImpl;
 
-    public GlobImps(GlobImp globImps, RepCommaGlobImpl repCommaGlobImpl) {
+    public GlobImps(GlobImp globImp, RepCommaGlobImp repCommaGlobImpl) {
         this.globImps = globImps;
         this.repCommaGlobImpl = repCommaGlobImpl;
     }

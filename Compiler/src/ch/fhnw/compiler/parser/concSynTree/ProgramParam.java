@@ -6,13 +6,11 @@ public class ProgramParam implements IConcSynWrapper {
     OptFlowMode optFlowMode;
     OptChangeMode optChangeMode;
     TypedIdent typedIdent;
-    RecordParam recordParam;
 
-    public ProgramParam(OptFlowMode optFlowMode, OptChangeMode optChangeMode, TypedIdent typedIdent, RecordParam recordParam) {
+    public ProgramParam(OptFlowMode optFlowMode, OptChangeMode optChangeMode, TypedIdent typedIdent) {
         this.optFlowMode = optFlowMode;
         this.optChangeMode = optChangeMode;
         this.typedIdent = typedIdent;
-        this.recordParam = recordParam;
     }
 
     @Override

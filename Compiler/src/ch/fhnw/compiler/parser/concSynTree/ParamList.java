@@ -5,11 +5,9 @@ import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class ParamList implements IConcSynWrapper{
-    Token lparen;
     OptParamRepCommaParam optParamRepCommaParam;
 
-    public ParamList(Token lparen, OptParamRepCommaParam optParamRepCommaParam) {
-        this.lparen = lparen;
+    public ParamList( OptParamRepCommaParam optParamRepCommaParam) {
         this.optParamRepCommaParam = optParamRepCommaParam;
     }
 
