@@ -1,13 +1,12 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
 
-public class OptTerm2 implements IConcSynWrapper{
-    Term2 term2;
+public class CmdDebugOut extends AbstractCmd{
+    Expr expr;
 
-    public OptTerm2(Term2 term2) {
-        this.term2 = term2;
+    public CmdDebugOut(Expr expr) {
+        this.expr = expr;
     }
 
     @Override

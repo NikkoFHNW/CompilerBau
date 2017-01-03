@@ -2,17 +2,14 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RecordData implements IConcSynWrapper{
-    Token ident;
-    Token colon;
-    Token atomtype;
+    TokenTupel ident;
     RepRecordData repRecordData;
 
-    public RecordData(Token ident, Token colon, Token atomtype, RepRecordData repRecordData) {
+    public RecordData(TokenTupel ident, RepRecordData repRecordData) {
         this.ident = ident;
-        this.colon = colon;
-        this.atomtype = atomtype;
         this.repRecordData = repRecordData;
     }
 

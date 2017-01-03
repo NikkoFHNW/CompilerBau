@@ -3,12 +3,15 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.IAbstractSynTree;
 
 public class CpsCmd implements IConcSynWrapper {
-    Cmd cmd;
-    RepSemicolonCmd repSemicolonCmd;
+    AbstractCmd cmd;
+    CpsCmd next;
 
-    public CpsCmd(Cmd cmd, RepSemicolonCmd repSemicolonCmd) {
+    public CpsCmd(AbstractCmd cmd) {
         this.cmd = cmd;
-        this.repSemicolonCmd = repSemicolonCmd;
+    }
+
+    public void setNext(CpsCmd next) {
+        this.next = next;
     }
 
     @Override

@@ -1,19 +1,15 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RepRecordData  implements IConcSynWrapper{
+public class RecConstrIdentFirst implements IConcSynWrapper {
     TokenTupel ident;
-    RepRecordData next;
+    RepCommaIdentLiteral repCommaIdentLiteral;
 
-    public RepRecordData(TokenTupel ident) {
+    public RecConstrIdentFirst(TokenTupel ident, RepCommaIdentLiteral repCommaIdentLiteral) {
         this.ident = ident;
-    }
-
-    public void setNext(RepRecordData next) {
-        this.next = next;
+        this.repCommaIdentLiteral = repCommaIdentLiteral;
     }
 
     @Override

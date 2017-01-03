@@ -4,11 +4,8 @@ import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class OptMechMode implements IConcSynWrapper{
-    Token mechmode;
 
-    public OptMechMode(Token mechmode) {
-        this.mechmode = mechmode;
-    }
+    public OptMechMode() {}
 
     @Override
     public IAbstractSynTree toAbstractSynTree() {

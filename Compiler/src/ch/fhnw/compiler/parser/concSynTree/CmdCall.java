@@ -1,19 +1,17 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RepRecordData  implements IConcSynWrapper{
+public class CmdCall extends AbstractCmd {
+    ExprList exprList;
+    OptGlobInits optGlobInits;
     TokenTupel ident;
-    RepRecordData next;
 
-    public RepRecordData(TokenTupel ident) {
+    public CmdCall(TokenTupel ident, ExprList exprList, OptGlobInits optGlobInits) {
         this.ident = ident;
-    }
-
-    public void setNext(RepRecordData next) {
-        this.next = next;
+        this.exprList = exprList;
+        this.optGlobInits = optGlobInits;
     }
 
     @Override

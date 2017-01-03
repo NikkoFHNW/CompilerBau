@@ -5,11 +5,9 @@ import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class GlobInits implements IConcSynWrapper{
-    Token init;
     Idents idents;
 
-    public GlobInits(Token init, Idents idents) {
-        this.init = init;
+    public GlobInits(Idents idents) {
         this.idents = idents;
     }
 

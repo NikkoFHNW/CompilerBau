@@ -1,18 +1,14 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
 
-public class RepFactor implements IConcSynWrapper {
+public class FactorMonadic extends AbstractFactor {
+    MonadicOpr monadicOpr;
     AbstractFactor factor;
-    RepFactor next;
 
-    public RepFactor(AbstractFactor factor) {
+    public FactorMonadic(MonadicOpr monadicOpr, AbstractFactor factor) {
+        this.monadicOpr = monadicOpr;
         this.factor = factor;
-    }
-
-    public void setNext(RepFactor next) {
-        this.next = next;
     }
 
     @Override

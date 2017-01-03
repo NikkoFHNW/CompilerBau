@@ -4,14 +4,15 @@ import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Token;
 
 public class RepCommaExpr implements IConcSynWrapper{
-    Token comma;
     Expr expr;
-    RepCommaExpr repCommaExpr;
+    RepCommaExpr next;
 
-    public RepCommaExpr(Token comma, Expr expr, RepCommaExpr repCommaExpr) {
-        this.comma = comma;
+    public RepCommaExpr(Expr expr) {
         this.expr = expr;
-        this.repCommaExpr = repCommaExpr;
+    }
+
+    public void setNext(RepCommaExpr next) {
+        this.next = next;
     }
 
     @Override

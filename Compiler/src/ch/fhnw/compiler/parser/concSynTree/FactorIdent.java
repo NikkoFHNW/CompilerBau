@@ -1,19 +1,16 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RepRecordData  implements IConcSynWrapper{
+public class FactorIdent extends AbstractFactor{
     TokenTupel ident;
-    RepRecordData next;
+    OptInitOrExprList optInitOrExprList;
 
-    public RepRecordData(TokenTupel ident) {
+    public FactorIdent(TokenTupel ident, OptInitOrExprList optInitOrExprList) {
         this.ident = ident;
-    }
-
-    public void setNext(RepRecordData next) {
-        this.next = next;
+        this.optInitOrExprList = optInitOrExprList;
     }
 
     @Override

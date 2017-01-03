@@ -1,18 +1,20 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RepRecordData  implements IConcSynWrapper{
+public class RepCommaIdentLiteral implements IConcSynWrapper {
     TokenTupel ident;
-    RepRecordData next;
+    TokenTupel literal;
 
-    public RepRecordData(TokenTupel ident) {
+    RepCommaIdentLiteral next;
+
+    public RepCommaIdentLiteral(TokenTupel ident, TokenTupel literal) {
         this.ident = ident;
+        this.literal = literal;
     }
 
-    public void setNext(RepRecordData next) {
+    public void setNext(RepCommaIdentLiteral next) {
         this.next = next;
     }
 
@@ -20,4 +22,5 @@ public class RepRecordData  implements IConcSynWrapper{
     public IAbstractSynTree toAbstractSynTree() {
         return null;
     }
+
 }

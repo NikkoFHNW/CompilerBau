@@ -1,17 +1,17 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
 
 public class RepTerm3 implements IConcSynWrapper{
-    Token addopr;
     Term3 term3;
-    RepTerm3 repTerm3;
+    RepTerm3 next;
 
-    public RepTerm3(Token addopr, Term3 term3, RepTerm3 repTerm3) {
-        this.addopr = addopr;
+    public RepTerm3(Term3 term3) {
         this.term3 = term3;
-        this.repTerm3 = repTerm3;
+    }
+
+    public void setNext(RepTerm3 next) {
+        this.next = next;
     }
 
     @Override

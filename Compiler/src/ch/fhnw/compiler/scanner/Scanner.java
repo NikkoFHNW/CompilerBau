@@ -64,7 +64,10 @@ public class Scanner {
 			char c = cs.charAt(i);
 			switch (state) {
 			case 0:
-				if (Character.isLetter(c)) {
+				if (Character.isLetter(c) && Character.isUpperCase(c)) {
+					state = 5;
+					lexAccu.append(c);
+				} else if (Character.isLetter(c)) {
 					state = 1; // Ident
 					lexAccu.append(c);
 				} else if (Character.isDigit(c)) {
@@ -78,9 +81,12 @@ public class Scanner {
 					lexAccu.append(c);
 				}else if(c == '('){
 					tList.add(new Token(Terminal.LPAREN));
-				}
-				else if(c==')'){
+				}else if(c==')'){
 					tList.add(new Token(Terminal.RPAREN));
+				}else if(c == '{'){
+					tList.add(new Token(Terminal.LCURL));
+				}else if(c=='}'){
+					tList.add(new Token(Terminal.RCURL));
 				}else if(c=='*'){
 					tList.add(new TokenTupel(Terminal.MULTOPR, Operator.TIMES));
 				}else if(c=='+'){
@@ -89,6 +95,8 @@ public class Scanner {
 					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.MINUS));
 				}else if(c==','){
 					tList.add(new Token(Terminal.COMMA));
+				}else if(c=='.'){
+					tList.add(new Token(Terminal.DOT));
 				}else if(c==';'){
 					tList.add(new Token(Terminal.SEMICOLON));
 				}else if(c=='^'){
@@ -203,9 +211,22 @@ public class Scanner {
 					throw new LexicalError("no such symbol & or |");
 
 				}
-
 				break;
 
+			case 5:
+				if (Character.isLetter(c) || Character.isDigit(c) || c=='\'') {
+					lexAccu.append(c);
+				} else {
+					if (keywords.containsKey(lexAccu.toString())) {
+						tList.add(keywords.get(lexAccu.toString()));
+					}else{
+						tList.add(new TokenTupel(Terminal.RECIDENT, lexAccu.toString()));
+					}
+					clearLexAccu();
+					i = i - 1;
+					state = 0;
+				}
+				break;
 			default:
 				throw new Exception("Default in Scanner");
 			}

@@ -1,14 +1,13 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class Cmd implements IConcSynWrapper {
-    AbstractCmd cmd;
+public class FactorParen extends AbstractFactor implements IConcSynWrapper {
+    Expr expr;
 
-    public Cmd(AbstractCmd cmd) {
-        this.cmd = cmd;
+    public FactorParen(Expr expr) {
+        this.expr = expr;
     }
 
     @Override

@@ -2,13 +2,13 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
 
-public class OptExprRepCommaExpr implements IConcSynWrapper {
+public class OptExprRep implements IConcSynWrapper {
     Expr expr;
-    RepCommaExpr repCommaExpr;
+    RepCommaExpr rep;
 
-    public OptExprRepCommaExpr(Expr expr, RepCommaExpr repCommaExpr) {
+    public OptExprRep(Expr expr, RepCommaExpr rep) {
         this.expr = expr;
-        this.repCommaExpr = repCommaExpr;
+        this.rep = rep;
     }
 
     @Override

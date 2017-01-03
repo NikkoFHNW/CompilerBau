@@ -2,22 +2,15 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.IAbstractSynTree;
 import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RecordDecl implements IConcSynWrapper{
-    Token rec;
-    Token ident;
-    Token colon;
-    Token lcurl;
+    TokenTupel recident;
     RecordData recordData;
-    Token rcurl;
 
-    public RecordDecl(Token rec, Token ident, Token colon, Token lcurl, RecordData recordData, Token rcurl) {
-        this.rec = rec;
-        this.ident = ident;
-        this.colon = colon;
-        this.lcurl = lcurl;
+    public RecordDecl(TokenTupel recident, RecordData recordData) {
+        this.recident = recident;
         this.recordData = recordData;
-        this.rcurl = rcurl;
     }
 
     @Override
