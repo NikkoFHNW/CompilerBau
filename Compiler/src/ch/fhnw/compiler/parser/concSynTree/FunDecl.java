@@ -23,6 +23,7 @@ public class FunDecl implements IConcSynWrapper {
 
     @Override
     public IAbstractSynTree toAbstractSynTree() {
-        return null;
+		return null;
+        
     }
 }

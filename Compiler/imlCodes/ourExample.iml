@@ -1,0 +1,25 @@
+program room(in  id:int32, in  daysOfStay:int32,
+               in checkedIn:bool, q:int32, out occupied:bool)
+global
+rec Guest: {var id:int32, var daysOfStay:int32, var checkedIn:bool};
+Guest g1 := (id,daysOfStay,checkedIn)
+
+    fun checkIn (in ref .g:Guest) returns var isCheckedIn:bool
+    local
+        var isCheckedIn:bool
+    do
+    .g.checkedIn:=true;
+    isCheckedIn:=true
+    endfun
+
+    fun checkOut (in ref .g:Guest) returns var isCheckedIn:bool
+    local
+        var isCheckedIn:bool
+    do
+    .g.checkedIn:=false;
+    isCheckedIn:=false
+    endfun
+
+do
+ occupied init := checkIn(.g1)
+endprogram
