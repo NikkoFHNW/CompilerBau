@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class CmdBecomes extends Cmd {
+public class CmdBecomes extends AbstractCmd {
     Expr expr1;
     Expr expr2;
 
@@ -12,7 +12,7 @@ public class CmdBecomes extends Cmd {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
         return null;
     }
 }

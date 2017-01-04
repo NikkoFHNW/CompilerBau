@@ -1,9 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class RepCommaExpr implements IConcSynWrapper{
+public class RepCommaExpr implements IConcSyn.IExpr {
     Expr expr;
     RepCommaExpr next;
 
@@ -15,8 +14,9 @@ public class RepCommaExpr implements IConcSynWrapper{
         this.next = next;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

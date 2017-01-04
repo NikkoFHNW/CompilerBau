@@ -1,9 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class FactorRecord extends AbstractFactor implements IConcSynWrapper {
+public class FactorRecord extends AbstractFactor implements IConcSyn {
     Token ident;
     Token ident2;
 
@@ -13,7 +13,7 @@ public class FactorRecord extends AbstractFactor implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

@@ -1,11 +1,10 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class ProcDecl implements IConcSynWrapper {
+public class ProcDecl implements IConcSyn.IProcDecl {
     Token proc;
     Token ident;
     Param param;
@@ -25,7 +24,7 @@ public class ProcDecl implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IDecl toAbstrSyntax() {
         return null;
     }
 }

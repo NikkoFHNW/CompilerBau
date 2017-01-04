@@ -1,17 +1,17 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class OptTerm2 implements IConcSynWrapper{
+public class OptTerm2 implements IConcSyn.ITerm2{
     Term2 term2;
 
     public OptTerm2(Term2 term2) {
         this.term2 = term2;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

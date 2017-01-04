@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class CpsCmd implements IConcSynWrapper {
+public class CpsCmd implements IConcSyn.ICmd {
     AbstractCmd cmd;
     CpsCmd next;
 
@@ -15,7 +15,7 @@ public class CpsCmd implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
         return null;
     }
 }

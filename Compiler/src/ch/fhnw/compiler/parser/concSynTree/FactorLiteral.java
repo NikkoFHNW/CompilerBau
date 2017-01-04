@@ -1,7 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class FactorLiteral extends AbstractFactor {
@@ -12,7 +11,7 @@ public class FactorLiteral extends AbstractFactor {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

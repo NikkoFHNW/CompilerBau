@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class CpsDecl implements IConcSynWrapper {
+public class CpsDecl implements IConcSyn.ICpsDecl {
     Decl decl;
     RepSemicolonDecl repSemicolonDecl;
 
@@ -12,7 +12,7 @@ public class CpsDecl implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICpsDecl toAbstrSyntax() {
         return null;
     }
 }

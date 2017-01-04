@@ -1,6 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class CmdDebugOut extends AbstractCmd{
     Expr expr;
@@ -10,7 +10,7 @@ public class CmdDebugOut extends AbstractCmd{
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
         return null;
     }
 }

@@ -1,10 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class OptGlobalglobImps implements IConcSynWrapper {
+public class OptGlobalglobImps implements IConcSyn.IOptGlobalglobImps {
     Token global;
     GlobImps globImps;
 
@@ -14,7 +13,7 @@ public class OptGlobalglobImps implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IGlobImp toAbstrSyntax() {
         return null;
     }
 }

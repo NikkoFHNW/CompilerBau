@@ -1,10 +1,10 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class OptChangeMode implements IConcSynWrapper {
+public class OptChangeMode implements IConcSyn.IOptChangeMode {
     Token changeMode;
 
     public OptChangeMode(Token changeMode) {
@@ -12,7 +12,7 @@ public class OptChangeMode implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public TokenTupel toAbstrSyntax() {
         return null;
     }
 }

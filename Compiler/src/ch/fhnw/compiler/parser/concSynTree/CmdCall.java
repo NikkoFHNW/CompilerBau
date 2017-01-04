@@ -1,6 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class CmdCall extends AbstractCmd {
@@ -15,7 +15,7 @@ public class CmdCall extends AbstractCmd {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
         return null;
     }
 }

@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class Param implements IConcSynWrapper {
+public class Param implements IConcSyn.IParam {
     OptFlowMode optFlowMode;
     OptMechMode optMechMode;
     OptChangeMode optChangeMode;
@@ -15,8 +15,9 @@ public class Param implements IConcSynWrapper {
         this.typedIdent = typedIdent;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IParam toAbstrSyntax(IRepCommaParam repParam) {
         return null;
     }
 }

@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class OptExprRep implements IConcSynWrapper {
+public class OptExprRep implements IConcSyn.IOptExprRep{
     Expr expr;
     RepCommaExpr rep;
 
@@ -12,7 +12,7 @@ public class OptExprRep implements IConcSynWrapper {
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExprList toAbstrSyntax() {
         return null;
     }
 }

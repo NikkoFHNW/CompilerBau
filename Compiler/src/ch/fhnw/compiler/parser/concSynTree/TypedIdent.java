@@ -1,11 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class TypedIdent implements IConcSynWrapper{
+public class TypedIdent implements IConcSyn.IFactor {
     TokenTupel ident;
     TokenTupel atomtype;
 
@@ -15,7 +13,7 @@ public class TypedIdent implements IConcSynWrapper{
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

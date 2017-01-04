@@ -1,10 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class RepCommaProgParam implements IConcSynWrapper{
+public class RepCommaProgParam implements IConcSyn.IParamList {
     ProgramParam programParam;
     RepCommaProgParam repCommaProgParam;
 
@@ -13,8 +11,9 @@ public class RepCommaProgParam implements IConcSynWrapper{
         this.repCommaProgParam = repCommaProgParam;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IParam toAbstrSyntax() {
         return null;
     }
 }

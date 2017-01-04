@@ -1,11 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RecordParam implements IConcSynWrapper{
+public class RecordParam implements IConcSyn.IParam {
     TokenTupel ident;
     TokenTupel recident;
 
@@ -15,7 +13,7 @@ public class RecordParam implements IConcSynWrapper{
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IParam toAbstrSyntax(IRepCommaParam repParam) {
         return null;
     }
 }

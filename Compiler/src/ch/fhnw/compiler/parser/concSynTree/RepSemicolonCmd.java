@@ -1,9 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class RepSemicolonCmd implements IConcSynWrapper {
+public class RepSemicolonCmd implements IConcSyn.ICmd {
     AbstractCmd cmd;
     RepSemicolonCmd repSemicolonCmd;
 
@@ -12,8 +11,9 @@ public class RepSemicolonCmd implements IConcSynWrapper {
         this.repSemicolonCmd = repSemicolonCmd;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
         return null;
     }
 }

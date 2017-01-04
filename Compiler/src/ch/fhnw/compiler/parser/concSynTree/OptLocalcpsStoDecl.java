@@ -1,10 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class OptLocalcpsStoDecl implements IConcSynWrapper {
+public class OptLocalcpsStoDecl implements IConcSyn.ICpsDecl {
     Token local;
     CpsStoDecl cpsStoDecl;
 
@@ -13,8 +12,9 @@ public class OptLocalcpsStoDecl implements IConcSynWrapper {
         this.cpsStoDecl = cpsStoDecl;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.ICpsDecl toAbstrSyntax() {
         return null;
     }
 }

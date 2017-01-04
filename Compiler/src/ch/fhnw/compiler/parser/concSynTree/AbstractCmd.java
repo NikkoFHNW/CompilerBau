@@ -1,4 +1,4 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 
-public abstract class AbstractCmd implements IConcSynWrapper{ }
+public abstract class AbstractCmd implements IConcSyn.ICmd { }

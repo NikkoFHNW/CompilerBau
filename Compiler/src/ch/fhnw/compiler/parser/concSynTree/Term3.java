@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class Term3 implements IConcSynWrapper{
+public class Term3 implements IConcSyn.ITerm3 {
     AbstractFactor factor;
     RepFactor repFactor;
 
@@ -12,7 +12,7 @@ public class Term3 implements IConcSynWrapper{
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

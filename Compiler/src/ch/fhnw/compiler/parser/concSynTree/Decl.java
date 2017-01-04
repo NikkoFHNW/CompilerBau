@@ -1,9 +1,10 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class Decl implements IConcSynWrapper{
+public class Decl implements IConcSyn.IDecl {
     StoDecl stoDecl;
     FunDecl funDecl;
     ProcDecl procDecl;
@@ -15,27 +16,8 @@ public class Decl implements IConcSynWrapper{
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IDecl toAbstrSyntax() {
         return null;
-    }
-    
-    
-    
-    abstract class AbstractDecl{}
-    
-    class stoDecl extends AbstractDecl{
-        
-
-        public FactorLiteral(Token literal) {
-            this.literal = literal;
-        }
-
-        @Override
-        public IAbstractSynTree toAbstractSynTree() {
-            return null;
-        }
-    	
-    	
     }
     
 }

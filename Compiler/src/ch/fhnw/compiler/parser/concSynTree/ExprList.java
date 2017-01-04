@@ -1,16 +1,17 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class ExprList implements IConcSynWrapper {
+public class ExprList implements IConcSyn.IExprList {
     OptExprRep optExprRep;
 
     public ExprList(OptExprRep optExprRep) {
         this.optExprRep = optExprRep;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExprList toAbstrSyntax() {
         return null;
     }
 }

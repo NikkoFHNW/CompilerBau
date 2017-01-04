@@ -1,8 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class Term2 implements IConcSynWrapper{
+public class Term2 implements IConcSyn.ITerm2 {
     Term3 term3;
     RepTerm3 repTerm3;
 
@@ -12,7 +12,7 @@ public class Term2 implements IConcSynWrapper{
     }
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
 }

@@ -5,9 +5,15 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class ExprDyadic implements IAbs.IExpr {
-    Operator operator;
+    TokenTupel operator;
     IExpr expr1;
     IExpr expr2;
+
+    public ExprDyadic(TokenTupel operator, IExpr expr1, IExpr expr2) {
+        this.operator = operator;
+        this.expr1 = expr1;
+        this.expr2 = expr2;
+    }
 
     @Override
     public TokenTupel checkR() throws ContextError {

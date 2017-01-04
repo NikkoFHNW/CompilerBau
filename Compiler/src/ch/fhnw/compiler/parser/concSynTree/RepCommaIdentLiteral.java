@@ -1,9 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RepCommaIdentLiteral implements IConcSynWrapper {
+public class RepCommaIdentLiteral implements IConcSyn.IFactor {
     TokenTupel ident;
     TokenTupel literal;
 
@@ -18,9 +18,9 @@ public class RepCommaIdentLiteral implements IConcSynWrapper {
         this.next = next;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IExpr toAbstrSyntax() {
         return null;
     }
-
 }

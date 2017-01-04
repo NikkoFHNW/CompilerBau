@@ -1,11 +1,10 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class Program implements IConcSynWrapper {
+public class Program implements IConcSyn.IProgram {
     Token program;
     Token ident;
     ProgParamList progParamList;
@@ -24,8 +23,9 @@ public class Program implements IConcSynWrapper {
         this.endProg = endProg;
     }
 
+
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IProgram toAbstrSyntax() {
         return null;
     }
 }

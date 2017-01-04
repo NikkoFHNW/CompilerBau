@@ -5,7 +5,7 @@ package ch.fhnw.lederer.virtualmachineFS2015;
 
 public class Data
 {
-    static interface IBaseData
+    interface IBaseData
     {
         IBaseData copy();
     }

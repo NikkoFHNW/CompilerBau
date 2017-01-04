@@ -1,9 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class StoDecl implements IConcSynWrapper{
+public class StoDecl implements IConcSyn.IStoDecl {
     OptChangeMode optChangeMode;
     TypedIdent typedIdent;
 
@@ -12,7 +11,7 @@ public class StoDecl implements IConcSynWrapper{
         this.typedIdent = typedIdent;
     }
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public IAbs.IStoDecl toAbstrSyntax() {
         return null;
     }
 }

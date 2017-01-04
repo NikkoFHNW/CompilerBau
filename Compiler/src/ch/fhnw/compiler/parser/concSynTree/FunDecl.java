@@ -1,11 +1,9 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Terminal;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class FunDecl implements IConcSynWrapper {
+public class FunDecl implements IConcSyn.IFunDecl {
 	TokenTupel ident;
 	ParamList pList;
 	OptGlobalglobImps optglobimps;
@@ -21,9 +19,8 @@ public class FunDecl implements IConcSynWrapper {
     	this.cpscmd=cpsCmd;
     }
 
-    @Override
-    public IAbstractSynTree toAbstractSynTree() {
+	@Override
+	public IAbs.IDecl toAbstrSyntax() {
 		return null;
-        
-    }
+	}
 }

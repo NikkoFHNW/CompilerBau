@@ -1,14 +1,14 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.IAbstractSynTree;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class OptMechMode implements IConcSynWrapper{
+public class OptMechMode implements IConcSyn.IOptMechMode {
 
     public OptMechMode() {}
 
     @Override
-    public IAbstractSynTree toAbstractSynTree() {
+    public TokenTupel toAbstrSyntax() {
         return null;
     }
 }
