@@ -1,6 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.ParamRecord;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RecordParam implements IConcSyn.IParam {
@@ -13,7 +14,7 @@ public class RecordParam implements IConcSyn.IParam {
     }
 
     @Override
-    public IAbs.IParam toAbstrSyntax(IRepCommaParam repParam) {
-        return null;
+    public IAbs.IParam toAbstrSyntax() {
+        return new ParamRecord(ident, recident);
     }
 }

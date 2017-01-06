@@ -1,22 +1,11 @@
 package ch.fhnw.compiler.parser.abs;
 
-import ch.fhnw.compiler.parser.concSynTree.CpsCmd;
-import ch.fhnw.compiler.parser.concSynTree.OptGlobalglobImps;
-import ch.fhnw.compiler.parser.concSynTree.OptLocalcpsStoDecl;
-import ch.fhnw.compiler.parser.concSynTree.ParamList;
-import ch.fhnw.compiler.parser.concSynTree.StoDecl;
-import ch.fhnw.compiler.parserNew.AbsTree.ParameterList;
+
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
 public class FunDecl implements IAbs.IDecl {
 
-//	TokenTupel ident;
-//	ParamList pList;
-//	StoDecl stoDecl;
-//	OptGlobalglobImps optglobimps;
-//	OptLocalcpsStoDecl optLocalcpsStoDecl;
-//	CpsCmd cpscmd;
 	TokenTupel ident;
 	IParam pList;
 	IStoDecl stoDecl;

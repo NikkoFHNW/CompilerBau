@@ -132,7 +132,7 @@ public class Parser implements IParser {
 		switch(terminal){
 		case CHANGEMODE:
 
-			return new OptChangeMode(consume(Terminal.CHANGEMODE));
+			return new OptChangeMode((TokenTupel) consume(Terminal.CHANGEMODE));
 			default: return new OptChangeModeEps(); //EPSILON
 
 
@@ -166,15 +166,14 @@ public class Parser implements IParser {
 	}
 	private IConcSyn procDecl() throws GrammarError{
 
-		TokenTupel proc = (TokenTupel) consume(Terminal.PROC);
 		TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-		Param param = (Param) param();
+		ParamList paramList = (ParamList) paramList();
 		OptGlobalglobImps optggi = (OptGlobalglobImps) optGlobalglobImps();
 		OptLocalcpsStoDecl olcsd = (OptLocalcpsStoDecl) optLocalcpsStoDecl();
 		consume(Terminal.DO);
 		CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 		consume(Terminal.ENDPROC);
-		return new ProcDecl(proc, ident, param, optggi, olcsd,cpsCmd);
+		return new ProcDecl(ident, paramList, optggi, olcsd,cpsCmd);
 	}
 	private IConcSyn globImps() throws GrammarError{
 
@@ -209,7 +208,7 @@ public class Parser implements IParser {
 		case FLOWMODE:
 			 //Hier was returnen? die optklasse oder flowmode?
 //			falls flowmode, token oder tokentupel. beide m�sste IConcSyn auch implementieren.
-			return new OptFlowMode(consume(Terminal.FLOWMODE));
+			return new OptFlowMode((TokenTupel) consume(Terminal.FLOWMODE));
 		default: return new OptFlowModeEps(); //EPSILON
 		}
 

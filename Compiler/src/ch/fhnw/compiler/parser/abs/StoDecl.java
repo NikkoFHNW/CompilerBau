@@ -1,6 +1,5 @@
 package ch.fhnw.compiler.parser.abs;
 
-import ch.fhnw.compiler.parserNew.AbsTree.TypedIdent;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions.Store;
@@ -14,8 +13,6 @@ public class StoDecl implements IAbs.IStoDecl {
 	
 	public StoDecl(TokenTupel cm, IAbs.IExpr typedId){
 		this.cm=cm;
-//		this.ident=ident;
-//		this.type=type;
 		this.typedId=typedId;
 	}
 

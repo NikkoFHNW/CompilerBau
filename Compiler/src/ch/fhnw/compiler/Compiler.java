@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import ch.fhnw.compiler.parser.Parser;
 import ch.fhnw.compiler.scanner.Scanner;
 import ch.fhnw.compiler.scanner.data.*;
 
@@ -40,5 +41,8 @@ public class Compiler {
 		}
         
        System.out.println(tList.toString());
+
+//		Parser parser = new Parser(tList);
+
     }
 }

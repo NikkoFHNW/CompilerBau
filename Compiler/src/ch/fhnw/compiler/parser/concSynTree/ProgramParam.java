@@ -1,6 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.*;
+import ch.fhnw.compiler.parser.abs.Param;
 
 public class ProgramParam implements IConcSyn.IParam {
     OptFlowMode optFlowMode;
@@ -14,7 +15,7 @@ public class ProgramParam implements IConcSyn.IParam {
     }
 
     @Override
-    public IAbs.IParam toAbstrSyntax(IRepCommaParam repParam) {
-        return null;
+    public IAbs.IParam toAbstrSyntax() {
+        return new Param(optFlowMode.toAbstrSyntax(), null,  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax());
     }
 }
