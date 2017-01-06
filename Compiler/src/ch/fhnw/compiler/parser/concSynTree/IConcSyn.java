@@ -1,7 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
-import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public interface IConcSyn {
@@ -91,7 +90,7 @@ public interface IConcSyn {
             IAbs.IExpr toAbstrSyntax();
         };
         public interface IExprList extends IConcSyn {
-            IAbs.IExprList toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax();
         };
         public interface IOptExprRep extends IConcSyn {
             IAbs.IExpr toAbstrSyntax();

@@ -11,7 +11,7 @@ public class ExprList implements IConcSyn.IExprList {
 
 
     @Override
-    public IAbs.IExprList toAbstrSyntax() {
+    public IAbs.IExpr toAbstrSyntax() {
         return optExprRep.toAbstrSyntax();
     }
 }

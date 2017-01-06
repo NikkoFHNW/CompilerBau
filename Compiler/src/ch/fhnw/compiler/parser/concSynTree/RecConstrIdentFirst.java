@@ -13,7 +13,7 @@ public class RecConstrIdentFirst extends AbstractRecConstr  {
     }
 
     @Override
-    public IAbs toAbstrSyntax() {
+    public IAbs.ICmd toAbstrSyntax() {
         return null;
     }
 }
