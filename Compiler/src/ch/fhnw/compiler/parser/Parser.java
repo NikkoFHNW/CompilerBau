@@ -2,7 +2,6 @@ package ch.fhnw.compiler.parser;
 
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
-import ch.fhnw.compiler.parser.concSynTree.IConcSyn;
 import ch.fhnw.compiler.scanner.data.*;
 
 
@@ -118,7 +117,7 @@ public class Parser implements IParser {
 //			CpsDecl cps = cpsDecl();
 //			return new OptGlobalCpsDecl(global, cpsDecl);
 
-		default: return null; //EPSILON
+		default: return new OptGlobalcpsDeclEps(); //EPSILON
 
 		}
 
@@ -130,7 +129,7 @@ public class Parser implements IParser {
 		case CHANGEMODE:
 
 			return new OptChangeMode(consume(Terminal.CHANGEMODE));
-			default: return null; //EPSILON
+			default: return new OptChangeModeEps(); //EPSILON
 
 
 		}
@@ -142,7 +141,7 @@ public class Parser implements IParser {
 			consume(Terminal.GLOBAL);
 			return globImps();
 
-			default: return null; //EPSILON
+			default: return new OptGlobalglobImpsEps(); //EPSILON
 
 
 		}
@@ -155,7 +154,7 @@ public class Parser implements IParser {
 			consume(Terminal.LOCAL);
 			return cpsStoDecl();
 
-			default: return null; //EPSILON
+			default: return new OptLocalcpsStoDeclEps(); //EPSILON
 
 
 		}
@@ -189,7 +188,7 @@ public class Parser implements IParser {
 			RepCommaGlobImp repCommaGI = (RepCommaGlobImp) repCommaGlobImp();
 			return  new RepCommaGlobImp(globImp, repCommaGI); //Hier gehts nicht ohne new return sonst geht globimp verloren
 
-		default: return null; //EPSILON
+		default: return new RepCommaGlobImpEps(); //EPSILON
 
 		}
 	}
@@ -207,7 +206,7 @@ public class Parser implements IParser {
 			 //Hier was returnen? die optklasse oder flowmode?
 //			falls flowmode, token oder tokentupel. beide m�sste IConcSyn auch implementieren.
 			return new OptFlowMode(consume(Terminal.FLOWMODE));
-		default: return null; //EPSILON
+		default: return new OptFlowModeEps(); //EPSILON
 		}
 
 
@@ -226,7 +225,7 @@ public class Parser implements IParser {
 			Decl decl = (Decl) decl();
 			RepSemicolonDecl repDecl = (RepSemicolonDecl) repSemicolonDecl();
 			return new RepSemicolonDecl(decl, repDecl);
-		default: return null; //EPSILON
+		default: return new RepSemicolonDeclEps(); //EPSILON
 		}
 	}
 	private IConcSyn cpsStoDecl() throws GrammarError{
@@ -243,7 +242,7 @@ public class Parser implements IParser {
 			StoDecl stoDecl = (StoDecl) stoDecl();
 			RepSemicolonStoDecl repSto = (RepSemicolonStoDecl) repSemicolonStoDecl();
 			return new RepSemicolonStoDecl( stoDecl, repSto);
-		default: return null; //EPSILON
+		default: return new RepSemicolonDeclEps(); //EPSILON
 		}
 	}
 	private IConcSyn progParamList() throws GrammarError{
@@ -263,7 +262,7 @@ public class Parser implements IParser {
 			ProgramParam progParam = (ProgramParam) progParam();
 			RepCommaProgParam repPr = (RepCommaProgParam) repCommaProgParam();
 			return new OptProgParamRepCommaProgParam(progParam, repPr);
-		default: return null; //EPSILON
+		default: return new OptProgParamRepCommaProgParamEps(); //EPSILON
 
 		}
 	}
@@ -275,7 +274,7 @@ public class Parser implements IParser {
 			ProgramParam progParam = (ProgramParam) progParam();
 			RepCommaProgParam repPr = (RepCommaProgParam) repCommaProgParam();
 			return new RepCommaProgParam(progParam, repPr);
-		default: return null; //EPSILON
+		default: return new RepCommaProgParamEps(); //EPSILON
 
 		}
 	}
@@ -315,7 +314,7 @@ public class Parser implements IParser {
 			Param p = (Param) param();
 			RepCommaParam rep = (RepCommaParam) repCommaParam();
 			return new OptParamRepCommaParam(p, rep);
-		default: return null; //EPSILON
+		default: return new OptParamRepCommaParamEps(); //EPSILON
 		}
 	}
 	private IConcSyn repCommaParam() throws GrammarError{
@@ -326,7 +325,7 @@ public class Parser implements IParser {
 			Param p = (Param) param();
 			RepCommaParam rp = (RepCommaParam) repCommaParam();
 			return new RepCommaParam(p, rp);
-		default: return null; //EPSILON
+		default: return new RepCommaParamEps(); //EPSILON
 
 		}
 
@@ -428,6 +427,7 @@ public class Parser implements IParser {
 				consume(Terminal.LPAREN);
 				IConcSyn recconstr = recConstr();
 				consume(Terminal.RPAREN);
+				//Result new recident?
 		}
 		return result;
     }
@@ -478,7 +478,7 @@ public class Parser implements IParser {
             GlobInits globInits = (GlobInits) globInits();
 			return new OptGlobInits(globInits);
 		} else
-			return null;//OptGlobInitsEpsilon()
+			return new OptGlobInitsEps();//OptGlobInitsEpsilon()
 	}
 
     private IConcSyn cpsCmd() throws GrammarError {
@@ -534,7 +534,7 @@ public class Parser implements IParser {
             return repTerm1;
         }
 
-        return null;
+        return new RepTerm1Eps();
     }
 
     private IConcSyn optTerm2() throws GrammarError {
@@ -544,7 +544,7 @@ public class Parser implements IParser {
             Term2 term2 = (Term2) term2();
             return new OptTerm2(term2);
         }
-        return null;
+        return new OptTerm2Eps();
     }
 
     private IConcSyn term1() throws GrammarError {
@@ -571,7 +571,7 @@ public class Parser implements IParser {
             repTerm3.setNext(next);
             return repTerm3;
         }
-        return null;
+        return new RepTerm3Eps();
     }
 
     private IConcSyn term3() throws GrammarError {
@@ -591,7 +591,7 @@ public class Parser implements IParser {
             repFactor.setNext(next);
             return repFactor;
         }
-        return null;
+        return new RepFactorEps();
     }
 
     private IConcSyn factor() throws GrammarError {
@@ -661,7 +661,7 @@ public class Parser implements IParser {
             RepCommaExpr next = (RepCommaExpr) repCommaExpr();
             return repCommaExpr;
         }
-        return null;
+        return new RepCommaExprEps();
     }
 
     private IConcSyn monadicOpr() throws GrammarError {
