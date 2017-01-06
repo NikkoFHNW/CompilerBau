@@ -12,6 +12,6 @@ public class GlobInits implements IConcSyn.IGlobInits {
 
     @Override
     public IAbs.IGlobInit toAbstrSyntax() {
-        return null;
+        return idents.toAbstrSyntax();
     }
 }

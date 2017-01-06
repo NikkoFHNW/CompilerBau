@@ -1,6 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.ExprLiteral;
 import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.Value;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class FactorLiteral extends AbstractFactor {
@@ -12,6 +14,7 @@ public class FactorLiteral extends AbstractFactor {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        Value value = new Value(literal.getIntVal());
+        return new ExprLiteral(value);
     }
 }

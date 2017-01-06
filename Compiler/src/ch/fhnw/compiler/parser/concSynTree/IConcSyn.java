@@ -46,7 +46,10 @@ public interface IConcSyn {
             IAbs.IGlobImp toAbstrSyntax(IRepCommaGlobImp repGlobImp);
         };
         public interface ICmd extends IConcSyn {
-            IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd);
+            IAbs.ICmd toAbstrSyntax();
+        };
+        public interface ICpsCmd extends IConcSyn {
+            IAbs.ICmd toAbstrSyntax(ICpsCmd next);
         };
         public interface IOptGlobInits extends IConcSyn {
             IAbs.IGlobInit toAbstrSyntax();
@@ -72,10 +75,16 @@ public interface IConcSyn {
         public interface IRepTerm3 extends IConcSyn {
             IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
         };
+        public interface IOptTerm2 extends IConcSyn {
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
+        };
         public interface ITerm3 extends IConcSyn {
             IAbs.IExpr toAbstrSyntax();
         };
         public interface IRepFactor extends IConcSyn {
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
+        };
+        public interface IRepCommaExpr extends IConcSyn {
             IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
         };
         public interface IFactor extends IConcSyn {
@@ -85,10 +94,10 @@ public interface IConcSyn {
             IAbs.IExprList toAbstrSyntax();
         };
         public interface IOptExprRep extends IConcSyn {
-            IAbs.IExprList toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax();
         };
         public interface IMonadicOpr extends IConcSyn {
-            Token toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax(AbstractFactor factor);
         };
         public interface IOptMechMode extends IConcSyn {
             TokenTupel toAbstrSyntax();
@@ -100,7 +109,7 @@ public interface IConcSyn {
             TokenTupel toAbstrSyntax();
         };
         public interface IRecConstr extends IConcSyn {
-            IAbs toAbstrSyntax();
+            IAbs.ICmd toAbstrSyntax();
         };
 
 

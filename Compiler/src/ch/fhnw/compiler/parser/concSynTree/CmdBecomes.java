@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.CmdAssi;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class CmdBecomes extends AbstractCmd {
@@ -12,7 +13,7 @@ public class CmdBecomes extends AbstractCmd {
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
-        return null;
+    public IAbs.ICmd toAbstrSyntax() {
+        return new CmdAssi(expr1.toAbstrSyntax(), expr2.toAbstrSyntax());
     }
 }

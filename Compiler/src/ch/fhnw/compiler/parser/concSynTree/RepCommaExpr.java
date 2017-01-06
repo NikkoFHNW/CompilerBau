@@ -2,7 +2,7 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class RepCommaExpr implements IConcSyn.IExpr {
+public class RepCommaExpr implements IConcSyn.IRepCommaExpr {
     Expr expr;
     RepCommaExpr next;
 
@@ -15,8 +15,12 @@ public class RepCommaExpr implements IConcSyn.IExpr {
     }
 
 
+    //TODO param??
     @Override
-    public IAbs.IExpr toAbstrSyntax() {
-        return null;
+    public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
+        if (next == null) {
+            return this.expr.toAbstrSyntax();
+        } else
+            return next.toAbstrSyntax(this.expr.toAbstrSyntax());
     }
 }

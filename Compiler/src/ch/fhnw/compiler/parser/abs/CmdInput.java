@@ -1,8 +1,14 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class CmdInput implements IAbs.ICmd {
+    IExpr expr;
+
+    public CmdInput(IExpr expr) {
+        this.expr = expr;
+    }
 
     @Override
     public void check(boolean canInit) throws ContextError {

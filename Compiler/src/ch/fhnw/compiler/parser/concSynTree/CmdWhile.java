@@ -12,7 +12,7 @@ public class CmdWhile extends AbstractCmd {
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
-        return null;
+    public IAbs.ICmd toAbstrSyntax() {
+        return new ch.fhnw.compiler.parser.abs.CmdWhile(expr.toAbstrSyntax(), cpsCmd.toAbstrSyntax());
     }
 }

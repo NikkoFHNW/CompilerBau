@@ -57,6 +57,8 @@ public interface IAbs {
 //        int code(int loc
              ) throws CodeTooSmallError;
     }
+
+    //possible TODO: return Set
     interface IGlobInit extends IAbs {
         Object check(Object initList)
                 throws ContextError;

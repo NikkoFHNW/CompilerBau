@@ -12,6 +12,9 @@ public class OptGlobInits implements IConcSyn.IOptGlobInits {
 
     @Override
     public IAbs.IGlobInit toAbstrSyntax() {
-        return null;
+        if (globInits == null)
+            return null;
+        else
+            return globInits.toAbstrSyntax();
     }
 }

@@ -4,14 +4,13 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class CmdProcCall implements IAbs.ICmd {
-    TokenTupel ident;
+//    TokenTupel ident; in routineCall enthalten
     RoutineCall routineCall;
-    TokenTupel optIdent;
+    IGlobInit globalInit;
 
-    public CmdProcCall(TokenTupel ident, RoutineCall routineCall, TokenTupel optIdent) {
-        this.ident = ident;
+    public CmdProcCall(RoutineCall routineCall, IGlobInit globalInit) {
         this.routineCall = routineCall;
-        this.optIdent = optIdent;
+        this.globalInit = globalInit;
     }
 
     @Override

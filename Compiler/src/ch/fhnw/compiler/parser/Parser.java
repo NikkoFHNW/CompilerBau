@@ -23,8 +23,6 @@ public class Parser implements IParser {
 	
 	@Override
 	public Program parse() throws ch.fhnw.compiler.error.GrammarError {
-		// TODO Auto-generated method stub
-		
 		Program program = program();
 		consume(Terminal.SENTINEL);
 		return program;
@@ -32,16 +30,18 @@ public class Parser implements IParser {
 	}
 	
 	private Program program() throws ch.fhnw.compiler.error.GrammarError{
-		// TODO Auto-generated method stub
-			consume(Terminal.PROGRAM);
-			Token t =consume(Terminal.IDENT);
-			//FOR next ones we need the wrappers.
-			
-			
-		
-		throw new ch.fhnw.compiler.error.GrammarError(terminal,Terminal.PROGRAM);
-	}
+        if (terminal == Terminal.PROGRAM) {
+            consume(Terminal.PROGRAM);
+            TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
+            ProgParamList progParamList = (ProgParamList) progParamList();
+            OptGlobalCpsDecl optGlobalCpsDecl = (OptGlobalCpsDecl) optGlobalcpsDecl();
+            CpsCmd cpsCmd = (CpsCmd) cpsCmd();
+            return new Program(ident, progParamList, optGlobalCpsDecl, cpsCmd);
+        }
 
+        else
+		    throw new ch.fhnw.compiler.error.GrammarError(terminal,Terminal.PROGRAM);
+	}
 
 	private Token consume(Terminal expectedTerm) throws ch.fhnw.compiler.error.GrammarError{
 
@@ -103,7 +103,7 @@ public class Parser implements IParser {
 			CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 			consume(Terminal.ENDFUN);
 			
-			return new FunDecl(ident, paramList, optGlobalglobImps, optLocalcpsStoDecl, cpsCmd);
+			return new FunDecl(ident, paramList, stoDecl, optGlobalglobImps, optLocalcpsStoDecl, cpsCmd);
 
 		default: throw new ch.fhnw.compiler.error.GrammarError("decl got ",0);
 		}
@@ -282,8 +282,6 @@ public class Parser implements IParser {
 	private IConcSyn progParam() throws GrammarError{
 //[[N optFlowMode, N optChangeMode, N typedIdent],[N recordParam]]
 
-		RecordParam recordParam = (RecordParam) recordParam();
-
 		switch(terminal){
 		case FLOWMODE:
 		case CHANGEMODE:
@@ -367,7 +365,7 @@ public class Parser implements IParser {
 	
 
 	private IConcSyn cmd() throws GrammarError {
-		AbstractCmd result = null;
+		AbstractCmd result;
         switch (terminal) {
             case SKIP:
                 System.out.println("cmd ::= SKIP");
@@ -420,14 +418,19 @@ public class Parser implements IParser {
 				result = new CmdDebugOut(expr);
 				break;
 
-			default:
-			//TODO recident case; recidents in scanner????
+            case RECIDENT:
 				System.out.println("cmd ::= RECIDENT");
-				ident = (TokenTupel) consume(Terminal.IDENT);
+                TokenTupel recident = (TokenTupel) consume(Terminal.IDENT);
+                ident = (TokenTupel) consume(Terminal.IDENT);
 				consume(Terminal.BECOMES);
 				consume(Terminal.LPAREN);
-				IConcSyn recconstr = recConstr();
+				AbstractRecConstr recconstr = (AbstractRecConstr) recConstr();
 				consume(Terminal.RPAREN);
+                result = new CmdRec(ident, recident, recconstr);
+                break;
+
+            default:
+                throw new GrammarError("cmd()", 0);
 		}
 		return result;
     }
@@ -537,12 +540,15 @@ public class Parser implements IParser {
         return null;
     }
 
-    private IConcSyn optTerm2() throws GrammarError {
+    private IConcSyn repTerm2() throws GrammarError {
         if (terminal == Terminal.RELOPR){
             System.out.println("expr := optTerm2");
-            consume(Terminal.RELOPR);
+            TokenTupel relOpr = (TokenTupel) consume(Terminal.RELOPR);
             Term2 term2 = (Term2) term2();
-            return new OptTerm2(term2);
+            RepTerm2 repTerm2 = new RepTerm2(relOpr, term2);
+            RepTerm2 next = (RepTerm2) repTerm2();
+            repTerm2.setNext(next);
+            return repTerm2;
         }
         return null;
     }
@@ -550,8 +556,8 @@ public class Parser implements IParser {
     private IConcSyn term1() throws GrammarError {
         System.out.println("expr := term1");
         Term2 term2 = (Term2) term2();
-        OptTerm2 optTerm2 = (OptTerm2) optTerm2();
-        return new Term1(term2, optTerm2);
+        RepTerm2 repTerm2 = (RepTerm2) repTerm2();
+        return new Term1(term2, repTerm2);
     }
 
     private IConcSyn term2() throws GrammarError {
@@ -564,9 +570,9 @@ public class Parser implements IParser {
     private IConcSyn repTerm3() throws GrammarError {
         if (terminal == Terminal.ADDOPR) {
             System.out.println("expr := repTerm3");
-            consume(Terminal.ADDOPR);
+            TokenTupel addOpr = (TokenTupel) consume(Terminal.ADDOPR);
             Term3 term3 = (Term3) term3();
-            RepTerm3 repTerm3 = new RepTerm3(term3);
+            RepTerm3 repTerm3 = new RepTerm3(addOpr, term3);
             RepTerm3 next = (RepTerm3) repTerm3();
             repTerm3.setNext(next);
             return repTerm3;
@@ -604,7 +610,8 @@ public class Parser implements IParser {
             case IDENT:
                 System.out.println("factor := IDENT");
                 TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-                return new FactorLiteral(ident);
+                OptInitOrExprList optInitOrExprList = (OptInitOrExprList) optInitOrExprList();
+                return new FactorIdent(ident, optInitOrExprList);
 
             case LPAREN:
                 System.out.println("factor := LPAREN");
@@ -627,26 +634,40 @@ public class Parser implements IParser {
                 factorMonadic = new FactorMonadic(monadicOpr, factor);
                 return factorMonadic;
 
+			case DOT:
+				return recordFactor();
+
             default:
                 throw new GrammarError("factor()", 0);
         }
     }
 
+    private IConcSyn optInitOrExprList() throws GrammarError {
+        if (terminal == Terminal.INIT) {
+            System.out.println("optInitOrExprList := INIT");
+            consume(Terminal.INIT);
+            return null;
+        } else if (terminal == Terminal.LPAREN) {
+            return exprList();
+        } else
+            throw new GrammarError("optInitOrExprList := INIT", 0);
+    }
+
     private IConcSyn exprList() throws GrammarError {
         System.out.println("exprList");
         consume(Terminal.LPAREN);
-        OptExprRep optExprRep = optExprRep();
+        OptExprRep optExprRep = (OptExprRep) optExprRep();
         consume(Terminal.RPAREN);
         return new ExprList(optExprRep);
     }
 
-    private OptExprRep optExprRep() throws GrammarError {
+    private IConcSyn optExprRep() throws GrammarError {
         System.out.println("exprList optExprRep");
         Expr expr;
         try {
             expr = (Expr) expr();
         } catch (GrammarError e) {
-            return null;
+            return new OptExprRepEps();
         }
         RepCommaExpr repCommaExpr = (RepCommaExpr) repCommaExpr();
         return new OptExprRep(expr, repCommaExpr);
@@ -659,6 +680,7 @@ public class Parser implements IParser {
             Expr expr = (Expr) expr();
             RepCommaExpr repCommaExpr = new RepCommaExpr(expr);
             RepCommaExpr next = (RepCommaExpr) repCommaExpr();
+            repCommaExpr.setNext(next);
             return repCommaExpr;
         }
         return null;
@@ -666,11 +688,11 @@ public class Parser implements IParser {
 
     private IConcSyn monadicOpr() throws GrammarError {
         System.out.println("monadicOpr");
-        if (terminal == Terminal.NOT) {
-            return new MonadicOpr(Terminal.NOT);
-        } else if (terminal == Terminal.ADDOPR) {
-            return new MonadicOpr(Terminal.ADDOPR);
-        } else
+        if (terminal == Terminal.ADDOPR) {
+            TokenTupel operator = (TokenTupel) consume(Terminal.ADDOPR);
+            return new MonadicOpr(operator);
+        }
+        else
             throw new GrammarError("monadicOpr", 0);
 
     }
@@ -696,22 +718,22 @@ public class Parser implements IParser {
 	}
 
 	private IConcSyn repRecordData() throws GrammarError {
-        //TODO
-		RepRecordData head = null, current = null;
+		RepRecordData head = null, current;
 		while (terminal == Terminal.COMMA) {
 			consume(Terminal.COMMA);
 			TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 			consume(Terminal.COLON);
 			consume(Terminal.TYPE);
 			current = new RepRecordData(ident);
+
+            if (head == null)
+                head = current;
+            else {
+                head.setNext(current);
+            }
 		}
 
-		if (head == null)
-			head = current;
-		else
-			head.setNext(current);
-
-		return (IConcSyn) head;
+		return head;
 	}
 
 	private IConcSyn recordFactor() throws GrammarError {

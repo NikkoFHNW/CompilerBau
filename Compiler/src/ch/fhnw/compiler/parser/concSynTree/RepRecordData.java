@@ -11,6 +11,15 @@ public class RepRecordData  implements IConcSyn.IDecl {
         this.ident = ident;
     }
 
+    public void setNext(RepRecordData next) {
+        if (next == null) {
+            this.next = next;
+        } else {
+            next.setNext(next);
+        }
+
+    }
+
     @Override
     public IAbs.IDecl toAbstrSyntax() {
         return null;

@@ -13,6 +13,6 @@ public class Expr implements IConcSyn.IExpr {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        return next.toAbstrSyntax(term1.toAbstrSyntax());
     }
 }

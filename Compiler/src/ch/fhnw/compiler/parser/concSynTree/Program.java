@@ -3,26 +3,20 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class Program implements IConcSyn.IProgram {
-    Token program;
-    Token ident;
+    TokenTupel ident;
     ProgParamList progParamList;
     OptGlobalCpsDecl optGlobalCpsDecl;
     CpsCmd cpsCmd;
-    Token _do;
-    Token endProg;
 
-    public Program(Token program, Token ident, ProgParamList progParamList, OptGlobalCpsDecl optGlobalCpsDecl, CpsCmd cpsCmd, Token _do, Token endProg) {
-        this.program = program;
+    public Program(TokenTupel ident, ProgParamList progParamList, OptGlobalCpsDecl optGlobalCpsDecl, CpsCmd cpsCmd) {
         this.ident = ident;
         this.progParamList = progParamList;
         this.optGlobalCpsDecl = optGlobalCpsDecl;
         this.cpsCmd = cpsCmd;
-        this._do = _do;
-        this.endProg = endProg;
     }
-
 
     @Override
     public IAbs.IProgram toAbstrSyntax() {

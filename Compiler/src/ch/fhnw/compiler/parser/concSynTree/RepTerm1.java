@@ -19,13 +19,12 @@ public class RepTerm1 implements IConcSyn.IRepTerm1 {
     }
 
 
-    public IAbs toAbstractSynTree(ch.fhnw.compiler.parser.abs.IAbs.IExpr expr) {
-        ExprDyadic exprDyadic = new ExprDyadic(boolOpr, expr, (IAbs.IExpr) term1.toAbstrSyntax());
-        return null;
-    }
-
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
-        return null;
+        ExprDyadic exprDyadic = new ExprDyadic(boolOpr, expr, term1.toAbstrSyntax());
+        if (next != null)
+            return next.toAbstrSyntax(exprDyadic);
+         else
+            return exprDyadic;
     }
 }

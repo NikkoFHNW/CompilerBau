@@ -1,19 +1,19 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.ExprMonadic;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IMonadicOpr;
-import ch.fhnw.compiler.scanner.data.Terminal;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class MonadicOpr implements IMonadicOpr{
-    Terminal opr;
+    TokenTupel monadicOpr;
 
-    public MonadicOpr(Terminal opr) {
-        this.opr = opr;
+    public MonadicOpr(TokenTupel monadicOpr) {
+        this.monadicOpr = monadicOpr;
     }
 
     @Override
-    public Token toAbstrSyntax() {
-        return null;
+    public IAbs.IExpr toAbstrSyntax(AbstractFactor factor) {
+        return new ExprMonadic(monadicOpr.getOp(), factor.toAbstrSyntax());
     }
 }

@@ -37,6 +37,7 @@ public class Scanner {
         keywords.put("true", new TokenTupel(Terminal.LITERAL, true));
         keywords.put("var", new TokenTupel(Terminal.CHANGEMODE, Mode.VAR));
 
+
         // create list with tupel terminals
         LinkedList<Terminal> tupelTokens = new LinkedList<>();
         for (Object o : keywords.entrySet()) {

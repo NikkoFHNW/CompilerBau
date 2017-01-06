@@ -12,7 +12,12 @@ public class OptExprRep implements IConcSyn.IOptExprRep{
     }
 
     @Override
-    public IAbs.IExprList toAbstrSyntax() {
-        return null;
+    public IAbs.IExpr toAbstrSyntax() {
+        if (rep == null)
+            return expr.toAbstrSyntax();
+        else {
+            return rep.toAbstrSyntax(expr.toAbstrSyntax());
+        }
+
     }
 }

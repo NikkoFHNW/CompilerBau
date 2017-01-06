@@ -5,13 +5,19 @@ import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class RoutineCall implements IAbs.IExpr {
     TokenTupel ident;
-    IExpr expr;
-    IExpr nextExpression;
+    IExprList exprList;
 
-    public RoutineCall(TokenTupel ident, IExpr expr, IExpr nextExpression) {
+    public RoutineCall(TokenTupel ident, IExprList exprList) {
         this.ident = ident;
-        this.expr = expr;
-        this.nextExpression = nextExpression;
+        this.exprList = exprList;
+    }
+
+    public TokenTupel getIdent() {
+        return ident;
+    }
+
+    public IExprList getExprList() {
+        return exprList;
     }
 
     @Override

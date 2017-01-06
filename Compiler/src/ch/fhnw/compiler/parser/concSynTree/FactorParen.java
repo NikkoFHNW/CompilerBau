@@ -11,6 +11,6 @@ public class FactorParen extends AbstractFactor implements IConcSyn {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        return expr.toAbstrSyntax();
     }
 }

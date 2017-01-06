@@ -1,12 +1,18 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.parser.concSynTree.IConcSyn;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
-public class CmdOutput implements IAbs.ICmd {
-    IExpr expr;
+public class CmdRec implements IAbs.ICmd {
+    TokenTupel recident;
+    TokenTupel ident;
+    ICmd recConstr;
 
-    public CmdOutput(IExpr expr) {
-        this.expr = expr;
+    public CmdRec(TokenTupel recident, TokenTupel ident, ICmd recConstr) {
+        this.recident = recident;
+        this.ident = ident;
+        this.recConstr = recConstr;
     }
 
     @Override

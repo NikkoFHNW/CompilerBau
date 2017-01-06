@@ -4,10 +4,10 @@ public class TokenTupel extends Token {
 
 	private Operator op;
 	private Type typ;
-	private boolean bVal;
+	private boolean boolVal;
 	private Mode m;
-	private int iVal;
-	private String sVal;
+	private int intVal;
+	private String stringVal;
 
     private enum ConcreteTyp {
 		OPERATOR,TYPE,BOOLEAN,MODE,STRING,INT
@@ -19,10 +19,10 @@ public class TokenTupel extends Token {
         super(t);
         op=null;
         typ=null;
-        bVal=false;
+        boolVal=false;
         m=null;
-        iVal=0;
-        sVal=null;
+        intVal=0;
+        stringVal=null;
 	}
 	
 	public TokenTupel(Terminal t, Operator o){
@@ -40,7 +40,7 @@ public class TokenTupel extends Token {
     public TokenTupel(Terminal t, boolean o){
 		this(t);
         conc = ConcreteTyp.BOOLEAN;
-        bVal=o;
+        boolVal=o;
 	}
 
     public TokenTupel(Terminal t, Mode o){
@@ -52,20 +52,32 @@ public class TokenTupel extends Token {
     public TokenTupel(Terminal t, int o){
         this(t);
         conc = ConcreteTyp.INT;
-		iVal=o;
+        intVal=o;
 	}
 
     public TokenTupel(Terminal t, String o){
         this(t);
         conc = ConcreteTyp.STRING;
-		sVal=o;
+		stringVal=o;
 	}
-	
-	public String toString(){
+
+    public int getIntVal() {
+        return intVal;
+    }
+
+    public boolean getBoolVal() {
+        return boolVal;
+    }
+
+    public Operator getOp() {
+        return op;
+    }
+
+    public String toString(){
 		
 		String res;
         switch(conc){
-            case BOOLEAN: res = Boolean.toString(bVal);
+            case BOOLEAN: res = Boolean.toString(boolVal);
                 break;
             case TYPE: res = typ.toString();
                 break;
@@ -73,9 +85,9 @@ public class TokenTupel extends Token {
                 break;
             case MODE: res = m.toString();
                 break;
-            case INT: res = Integer.toString(iVal);
+            case INT: res = Integer.toString(intVal);
                 break;
-            case STRING: res = sVal;
+            case STRING: res = stringVal;
                 break;
             default: res = null;
                 break;

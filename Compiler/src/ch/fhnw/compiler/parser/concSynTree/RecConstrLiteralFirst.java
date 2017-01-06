@@ -3,7 +3,7 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RecConstrLiteralFirst implements IConcSyn.IRecConstr {
+public class RecConstrLiteralFirst extends AbstractRecConstr {
     TokenTupel literal;
     RepCommaIdentLiteral repCommaIdentLiteral;
 

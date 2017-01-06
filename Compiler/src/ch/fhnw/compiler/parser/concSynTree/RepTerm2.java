@@ -4,23 +4,23 @@ import ch.fhnw.compiler.parser.abs.ExprDyadic;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RepTerm3 implements IConcSyn.IRepTerm3 {
-    TokenTupel addOpr;
-    Term3 term3;
-    RepTerm3 next;
+public class RepTerm2 implements IConcSyn.IOptTerm2{
+    TokenTupel relOpr;
+    Term2 term2;
+    RepTerm2 next;
 
-    public RepTerm3(TokenTupel addOpr, Term3 term3) {
-        this.addOpr = addOpr;
-        this.term3 = term3;
+    public RepTerm2(TokenTupel relOpr, Term2 term2) {
+        this.relOpr = relOpr;
+        this.term2 = term2;
     }
 
-    public void setNext(RepTerm3 next) {
+    public void setNext(RepTerm2 next) {
         this.next = next;
     }
 
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
-        ExprDyadic exprDyadic = new ExprDyadic(addOpr, expr, term3.toAbstrSyntax());
+        ExprDyadic exprDyadic = new ExprDyadic(relOpr, expr, term2.toAbstrSyntax());
         if (next != null)
             return next.toAbstrSyntax(exprDyadic);
         else

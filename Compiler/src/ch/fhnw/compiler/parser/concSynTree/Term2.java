@@ -13,6 +13,9 @@ public class Term2 implements IConcSyn.ITerm2 {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        if (repTerm3 != null)
+            return repTerm3.toAbstrSyntax(term3.toAbstrSyntax());
+        else
+            return term3.toAbstrSyntax();
     }
 }

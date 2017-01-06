@@ -3,7 +3,13 @@ package ch.fhnw.compiler.parser.abs;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class CmdCps implements IAbs.ICmd {
-    ICmd next;
+    ICmd cmd;
+    CmdCps next;
+
+    public CmdCps(ICmd cmd, CmdCps next) {
+        this.cmd = cmd;
+        this.next = next;
+    }
 
     @Override
     public void check(boolean canInit) throws ContextError {

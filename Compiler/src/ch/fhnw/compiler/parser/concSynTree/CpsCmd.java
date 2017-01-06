@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.CmdCps;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class CpsCmd implements IConcSyn.ICmd {
@@ -11,11 +12,15 @@ public class CpsCmd implements IConcSyn.ICmd {
     }
 
     public void setNext(CpsCmd next) {
-        this.next = next;
+        if (next == null)
+            this.next = next;
+        else
+            next.setNext(next);
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax(IAbs.ICmd repCmd) {
-        return null;
+    public IAbs.ICmd toAbstrSyntax() {
+        return new CmdCps(cmd.toAbstrSyntax(), (CmdCps) next.toAbstrSyntax());
     }
+
 }

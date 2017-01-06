@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.GlobalInit;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
@@ -12,11 +13,14 @@ public class Idents implements IConcSyn.IIdents {
     }
 
     public void setNext(Idents next) {
-        this.next = next;
+        if (next == null)
+            this.next = next;
+        else
+            next.setNext(next);
     }
 
     @Override
     public IAbs.IGlobInit toAbstrSyntax() {
-        return null;
+        return new GlobalInit(ident, next.toAbstrSyntax());
     }
 }
