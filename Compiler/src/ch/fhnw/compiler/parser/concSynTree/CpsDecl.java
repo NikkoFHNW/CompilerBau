@@ -13,6 +13,6 @@ public class CpsDecl implements IConcSyn.ICpsDecl {
 
     @Override
     public IAbs.ICpsDecl toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.CpsDecl(decl.toAbstrSyntax(), repSemicolonDecl.toAbstrSyntax());
     }
 }

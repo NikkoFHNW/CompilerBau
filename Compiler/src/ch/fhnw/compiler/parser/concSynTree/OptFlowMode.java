@@ -5,14 +5,14 @@ import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class OptFlowMode implements IConcSyn.IOptFlowMode {
-    Token flowMode;
+    TokenTupel flowMode;
 
-    public OptFlowMode(Token flowMode) {
+    public OptFlowMode(TokenTupel flowMode) {
         this.flowMode = flowMode;
     }
 
     @Override
     public TokenTupel toAbstrSyntax() {
-        return null;
+        return flowMode;
     }
 }

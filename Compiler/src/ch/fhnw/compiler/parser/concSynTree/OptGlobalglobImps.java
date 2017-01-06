@@ -14,6 +14,6 @@ public class OptGlobalglobImps implements IConcSyn.IOptGlobalglobImps {
 
     @Override
     public IAbs.IGlobImp toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.OptGlobalglobImps(globImps.toAbstrSyntax());
     }
 }

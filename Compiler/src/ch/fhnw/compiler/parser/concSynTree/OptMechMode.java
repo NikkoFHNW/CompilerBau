@@ -5,10 +5,13 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class OptMechMode implements IConcSyn.IOptMechMode {
 
-    public OptMechMode() {}
+	TokenTupel mech;
+    public OptMechMode(TokenTupel mech) {
+    	this.mech =mech;
+    }
 
     @Override
     public TokenTupel toAbstrSyntax() {
-        return null;
+        return mech;
     }
 }

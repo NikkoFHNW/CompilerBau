@@ -23,6 +23,6 @@ public class FunDecl implements IConcSyn.IFunDecl {
 
 	@Override
 	public IAbs.IDecl toAbstrSyntax() {
-		return null;
+		return new ch.fhnw.compiler.parser.abs.FunDecl(ident,pList.toAbstrSyntax(),stoDecl.toAbstrSyntax(),optglobimps.toAbstrSyntax(),optLocalcpsStoDecl.toAbstrSyntax(),cpscmd.toAbstrSyntax());
 	}
 }

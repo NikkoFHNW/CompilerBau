@@ -30,7 +30,7 @@ public interface IConcSyn {
             IAbs.IParam toAbstrSyntax();
         };
         public interface IParam extends IConcSyn {
-            IAbs.IParam toAbstrSyntax(IRepCommaParam repParam);
+            IAbs.IParam toAbstrSyntax();
         };
         public interface IOptGlobalglobImps extends IConcSyn {
             IAbs.IGlobImp toAbstrSyntax();
