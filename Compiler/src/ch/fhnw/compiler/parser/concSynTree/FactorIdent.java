@@ -1,6 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.ExprStore;
 import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.IsInitialization;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class FactorIdent extends AbstractFactor{
@@ -14,6 +16,7 @@ public class FactorIdent extends AbstractFactor{
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        IsInitialization isInit = optInitOrExprList.isInit()? IsInitialization.INITIALIZATION : IsInitialization.NO_INITIALIZATION;
+        return new ExprStore(ident.toString(), isInit);
     }
 }

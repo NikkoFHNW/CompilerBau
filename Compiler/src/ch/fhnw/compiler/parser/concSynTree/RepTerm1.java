@@ -18,13 +18,10 @@ public class RepTerm1 implements IConcSyn.IRepTerm1 {
         this.next = next;
     }
 
-
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
         ExprDyadic exprDyadic = new ExprDyadic(boolOpr, expr, term1.toAbstrSyntax());
-        if (next != null)
-            return next.toAbstrSyntax(exprDyadic);
-         else
-            return exprDyadic;
+        return next.toAbstrSyntax(exprDyadic);
+
     }
 }

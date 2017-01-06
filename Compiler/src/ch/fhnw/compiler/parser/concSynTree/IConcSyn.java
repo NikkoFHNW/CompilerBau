@@ -96,7 +96,7 @@ public interface IConcSyn {
             IAbs.IExpr toAbstrSyntax();
         };
         public interface IMonadicOpr extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax(AbstractFactor factor);
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr factor);
         };
         public interface IOptMechMode extends IConcSyn {
             TokenTupel toAbstrSyntax();

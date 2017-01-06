@@ -1,19 +1,20 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
-import ch.fhnw.compiler.scanner.data.Token;
+import ch.fhnw.compiler.parser.abs.RecordExpr;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class FactorRecord extends AbstractFactor implements IConcSyn {
-    Token ident;
-    Token ident2;
+    TokenTupel ident;
+    TokenTupel ident2;
 
-    public FactorRecord(Token ident, Token ident2) {
+    public FactorRecord(TokenTupel ident, TokenTupel ident2) {
         this.ident = ident;
         this.ident2 = ident2;
     }
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        return new RecordExpr(ident, ident2);
     }
 }

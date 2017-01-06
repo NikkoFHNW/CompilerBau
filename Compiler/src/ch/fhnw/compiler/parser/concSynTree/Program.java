@@ -2,7 +2,6 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 
 import ch.fhnw.compiler.parser.abs.IAbs;
-import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class Program implements IConcSyn.IProgram {
@@ -20,6 +19,6 @@ public class Program implements IConcSyn.IProgram {
 
     @Override
     public IAbs.IProgram toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.Program(ident, optGlobalCpsDecl.toAbstrSyntax(), cpsCmd.toAbstrSyntax(), progParamList.toAbstrSyntax());
     }
 }

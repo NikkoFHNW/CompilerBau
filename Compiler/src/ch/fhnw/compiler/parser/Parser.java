@@ -553,7 +553,7 @@ public class Parser implements IParser {
             repTerm2.setNext(next);
             return repTerm2;
         }
-        return new OptTerm2Eps();
+        return new RepTerm2Eps();
     }
 
     private IConcSyn term1() throws GrammarError {

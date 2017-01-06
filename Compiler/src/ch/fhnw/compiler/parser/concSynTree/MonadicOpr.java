@@ -13,7 +13,7 @@ public class MonadicOpr implements IMonadicOpr{
     }
 
     @Override
-    public IAbs.IExpr toAbstrSyntax(AbstractFactor factor) {
-        return new ExprMonadic(monadicOpr.getOp(), factor.toAbstrSyntax());
+    public IAbs.IExpr toAbstrSyntax(IAbs.IExpr factor) {
+        return new ExprMonadic(monadicOpr.getOp(), factor);
     }
 }

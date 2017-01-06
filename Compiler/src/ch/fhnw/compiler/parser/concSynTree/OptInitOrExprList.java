@@ -6,6 +6,10 @@ import ch.fhnw.compiler.scanner.data.Token;
 public class OptInitOrExprList implements IConcSyn.IExprList {
     ExprList exprList;
 
+    public boolean isInit() {
+        return exprList == null;
+    }
+
     public OptInitOrExprList(ExprList exprList) {
         this.exprList = exprList;
     }

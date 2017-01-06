@@ -3,17 +3,15 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 
-public class OptGlobalCpsDecl implements IConcSyn.IStoDecl {
-    Token global;
+public class OptGlobalCpsDecl implements IConcSyn.ICpsDecl {
     CpsDecl cpsDecl;
 
-    public OptGlobalCpsDecl(Token global, CpsDecl cpsDecl) {
-        this.global = global;
+    public OptGlobalCpsDecl(CpsDecl cpsDecl) {
         this.cpsDecl = cpsDecl;
     }
 
     @Override
-    public IAbs.IStoDecl toAbstrSyntax() {
-        return null;
+    public IAbs.ICpsDecl toAbstrSyntax() {
+        return cpsDecl.toAbstrSyntax();
     }
 }

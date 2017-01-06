@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.parser.abs.ExprMonadic;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class FactorMonadic extends AbstractFactor {
@@ -13,6 +14,6 @@ public class FactorMonadic extends AbstractFactor {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        return monadicOpr.toAbstrSyntax(factor.toAbstrSyntax());
     }
 }

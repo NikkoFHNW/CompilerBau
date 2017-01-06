@@ -21,9 +21,6 @@ public class RepTerm3 implements IConcSyn.IRepTerm3 {
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
         ExprDyadic exprDyadic = new ExprDyadic(addOpr, expr, term3.toAbstrSyntax());
-        if (next != null)
-            return next.toAbstrSyntax(exprDyadic);
-        else
-            return exprDyadic;
+        return next.toAbstrSyntax(exprDyadic);
     }
 }

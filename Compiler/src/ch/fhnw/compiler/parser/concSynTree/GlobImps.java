@@ -6,7 +6,7 @@ public class GlobImps implements IConcSyn.IGlobImps {
     GlobImp globImps;
     RepCommaGlobImp repCommaGlobImpl;
 
-    public GlobImps(GlobImp globImp, RepCommaGlobImp repCommaGlobImpl) {
+    public GlobImps(GlobImp globImps, RepCommaGlobImp repCommaGlobImpl) {
         this.globImps = globImps;
         this.repCommaGlobImpl = repCommaGlobImpl;
     }
