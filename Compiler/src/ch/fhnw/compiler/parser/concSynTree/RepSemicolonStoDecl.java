@@ -13,6 +13,6 @@ public class RepSemicolonStoDecl implements IConcSyn.IStoDecl {
 
     @Override
     public IAbs.IStoDecl toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.RepSemicolonStoDecl(stoDecl.toAbstrSyntax(),repSemicolonStoDecl.toAbstrSyntax());
     }
 }

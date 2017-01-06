@@ -12,6 +12,6 @@ public class StoDecl implements IConcSyn.IStoDecl {
     }
     @Override
     public IAbs.IStoDecl toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.StoDecl(optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax());
     }
 }

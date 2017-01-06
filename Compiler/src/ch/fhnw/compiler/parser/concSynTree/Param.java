@@ -17,7 +17,7 @@ public class Param implements IConcSyn.IParam {
 
 
     @Override
-    public IAbs.IParam toAbstrSyntax(IRepCommaParam repParam) {
-        return null;
+    public IAbs.IParam toAbstrSyntax() {
+        return new ch.fhnw.compiler.parser.abs.Param(optFlowMode.toAbstrSyntax(),optMechMode.toAbstrSyntax(),optChangeMode.toAbstrSyntax(),typedIdent.toAbstrSyntax());
     }
 }

@@ -14,6 +14,6 @@ public class TypedIdent implements IConcSyn.IFactor {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.TypedIdent(ident,atomtype);
     }
 }

@@ -5,17 +5,13 @@ import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class ProcDecl implements IConcSyn.IProcDecl {
-    Token proc;
-    Token ident;
-    Param param;
+    TokenTupel ident;
+    ParamList param;
     OptGlobalglobImps optGlobalglobImps;
     OptLocalcpsStoDecl optLocalcpsStoDecl;
-    Token _do;
     CpsCmd cpsCmd;
-    Token endproc;
 
-    public ProcDecl(TokenTupel proc, TokenTupel ident, Param param, OptGlobalglobImps optGlobalglobImps, OptLocalcpsStoDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
-        this.proc = proc;
+    public ProcDecl(TokenTupel ident, ParamList param, OptGlobalglobImps optGlobalglobImps, OptLocalcpsStoDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
         this.ident = ident;
         this.param = param;
         this.optGlobalglobImps = optGlobalglobImps;
@@ -25,6 +21,6 @@ public class ProcDecl implements IConcSyn.IProcDecl {
 
     @Override
     public IAbs.IDecl toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.ProcDecl( ident, param.toAbstrSyntax(), optGlobalglobImps.toAbstrSyntax(), optLocalcpsStoDecl.toAbstrSyntax(),cpsCmd.toAbstrSyntax());
     }
 }

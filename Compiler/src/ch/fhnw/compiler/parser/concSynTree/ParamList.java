@@ -12,6 +12,6 @@ public class ParamList implements IConcSyn.IParamList {
 
     @Override
     public IAbs.IParam toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.ParamList(optParamRepCommaParam.param.toAbstrSyntax(), optParamRepCommaParam.repCommaParam.toAbstrSyntax());
     }
 }
