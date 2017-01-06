@@ -2,9 +2,14 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class OptProgParamRepCommaProgParamEps implements IConcSyn {
+public class OptProgParamRepCommaProgParamEps extends OptProgParamRepCommaProgParam implements IConcSyn {
 
-	IAbs toAbstrSyntax(){
-		return new ch.fhnw.compiler.parser.abs.OptProgParamRepCommaProgParamEps();
+	public OptProgParamRepCommaProgParamEps() {
+
+		super(null, null);
+	}
+	
+	public ch.fhnw.compiler.parser.abs.IAbs.IParam toAbstrSyntax(){
+		return null;
 	}
 }

@@ -1,11 +1,15 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class OptFlowModeEps implements IConcSyn{
+public class OptFlowModeEps extends OptFlowMode implements IConcSyn{
 
+	public OptFlowModeEps() {
+		super(null);
+	}
 	
-	IAbs toAbstrSyntax(){
-		return new ch.fhnw.compiler.parser.abs.OptFlowModeEps();
+	public TokenTupel toAbstrSyntax(){
+		return null;
 	}
 }

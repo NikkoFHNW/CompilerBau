@@ -56,6 +56,7 @@ public class Parser implements IParser {
 			}
 			return consumedToken;
 		}else{
+			System.out.println("expected: "+ expectedTerm + " actual: " + terminal);
 			throw new ch.fhnw.compiler.error.GrammarError(terminal,expectedTerm);
 		}
 	}
@@ -73,6 +74,8 @@ public class Parser implements IParser {
 			case IDENT:
 				System.out.println("decl ::= storeDecl");
 				return stoDecl();
+			case REC:
+				return recordDecl();
 			default:
 				throw new ch.fhnw.compiler.error.GrammarError("decl got ",0);
 		}

@@ -2,9 +2,13 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class RepSemicolonDeclEps implements IConcSyn {
+public class RepSemicolonDeclEps extends RepSemicolonDecl implements IConcSyn {
 
-	IAbs toAbstrSyntax(){
-		return new ch.fhnw.compiler.parser.abs.RepSemicolonDeclEps();
+	public RepSemicolonDeclEps() {
+		super(null, null);
+	}
+	
+	public ch.fhnw.compiler.parser.abs.IAbs.IDecl toAbstrSyntax(){
+		return null;
 	}
 }

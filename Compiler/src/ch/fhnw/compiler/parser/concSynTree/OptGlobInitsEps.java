@@ -1,10 +1,15 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.IAbs.IGlobInit;
 
-public class OptGlobInitsEps implements IConcSyn{
+public class OptGlobInitsEps extends OptGlobInits implements IConcSyn{
 
-	IAbs toAbstrSyntax(){
-		return new ch.fhnw.compiler.parser.abs.OptGlobInitsEps();
+	public OptGlobInitsEps() {
+		super(null);
+	}
+	
+	public IGlobInit toAbstrSyntax(){
+		return null;
 	}
 }

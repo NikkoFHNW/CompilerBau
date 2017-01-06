@@ -2,9 +2,13 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class RepTerm2Eps implements IConcSyn{
+public class RepTerm2Eps extends RepTerm2 implements IConcSyn{
 
+	public RepTerm2Eps() {
+		super(null, null);
+	}
+	
 	IAbs toAbstrSyntax(){
-		return new ch.fhnw.compiler.parser.abs.OptTerm2Eps();
+		return null;
 	}
 }
