@@ -21,7 +21,7 @@ public class Compiler {
     	ITokenList tList = new TokenList();
     	BufferedReader br;
         try {
-			br = new BufferedReader(new FileReader("imlCodes/ourExample.iml"));
+			br = new BufferedReader(new FileReader("imlCodes/Factorial.iml"));
 			
         	int i = (char)br.read();
 			while(i!=-1){

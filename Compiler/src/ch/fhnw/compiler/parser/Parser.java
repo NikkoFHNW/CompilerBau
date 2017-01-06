@@ -11,13 +11,14 @@ public class Parser implements IParser {
 	private ITokenList tokenList;
 	private Token token;
 	private Terminal terminal;
-
+	int consCount=0;
 	public Parser(ITokenList tl){
 	this.tokenList=tl;
 	this.tokenList.reset();
 	
 	token = tokenList.nextToken();
 	terminal = token.getTerminal();
+	
 	}
 	
 	
@@ -47,7 +48,7 @@ public class Parser implements IParser {
 
 
 	private Token consume(Terminal expectedTerm) throws ch.fhnw.compiler.error.GrammarError{
-
+     consCount++;
 		if(terminal==expectedTerm){
 			Token consumedToken = token;
 			if(terminal!=Terminal.SENTINEL){
@@ -56,7 +57,7 @@ public class Parser implements IParser {
 			}
 			return consumedToken;
 		}else{
-			System.out.println("expected: "+ expectedTerm + " actual: " + terminal);
+			System.out.println("expected: "+ expectedTerm + " actual: " + terminal + "consume count: "+consCount);
 			throw new ch.fhnw.compiler.error.GrammarError(terminal,expectedTerm);
 		}
 	}
