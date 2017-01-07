@@ -3,6 +3,7 @@ package ch.fhnw.compiler.parser;
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn;
+import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IDecl;
 import ch.fhnw.compiler.scanner.data.*;
 
 
@@ -78,7 +79,7 @@ public class Parser implements IParser {
 			case REC:
 				return recordDecl();
 			default:
-				throw new ch.fhnw.compiler.error.GrammarError("decl got ",0);
+				throw new ch.fhnw.compiler.error.GrammarError("decl got "+ terminal,token.getLineNr());
 		}
 	}
 	
@@ -220,7 +221,7 @@ public class Parser implements IParser {
 	}
 	private IConcSyn cpsDecl() throws GrammarError{
 //[[N decl, N repSemicolonDecl]]
-		Decl decl = (Decl) decl();
+		IDecl decl = (IDecl) decl();
 		RepSemicolonDecl repDecl = (RepSemicolonDecl) repSemicolonDecl();
 		return new CpsDecl(decl, repDecl);
 	}
@@ -704,8 +705,9 @@ public class Parser implements IParser {
     }
 
 	private IConcSyn recordDecl() throws GrammarError {
-		System.out.println("recordDecl");
 		consume(Terminal.REC);
+		System.out.println("recordDecl");
+		
 		TokenTupel recident = (TokenTupel) consume(Terminal.RECIDENT);
 		consume(Terminal.COLON);
 		consume(Terminal.LCURL);
@@ -716,21 +718,23 @@ public class Parser implements IParser {
 
 	private IConcSyn recordData() throws GrammarError {
 		System.out.println("recordData");
+		OptChangeMode opCM = (OptChangeMode) optChangeMode();
 		TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 		consume(Terminal.COLON);
 		consume(Terminal.TYPE);
 		RepRecordData repRecordData = (RepRecordData) repRecordData();
-		return new RecordData(ident, repRecordData);
+		return new RecordData(ident, repRecordData, opCM);
 	}
 
 	private IConcSyn repRecordData() throws GrammarError {
 		RepRecordData head = null, current;
 		while (terminal == Terminal.COMMA) {
 			consume(Terminal.COMMA);
+			OptChangeMode opc = (OptChangeMode) optChangeMode();
 			TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 			consume(Terminal.COLON);
 			consume(Terminal.TYPE);
-			current = new RepRecordData(ident);
+			current = new RepRecordData(ident,opc);
 
             if (head == null)
                 head = current;

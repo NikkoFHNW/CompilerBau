@@ -6,16 +6,19 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 public class RepRecordData  implements IConcSyn.IDecl {
     TokenTupel ident;
     RepRecordData next;
+    OptChangeMode opc;
+    
 
-    public RepRecordData(TokenTupel ident) {
+    public RepRecordData(TokenTupel ident,OptChangeMode opc) {
         this.ident = ident;
+        this.opc = opc;
     }
 
     public void setNext(RepRecordData next) {
-        if (next == null) {
+        if (this.next == null) {
             this.next = next;
         } else {
-            next.setNext(next);
+            this.next.setNext(next);
         }
 
     }

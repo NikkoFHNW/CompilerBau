@@ -17,7 +17,7 @@ public class Compiler {
 
     public static void main(String[] args) {
 
-        ITokenList tList = Scanner.scan("imlCodes/Factorial.iml");
+        ITokenList tList = Scanner.scan("imlCodes/ourExample.iml");
         System.out.println(tList.toString());
 
 		Parser parser = new Parser(tList);
