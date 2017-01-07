@@ -15,10 +15,10 @@ public class RepCommaIdentLiteral implements IConcSyn.IFactor {
     }
 
     public void setNext(RepCommaIdentLiteral next) {
-        if (next == null)
+        if (this.next == null)
             this.next = next;
         else
-            next.setNext(next);
+            this.next.setNext(next);
     }
 
 

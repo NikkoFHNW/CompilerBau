@@ -3,6 +3,7 @@ package ch.fhnw.compiler.parser;
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn;
+import ch.fhnw.compiler.parser.concSynTree.IConcSyn.ICpsDecl;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IDecl;
 import ch.fhnw.compiler.scanner.data.*;
 
@@ -38,7 +39,8 @@ public class Parser implements IParser {
             consume(Terminal.PROGRAM);
             TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
             ProgParamList progParamList = (ProgParamList) progParamList();
-            OptGlobalCpsDecl optGlobalCpsDecl = (OptGlobalCpsDecl) optGlobalcpsDecl();
+//            OptGlobalCpsDecl optGlobalCpsDecl = (OptGlobalCpsDecl) optGlobalcpsDecl();
+            ICpsDecl optGlobalCpsDecl = (ICpsDecl) optGlobalcpsDecl();
             CpsCmd cpsCmd = (CpsCmd) cpsCmd();
             return new Program(ident, progParamList, optGlobalCpsDecl, cpsCmd);
         }
@@ -58,7 +60,7 @@ public class Parser implements IParser {
 			}
 			return consumedToken;
 		}else{
-			System.out.println("expected: "+ expectedTerm + " actual: " + terminal + "consume count: "+consCount);
+			System.out.println("expected: "+ expectedTerm + " actual: " + terminal + "consume count: "+consCount + " linenr: "+ token.getLineNr());
 			throw new ch.fhnw.compiler.error.GrammarError(terminal,expectedTerm);
 		}
 	}
@@ -427,7 +429,7 @@ public class Parser implements IParser {
 
             case RECIDENT:
                 System.out.println("cmd ::= RECIDENT");
-                TokenTupel recident = (TokenTupel) consume(Terminal.IDENT);
+                TokenTupel recident = (TokenTupel) consume(Terminal.RECIDENT);
                 ident = (TokenTupel) consume(Terminal.IDENT);
                 consume(Terminal.BECOMES);
                 consume(Terminal.LPAREN);
