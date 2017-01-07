@@ -12,10 +12,10 @@ public class CpsCmd implements IConcSyn.ICmd {
     }
 
     public void setNext(CpsCmd next) {
-        if (next == null)
+        if (this.next == null)
             this.next = next;
         else
-            next.setNext(next);
+            this.next.setNext(next);
     }
 
     @Override

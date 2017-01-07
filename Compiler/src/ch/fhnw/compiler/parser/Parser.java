@@ -234,7 +234,7 @@ public class Parser implements IParser {
 		switch(terminal){
 		case SEMICOLON:
 			consume(Terminal.SEMICOLON);
-			Decl decl = (Decl) decl();
+			IDecl decl = (IDecl) decl();
 			RepSemicolonDecl repDecl = (RepSemicolonDecl) repSemicolonDecl();
 			return new RepSemicolonDecl(decl, repDecl);
 		default: return new RepSemicolonDeclEps(); //EPSILON
@@ -702,7 +702,7 @@ public class Parser implements IParser {
         } else if (terminal == Terminal.LPAREN) {
             return exprList();
         } else
-            throw new GrammarError("optInitOrExprList := INIT", 0);
+           return new OptInitOrExprListEps();
     }
 
     private IConcSyn exprList() throws GrammarError {
