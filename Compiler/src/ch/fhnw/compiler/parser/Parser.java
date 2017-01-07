@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser;
 
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.ICpsDecl;
@@ -662,7 +663,7 @@ public class Parser implements IParser {
             case IDENT:
                 System.out.println("factor := IDENT");
                 TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-                OptInitOrExprList optInitOrExprList = (OptInitOrExprList) optInitOrExprList();
+                IConcSyn.IExprList optInitOrExprList = (IConcSyn.IExprList) optInitOrExprList();
                 return new FactorIdent(ident, optInitOrExprList);
 
             case LPAREN:

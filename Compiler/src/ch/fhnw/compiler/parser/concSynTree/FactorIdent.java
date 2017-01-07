@@ -7,16 +7,17 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class FactorIdent extends AbstractFactor{
     TokenTupel ident;
-    OptInitOrExprList optInitOrExprList;
+    IExprList optInitOrExprList;
 
-    public FactorIdent(TokenTupel ident, OptInitOrExprList optInitOrExprList) {
+    public FactorIdent(TokenTupel ident, IExprList optInitOrExprList) {
         this.ident = ident;
         this.optInitOrExprList = optInitOrExprList;
     }
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        IsInitialization isInit = optInitOrExprList.isInit()? IsInitialization.INITIALIZATION : IsInitialization.NO_INITIALIZATION;
+        OptInitOrExprList o = (OptInitOrExprList) optInitOrExprList;
+        IsInitialization isInit = o.isInit()? IsInitialization.INITIALIZATION : IsInitialization.NO_INITIALIZATION;
         return new ExprStore(ident.toString(), isInit);
-    }
+    };
 }
