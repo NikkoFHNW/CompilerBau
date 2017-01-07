@@ -19,6 +19,6 @@ public class OptInitOrExprList implements IConcSyn.IExprList {
         if (exprList != null) {
             return exprList.toAbstrSyntax();
         } else
-            return null;
+            return (IAbs.IExpr) new OptInitOrExprListEps();
     }
 }

@@ -22,5 +22,5 @@ rec Guest: {var id:int32, var daysOfStay:int32, var checkedIn:bool};
 
 do
 Guest g1 := (id,daysOfStay,checkedIn);
- occupied init := checkIn(.g1)
+ occupied init := checkIn(g1)
 endprogram

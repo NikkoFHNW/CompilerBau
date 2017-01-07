@@ -20,8 +20,11 @@ public class RepTerm1 implements IConcSyn.IRepTerm1 {
 
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
-        ExprDyadic exprDyadic = new ExprDyadic(boolOpr, expr, term1.toAbstrSyntax());
-        return next.toAbstrSyntax(exprDyadic);
+        if (next != null) {
+            ExprDyadic exprDyadic = new ExprDyadic(boolOpr, expr, term1.toAbstrSyntax());
+            return next.toAbstrSyntax(exprDyadic);
+        }else
+            return new ExprDyadic(boolOpr, expr, null);
 
     }
 }

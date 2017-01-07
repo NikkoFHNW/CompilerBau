@@ -17,13 +17,13 @@ public class Compiler {
 
     public static void main(String[] args) {
 
-        ITokenList tList = Scanner.scan("imlCodes/ourExample.iml");
+        ITokenList tList = Scanner.scan("Compiler/imlCodes/ourExample.iml");
         System.out.println(tList.toString());
 
 		Parser parser = new Parser(tList);
 		try {
 			Program prog = parser.parse();
-//			prog.toAbstrSyntax()
+			prog.toAbstrSyntax();
 		} catch (GrammarError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

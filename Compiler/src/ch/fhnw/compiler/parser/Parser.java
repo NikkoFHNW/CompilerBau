@@ -664,7 +664,7 @@ public class Parser implements IParser {
                 System.out.println("factor := IDENT");
                 TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
                 IConcSyn.IExprList optInitOrExprList = (IConcSyn.IExprList) optInitOrExprList();
-                return new FactorIdent(ident, optInitOrExprList);
+                return new FactorIdent(ident, (OptInitOrExprList) optInitOrExprList);
 
             case LPAREN:
                 System.out.println("factor := LPAREN");
@@ -696,14 +696,14 @@ public class Parser implements IParser {
     }
 
     private IConcSyn optInitOrExprList() throws GrammarError {
-        if (terminal == Terminal.INIT) {
-            System.out.println("optInitOrExprList := INIT");
-            consume(Terminal.INIT);
-            return null;
-        } else if (terminal == Terminal.LPAREN) {
-            return exprList();
-        } else
-           return new OptInitOrExprListEps();
+		if (terminal == Terminal.INIT) {
+			System.out.println("optInitOrExprList := INIT");
+			consume(Terminal.INIT);
+			return new OptInitOrExprList(null);
+		} else if (terminal == Terminal.LPAREN) {
+			return new OptInitOrExprList((ExprList) exprList());
+		} else
+			return new OptInitOrExprListEps();
     }
 
     private IConcSyn exprList() throws GrammarError {

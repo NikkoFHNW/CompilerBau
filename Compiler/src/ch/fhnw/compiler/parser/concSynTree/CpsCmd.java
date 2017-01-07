@@ -20,7 +20,10 @@ public class CpsCmd implements IConcSyn.ICmd {
 
     @Override
     public IAbs.ICmd toAbstrSyntax() {
-        return new CmdCps(cmd.toAbstrSyntax(), (CmdCps) next.toAbstrSyntax());
+        if (next != null) {
+            return new CmdCps(cmd.toAbstrSyntax(), (CmdCps) next.toAbstrSyntax());
+        }
+        return new CmdCps(cmd.toAbstrSyntax(), null);
     }
 
 }
