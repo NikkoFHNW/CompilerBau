@@ -16,42 +16,17 @@ import ch.fhnw.compiler.scanner.data.*;
 public class Compiler {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner();
-    	StringBuilder code = new StringBuilder();
-    	ITokenList tList = new TokenList();
-    	BufferedReader br;
-        try {
-			br = new BufferedReader(new FileReader("imlCodes/Factorial.iml"));
-			
-        	int i = (char)br.read();
-			while(i!=-1){
-				char c = (char) i;
-				code.append(c);
-				i = br.read();
-			}
-			 tList=scanner.scan(code);
-			 br.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-       System.out.println(tList.toString());
+
+        ITokenList tList = Scanner.scan("imlCodes/Factorial.iml");
+        System.out.println(tList.toString());
 
 		Parser parser = new Parser(tList);
 		try {
-			Program prog =parser.parse();
+			Program prog = parser.parse();
 //			prog.toAbstrSyntax()
 		} catch (GrammarError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
     }
 }

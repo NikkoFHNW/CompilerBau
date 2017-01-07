@@ -2,23 +2,22 @@ package ch.fhnw.compiler.scanner;
 
 import ch.fhnw.compiler.scanner.data.*;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Scanner {
 
-	private Map<String, Token> keywords;
-	private TokenList tList;
-	private int numAccu = 0;
-	private StringBuffer lexAccu = null;
-	private int state = 0;
+	private static Map<String, Token> keywords;
+    private static StringBuffer lexAccu;
+    private static int numAccu;
+    private static int state;
 
-	public Scanner() {
-		initKeywords();
-		 lexAccu = new StringBuffer();
-		 tList = new TokenList();
-	}
 
-	private void initKeywords() {
+
+	private static void initKeywords() {
 
         // create map entries for ALL tupel terminals
         keywords = new HashMap<>();
@@ -57,12 +56,50 @@ public class Scanner {
 
 	}
 
-	public ITokenList scan(CharSequence cs) throws Exception {
+    public static ITokenList scan(String file) {
+        initKeywords();
+
+//        StringBuilder code = new StringBuilder();
+        int lineNr = 0;
+        ITokenList result = new TokenList();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+//            int i = (char)br.read();
+            String line = br.readLine();
+            while(line != null){
+                lineNr++;
+                ITokenList lineTokens = scanLine(line, lineNr);
+                result.add(lineTokens);
+                line = br.readLine();
+            }
+            br.close();
+            result.add(new Token(Terminal.SENTINEL, lineNr));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+	public static ITokenList scanLine(CharSequence cs, int lineNr) throws Exception {
+        cs = cs + " ";
+        TokenList tList = new TokenList();
+        numAccu = 0;
+        lexAccu = new StringBuffer();
+        state = 0;
         assert cs.length() == 0 || cs.charAt(cs.length() - 1) == '\n';
-       
 
 		for (int i = 0; i < cs.length(); i++) {
 			char c = cs.charAt(i);
+
 			switch (state) {
 			case 0:
 				if (Character.isLetter(c) && Character.isUpperCase(c)) {
@@ -81,29 +118,29 @@ public class Scanner {
 					state = 4; // Combines symbol with ?
 					lexAccu.append(c);
 				}else if(c == '('){
-					tList.add(new Token(Terminal.LPAREN));
+					tList.add(new Token(Terminal.LPAREN, lineNr));
 				}else if(c==')'){
-					tList.add(new Token(Terminal.RPAREN));
+					tList.add(new Token(Terminal.RPAREN, lineNr));
 				}else if(c == '{'){
-					tList.add(new Token(Terminal.LCURL));
+					tList.add(new Token(Terminal.LCURL, lineNr));
 				}else if(c=='}'){
-					tList.add(new Token(Terminal.RCURL));
+					tList.add(new Token(Terminal.RCURL, lineNr));
 				}else if(c=='*'){
-					tList.add(new TokenTupel(Terminal.MULTOPR, Operator.TIMES));
+					tList.add(new TokenTupel(Terminal.MULTOPR, Operator.TIMES, lineNr));
 				}else if(c=='+'){
-					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.PLUS));
+					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.PLUS, lineNr));
 				}else if(c=='-'){
-					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.MINUS));
+					tList.add(new TokenTupel(Terminal.ADDOPR, Operator.MINUS, lineNr));
 				}else if(c==','){
-					tList.add(new Token(Terminal.COMMA));
+					tList.add(new Token(Terminal.COMMA, lineNr));
 				}else if(c=='.'){
-					tList.add(new Token(Terminal.DOT));
+					tList.add(new Token(Terminal.DOT, lineNr));
 				}else if(c==';'){
-					tList.add(new Token(Terminal.SEMICOLON));
+					tList.add(new Token(Terminal.SEMICOLON, lineNr));
 				}else if(c=='^'){
-					tList.add(new TokenTupel(Terminal.MULTOPR,Operator.POW));
+					tList.add(new TokenTupel(Terminal.MULTOPR,Operator.POW, lineNr));
 				}else if(c=='='){
-					tList.add(new TokenTupel(Terminal.RELOPR,Operator.EQ));
+					tList.add(new TokenTupel(Terminal.RELOPR,Operator.EQ, lineNr));
 				}
 				else if (!Character.isWhitespace(c)) {
 					throw new LexicalError("state 0, other Input");
@@ -114,9 +151,9 @@ public class Scanner {
 					lexAccu.append(c);
 				} else {
 					if (keywords.containsKey(lexAccu.toString())) {
-						tList.add(keywords.get(lexAccu.toString()));
+						tList.add(keywords.get(lexAccu.toString()).setLineNr(lineNr));
 					}else{
-						tList.add(new TokenTupel(Terminal.IDENT, lexAccu.toString()));
+						tList.add(new TokenTupel(Terminal.IDENT, lexAccu.toString(), lineNr));
 					}
 
 					clearLexAccu();
@@ -128,7 +165,7 @@ public class Scanner {
 				if (Character.isDigit(c)) {
 					numAccu = numAccu * 10 + Character.getNumericValue(c);
 				} else if(c!='\''){
-					tList.add(new TokenTupel(Terminal.LITERAL, numAccu));
+					tList.add(new TokenTupel(Terminal.LITERAL, numAccu, lineNr));
 					i = i - 1;
 					state = 0;
 					numAccu = 0;
@@ -139,22 +176,22 @@ public class Scanner {
 					char tempc = lexAccu.charAt(0);
 					switch (tempc) {
 					case '<':
-						tList.add(new TokenTupel(Terminal.RELOPR, Operator.LE));
+						tList.add(new TokenTupel(Terminal.RELOPR, Operator.LE, lineNr));
 						clearLexAccu();
 						state = 0;
 						break;
 					case '>':
-						tList.add(new TokenTupel(Terminal.RELOPR, Operator.GE));
+						tList.add(new TokenTupel(Terminal.RELOPR, Operator.GE, lineNr));
 						clearLexAccu();
 						state = 0;
 						break;
 					case ':':
-						tList.add(new Token(Terminal.BECOMES));
+						tList.add(new Token(Terminal.BECOMES, lineNr));
 						clearLexAccu();
 						state = 0;
 						break;
 					case '/':
-						tList.add(new TokenTupel(Terminal.RELOPR, Operator.NE));
+						tList.add(new TokenTupel(Terminal.RELOPR, Operator.NE, lineNr));
 						clearLexAccu();
 						state = 0;
 						break;
@@ -170,19 +207,19 @@ public class Scanner {
 					char tempc = lexAccu.charAt(0);
 					switch (tempc) {
 					case '<':
-						tList.add(new TokenTupel(Terminal.RELOPR, Operator.LT));
+						tList.add(new TokenTupel(Terminal.RELOPR, Operator.LT, lineNr));
 						clearLexAccu();
 						state = 0;
 						i=i-1;
 						break;
 					case '>':
-						tList.add(new TokenTupel(Terminal.RELOPR, Operator.GT));
+						tList.add(new TokenTupel(Terminal.RELOPR, Operator.GT, lineNr));
 						clearLexAccu();
 						state = 0;
 						i=i-1;
 						break;
 					case ':':
-						tList.add(new Token(Terminal.COLON));
+						tList.add(new Token(Terminal.COLON, lineNr));
 						clearLexAccu();
 						state = 0;
 						i=i-1;
@@ -197,13 +234,13 @@ public class Scanner {
 					char tempc = lexAccu.charAt(0);
 					switch (tempc) {
 						case '&':
-							tList.add(new TokenTupel(Terminal.BOOLOPR, Operator.CAND));
+							tList.add(new TokenTupel(Terminal.BOOLOPR, Operator.CAND, lineNr));
 							clearLexAccu();
 							state = 0;
 							break;
 
 						case '|':
-							tList.add(new TokenTupel(Terminal.BOOLOPR, Operator.COR));
+							tList.add(new TokenTupel(Terminal.BOOLOPR, Operator.COR, lineNr));
 							clearLexAccu();
 							state = 0;
 							break;
@@ -221,7 +258,7 @@ public class Scanner {
 					if (keywords.containsKey(lexAccu.toString())) {
 						tList.add(keywords.get(lexAccu.toString()));
 					}else{
-						tList.add(new TokenTupel(Terminal.RECIDENT, lexAccu.toString()));
+						tList.add(new TokenTupel(Terminal.RECIDENT, lexAccu.toString(), lineNr));
 					}
 					clearLexAccu();
 					i = i - 1;
@@ -235,13 +272,12 @@ public class Scanner {
 		}
         assert state == 0;
 
-		tList.add(new Token(Terminal.SENTINEL));
 		return tList;
 
 	}
 
-	private void clearLexAccu() {
-		lexAccu = new StringBuffer();
+	private static void clearLexAccu() {
+        lexAccu = new StringBuffer();
 	}
 
 }

@@ -16,14 +16,14 @@ public class TokenTupel extends Token {
 	private ConcreteTyp conc;
 
     private TokenTupel(Terminal t) {
-        super(t);
+        super(t, -1);
         op=null;
         typ=null;
         boolVal=false;
         m=null;
         intVal=0;
         stringVal=null;
-	}
+    }
 	
 	public TokenTupel(Terminal t, Operator o){
         this(t);
@@ -37,7 +37,7 @@ public class TokenTupel extends Token {
         typ=o;
 	}
 
-    public TokenTupel(Terminal t, boolean o){
+    public TokenTupel(Terminal t,  boolean o){
 		this(t);
         conc = ConcreteTyp.BOOLEAN;
         boolVal=o;
@@ -55,11 +55,53 @@ public class TokenTupel extends Token {
         intVal=o;
 	}
 
-    public TokenTupel(Terminal t, String o){
+    public TokenTupel(Terminal t,  String o){
         this(t);
         conc = ConcreteTyp.STRING;
 		stringVal=o;
 	}
+
+    public TokenTupel(Terminal t, Operator o, int lineNr){
+        this(t);
+        setLineNr(lineNr);
+        conc = ConcreteTyp.OPERATOR;
+        op=o;
+    }
+
+    public TokenTupel(Terminal t, Type o, int lineNr){
+        this(t);
+        setLineNr(lineNr);
+        conc = ConcreteTyp.TYPE;
+        typ=o;
+    }
+
+    public TokenTupel(Terminal t,  boolean o, int lineNr){
+        this(t);
+        setLineNr(lineNr);
+        conc = ConcreteTyp.BOOLEAN;
+        boolVal=o;
+    }
+
+    public TokenTupel(Terminal t, Mode o, int lineNr){
+        this(t);
+        setLineNr(lineNr);
+        conc = ConcreteTyp.MODE;
+        m=o;
+    }
+
+    public TokenTupel(Terminal t, int o, int lineNr){
+        this(t);
+        setLineNr(lineNr);
+        conc = ConcreteTyp.INT;
+        intVal=o;
+    }
+
+    public TokenTupel(Terminal t,  String o, int lineNr){
+        this(t);
+        setLineNr(lineNr);
+        conc = ConcreteTyp.STRING;
+        stringVal=o;
+    }
 
     public int getIntVal() {
         return intVal;
@@ -94,7 +136,7 @@ public class TokenTupel extends Token {
         }
 		
 		
-		return "("+super.toString()+","+res+")";
+		return "("+toStringNoLine()+","+res+")"+'['+getLineNr()+']';
 	}
 
 

@@ -15,6 +15,15 @@ public class TokenList implements ITokenList{
 		
 	}
 
+	public void add(ITokenList tokenList) {
+		for (Token t : tokenList.getList())
+			list.add(t);
+	}
+
+	public ArrayList<Token> getList() {
+		return list;
+	}
+
 	@Override
 	public void reset() {
 		index=0;
