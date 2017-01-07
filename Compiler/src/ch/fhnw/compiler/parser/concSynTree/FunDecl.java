@@ -8,11 +8,11 @@ public class FunDecl implements IConcSyn.IFunDecl {
 	ParamList pList;
 	StoDecl stoDecl;
 	OptGlobalglobImps optglobimps;
-	OptLocalcpsStoDecl optLocalcpsStoDecl;
+	ICpsDecl optLocalcpsStoDecl;
 	CpsCmd cpscmd;
 
 
-	public FunDecl(TokenTupel ident, ParamList pList, StoDecl stoDecl, OptGlobalglobImps optglobimps, OptLocalcpsStoDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
+	public FunDecl(TokenTupel ident, ParamList pList, StoDecl stoDecl, OptGlobalglobImps optglobimps, ICpsDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
 		this.ident = ident;
 		this.pList = pList;
 		this.stoDecl = stoDecl;

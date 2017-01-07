@@ -3,7 +3,7 @@ package ch.fhnw.compiler.parser.abs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
-public class TypedIdent implements IAbs.IExpr {
+public class TypedIdent implements IAbs.IParam {
 
 	TokenTupel ident;
 	TokenTupel type;
@@ -25,20 +25,34 @@ public class TypedIdent implements IAbs.IExpr {
 		return 0;
 	}
 
+
+
 	@Override
-	public TokenTupel checkR() throws ContextError {
+	public void check(Object routine) throws ContextError {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public TokenTupel checkL(boolean canInit) throws ContextError {
+	public void checkInit() throws ContextError {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public int code(int loc) throws CodeTooSmallError {
+	public int calculateAddress(int count, int locals) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int codeIn(int loc, int count, int locals) throws CodeTooSmallError {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int codeOut(int loc, int count, int locals) throws CodeTooSmallError {
 		// TODO Auto-generated method stub
 		return 0;
 	}

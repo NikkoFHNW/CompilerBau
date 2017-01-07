@@ -2,9 +2,9 @@ package ch.fhnw.compiler.parser;
 
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
-import ch.fhnw.compiler.parser.concSynTree.IConcSyn;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.ICpsDecl;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IDecl;
+import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IParam;
 import ch.fhnw.compiler.scanner.data.*;
 
 
@@ -41,7 +41,9 @@ public class Parser implements IParser {
             ProgParamList progParamList = (ProgParamList) progParamList();
 //            OptGlobalCpsDecl optGlobalCpsDecl = (OptGlobalCpsDecl) optGlobalcpsDecl();
             ICpsDecl optGlobalCpsDecl = (ICpsDecl) optGlobalcpsDecl();
+            consume(Terminal.DO);
             CpsCmd cpsCmd = (CpsCmd) cpsCmd();
+            consume(Terminal.ENDPROGRAM);
             return new Program(ident, progParamList, optGlobalCpsDecl, cpsCmd);
         }
 
@@ -108,7 +110,7 @@ public class Parser implements IParser {
 			consume(Terminal.RETURNS);
 			StoDecl stoDecl = (StoDecl) stoDecl();
 			OptGlobalglobImps optGlobalglobImps = (OptGlobalglobImps) optGlobalglobImps();
-			OptLocalcpsStoDecl optLocalcpsStoDecl = (OptLocalcpsStoDecl) optLocalcpsStoDecl();
+			ICpsDecl optLocalcpsStoDecl = (ICpsDecl) optLocalcpsStoDecl();
 			consume(Terminal.DO);
 			CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 			consume(Terminal.ENDFUN);
@@ -252,8 +254,7 @@ public class Parser implements IParser {
 			StoDecl stoDecl = (StoDecl) stoDecl();
 			RepSemicolonStoDecl repSto = (RepSemicolonStoDecl) repSemicolonStoDecl();
 			return new RepSemicolonStoDecl( stoDecl, repSto);
-		default: return new RepSemicolonDeclEps(); //EPSILON
-		}
+		default: return new RepSemicolonStoDeclEps();		}
 	}
 	private IConcSyn progParamList() throws GrammarError{
 //[[T LPAREN, N optProgParamRepCommaProgParam, T RPAREN]]
@@ -340,21 +341,54 @@ public class Parser implements IParser {
 	}
 	private IConcSyn param()throws GrammarError{
 //		[[N optFlowMode, N optMechMode, N optChangeMode, N typedIdent],[N recordParam]]
+//		switch(terminal){
+//		case FLOWMODE:
+//		case MECHMODE:
+//		case CHANGEMODE:
+//		case IDENT:
+//			OptFlowMode optFl = (OptFlowMode) optFlowMode();
+//			OptMechMode optM = (OptMechMode) optMechMode();
+//			OptChangeMode optC = (OptChangeMode) optChangeMode();
+//			TypedIdent tIdent = (TypedIdent) typedIdent();
+//			return new Param(optFl, optM, optC, tIdent);
+//		case DOT:
+//			return recordParam();
+//		default: throw new GrammarError("param", 0);
+//		}
+		
+		OptFlowMode optFl = (OptFlowMode) optFlowMode();
+		OptMechMode optM = (OptMechMode) optMechMode();
+		OptChangeMode optC = (OptChangeMode) optChangeMode();
+		IParam param = (IParam) typedIdentOrRecordParam();
+		return new Param(optFl, optM, optC, param);
+		
+	}
+	
+	private IConcSyn typedIdentOrRecordParam() throws GrammarError{
 		switch(terminal){
-		case FLOWMODE:
-		case MECHMODE:
-		case CHANGEMODE:
+		case DOT: 
+
+			return recordParam(); 
 		case IDENT:
-			OptFlowMode optFl = (OptFlowMode) optFlowMode();
-			OptMechMode optM = (OptMechMode) optFlowMode();
-			OptChangeMode optC = (OptChangeMode) optChangeMode();
-			TypedIdent tIdent = (TypedIdent) typedIdent();
-			return new Param(optFl, optM, optC, tIdent);
-		case DOT:
-			return recordParam();
-		default: throw new GrammarError("param", 0);
+			return typedIdent();
+		default: throw new GrammarError("tyoedIdentOrRecordParam", token.getLineNr());
+		}
+		
+	}
+	
+	private OptMechMode optMechMode() throws GrammarError {
+		// TODO Auto-generated method stub
+		switch(terminal){
+		case MECHMODE:
+
+			return new OptMechMode((TokenTupel) consume(Terminal.MECHMODE));
+			default: return new OptMechModeEps(); //EPSILON
+
+
 		}
 	}
+
+
 	private IConcSyn recordParam() throws GrammarError{
 //		 [[T DOT,T IDENT, T COLON, T RECIDENT]]
 		consume(Terminal.DOT);
@@ -439,7 +473,16 @@ public class Parser implements IParser {
                 break;
 
             default:
-                throw new GrammarError("cmd()", 0);
+            	try{
+            		Expr expr1 = (Expr) expr();
+            		consume(Terminal.BECOMES);
+            		Expr expr2 = (Expr) expr();
+            		return new CmdBecomes(expr1, expr2);
+            	}catch(GrammarError e){
+            		throw new GrammarError("cmd()" + "term: "+terminal + "cons count: "+consCount, token.getLineNr());
+            	}
+            	
+                
 		}
 		return result;
     }

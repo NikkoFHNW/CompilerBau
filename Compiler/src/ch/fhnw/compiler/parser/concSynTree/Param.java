@@ -6,18 +6,18 @@ public class Param implements IConcSyn.IParam {
     OptFlowMode optFlowMode;
     OptMechMode optMechMode;
     OptChangeMode optChangeMode;
-    TypedIdent typedIdent;
+    IParam typedIdentOrRecIdent;
 
-    public Param(OptFlowMode optFlowMode, OptMechMode optMechMode, OptChangeMode optChangeMode, TypedIdent typedIdent) {
+    public Param(OptFlowMode optFlowMode, OptMechMode optMechMode, OptChangeMode optChangeMode, IParam param) {
         this.optFlowMode = optFlowMode;
         this.optMechMode = optMechMode;
         this.optChangeMode = optChangeMode;
-        this.typedIdent = typedIdent;
+        this.typedIdentOrRecIdent = param;
     }
 
 
     @Override
     public IAbs.IParam toAbstrSyntax() {
-        return new ch.fhnw.compiler.parser.abs.Param(optFlowMode.toAbstrSyntax(),optMechMode.toAbstrSyntax(),optChangeMode.toAbstrSyntax(),typedIdent.toAbstrSyntax());
+        return new ch.fhnw.compiler.parser.abs.Param(optFlowMode.toAbstrSyntax(),optMechMode.toAbstrSyntax(),optChangeMode.toAbstrSyntax(),typedIdentOrRecIdent.toAbstrSyntax());
     }
 }

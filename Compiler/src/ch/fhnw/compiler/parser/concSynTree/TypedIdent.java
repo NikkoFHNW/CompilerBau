@@ -3,7 +3,7 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class TypedIdent implements IConcSyn.IFactor {
+public class TypedIdent implements IConcSyn.IParam {
     TokenTupel ident;
     TokenTupel atomtype;
 
@@ -13,7 +13,7 @@ public class TypedIdent implements IConcSyn.IFactor {
     }
 
     @Override
-    public IAbs.IExpr toAbstrSyntax() {
+    public ch.fhnw.compiler.parser.abs.IAbs.IParam toAbstrSyntax() {
         return new ch.fhnw.compiler.parser.abs.TypedIdent(ident,atomtype);
     }
 }

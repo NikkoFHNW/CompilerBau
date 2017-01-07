@@ -12,14 +12,14 @@ public class Param implements IAbs.IParam {
     TokenTupel optFlowMode;
     TokenTupel optMechMode;
     TokenTupel optChangeMode;
-    IExpr typedIdent;
+    IParam typedIdentOrRecIdent;
 	
-	public Param(TokenTupel flow, TokenTupel mech, TokenTupel change, IExpr typ) {
+	public Param(TokenTupel flow, TokenTupel mech, TokenTupel change, IParam typ) {
 		// TODO Auto-generated constructor stub
 		this.optFlowMode=flow;
 		this.optMechMode=mech;
 		this.optChangeMode=change;
-		typedIdent=typ;
+		typedIdentOrRecIdent=typ;
 	}
 
 	@Override

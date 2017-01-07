@@ -3,7 +3,7 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
-public class RecordFactor implements IConcSyn.IFactor {
+public class RecordFactor extends AbstractFactor implements IConcSyn.IFactor {
     TokenTupel ident1;
     TokenTupel ident2;
 

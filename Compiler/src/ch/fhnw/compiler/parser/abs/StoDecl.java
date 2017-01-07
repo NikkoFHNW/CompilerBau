@@ -9,9 +9,9 @@ public class StoDecl implements IAbs.IStoDecl {
 //	ChangeMode cm;
 	
 	TokenTupel cm;
-	IAbs.IExpr typedId;
+	IAbs.IParam typedId;
 	
-	public StoDecl(TokenTupel cm, IAbs.IExpr typedId){
+	public StoDecl(TokenTupel cm, IAbs.IParam typedId){
 		this.cm=cm;
 		this.typedId=typedId;
 	}
