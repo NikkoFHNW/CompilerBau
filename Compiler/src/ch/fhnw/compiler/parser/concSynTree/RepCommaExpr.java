@@ -1,6 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.*;
 
 public class RepCommaExpr implements IConcSyn.IRepCommaExpr {
     Expr expr;
@@ -15,12 +15,14 @@ public class RepCommaExpr implements IConcSyn.IRepCommaExpr {
     }
 
 
-    //TODO param??
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
-        if (next == null) {
+        if (next instanceof RepCommaExprEps)
             return this.expr.toAbstrSyntax();
-        } else
+        else
             return next.toAbstrSyntax(this.expr.toAbstrSyntax());
+
+
+
     }
 }

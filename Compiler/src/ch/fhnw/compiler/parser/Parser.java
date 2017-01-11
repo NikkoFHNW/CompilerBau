@@ -175,7 +175,6 @@ public class Parser implements IParser {
 
 	}
 	private IConcSyn procDecl() throws GrammarError{
-
 		consume(Terminal.PROC);
 		TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 		ParamList paramList = (ParamList) paramList();
