@@ -9,6 +9,7 @@ public class StoDecl implements IConcSyn.IStoDecl {
     public StoDecl(OptChangeMode optChangeMode, TypedIdent typedIdent) {
         this.optChangeMode = optChangeMode;
         this.typedIdent = typedIdent;
+        
     }
     @Override
     public IAbs.IStoDecl toAbstrSyntax() {

@@ -1,6 +1,8 @@
 package ch.fhnw.compiler.parser.abs;
 
 
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Function;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
@@ -40,7 +42,15 @@ public class FunDecl implements IAbs.IDecl {
 	@Override
 	public void checkDeclaration() throws ContextError {
 		// TODO Auto-generated method stub
-
+		
+		Function func = new Function(ident.toString(), ident.getType());
+		Compiler.setScope(func.getScope());
+		if(!Compiler.getRoutineTable().addRoutine(func)){
+			throw new ContextError("Function " + ident.toString() + " already declared", ident.getLineNr());
+		}
+		pList.check(func);
+		Compiler.setScope(Compiler.getGlobalScope());
+		
 	}
 
 	@Override

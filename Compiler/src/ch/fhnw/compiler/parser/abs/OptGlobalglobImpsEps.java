@@ -1,5 +1,7 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.context.Routine;
+
 public class OptGlobalglobImpsEps implements IAbs.IGlobImp {
 
 	@Override
@@ -15,7 +17,7 @@ public class OptGlobalglobImpsEps implements IAbs.IGlobImp {
 	}
 
 	@Override
-	public void check(Object routine) throws ContextError {
+	public void check(Routine routine) throws ContextError {
 		// TODO Auto-generated method stub
 		
 	}

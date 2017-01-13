@@ -31,6 +31,8 @@ public class CpsStoDecl implements ICpsDecl {
 	public void checkDeclaration() throws ContextError {
 		// TODO Auto-generated method stub
 
+		stoDecl.checkDeclaration();
+		repStoDecl.checkDeclaration();
 	}
 
 	@Override

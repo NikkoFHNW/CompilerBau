@@ -114,7 +114,14 @@ public class TokenTupel extends Token {
     public Operator getOp() {
         return op;
     }
+    
+    public Mode getMode(){
+    	return m;
+    }
 
+    public Type getType(){
+    	return typ;
+    }
     public String toString(){
 		
 		String res;

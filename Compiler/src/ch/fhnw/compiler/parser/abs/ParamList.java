@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
 public class ParamList implements IAbs.IParam {
@@ -30,8 +31,10 @@ public class ParamList implements IAbs.IParam {
 	}
 
 	@Override
-	public void check(Object routine) throws ContextError {
+	public void check(Routine routine) throws ContextError {
 		// TODO Auto-generated method stub
+		param.check(routine);
+		next.check(routine);
 		
 	}
 

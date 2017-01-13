@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
@@ -13,7 +14,7 @@ public class ParamRecord implements IAbs.IParam {
     }
 
     @Override
-    public void check(Object routine) throws ContextError {
+    public void check(Routine routine) throws ContextError {
 
     }
 

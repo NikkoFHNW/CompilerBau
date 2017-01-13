@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
@@ -33,14 +34,14 @@ public interface IAbs {
         int code(int loc) throws CodeTooSmallError;
     }
     interface IParam extends IAbs {
-        void check(Object routine) throws ContextError;
+        void check(Routine routine) throws ContextError;
         void checkInit() throws ContextError;
         int calculateAddress(int count, int locals);
         int codeIn(int loc, int count, int locals) throws CodeTooSmallError;
         int codeOut(int loc, int count, int locals) throws CodeTooSmallError;
     }
     interface IGlobImp extends IAbs {
-        void check(Object routine) throws ContextError;
+        void check(Routine routine) throws ContextError;
         void checkInit() throws ContextError;
     }
     interface IExpr extends IAbs {

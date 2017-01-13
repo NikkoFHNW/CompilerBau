@@ -26,7 +26,8 @@ public class CpsDecl implements IAbs.ICpsDecl{
 
 	@Override
 	public void checkDeclaration() throws ContextError {
-		// TODO Auto-generated method stub
+		decl.checkDeclaration();
+		cpsDecl.checkDeclaration();
 		
 	}
 
