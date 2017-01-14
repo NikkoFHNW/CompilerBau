@@ -29,7 +29,7 @@ public class Program implements IAbs.IProgram {
     	Compiler.setScope(new Scope(Compiler.getGlobalStoreTable(),Compiler.getRecordStoreTable()));
     	params.check(null);
     	cpsDecl.checkDeclaration();
-    	cmd.check(false);
+    	cmd.check();
     	
     }
 
