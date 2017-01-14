@@ -1,9 +1,11 @@
 package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.context.Scope;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public class Program implements IAbs.IProgram {
 
@@ -33,7 +35,14 @@ public class Program implements IAbs.IProgram {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+        int loc1 = cmd.code(loc);
+        Compiler.getCodeArray().put(loc1, new IInstructions.Stop());
+        if(cpsDecl != null)
+            loc1 = cpsDecl.code(loc1 + 1);
+        for (Routine routine : Compiler.getRoutineTable().getTable().values()) {
+            routine.codeCalls();
+        }
+        return loc1;
     }
 
     @Override
@@ -43,6 +52,6 @@ public class Program implements IAbs.IProgram {
 
     @Override
     public int getLine() {
-        return 0;
+        return ident.getLineNr();
     }
 }

@@ -3,8 +3,11 @@ package ch.fhnw.compiler.context;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Mode;
 import ch.fhnw.compiler.scanner.data.Type;
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public abstract class Routine extends Symbol {
     
@@ -32,11 +35,11 @@ public abstract class Routine extends Symbol {
         calls.add(loc);
     }
     
-//    public final void codeCalls() throws CodeTooSmallError {
-//        for (int loc : calls) {
-//            IMLCompiler.getVM().Call(loc, address);
-//        }
-//    }
+    public final void codeCalls() throws ICodeArray.CodeTooSmallError {
+        for (int loc : calls) {
+            Compiler.getCodeArray().put(loc, new IInstructions.Call(address));
+        }
+    }
     
     public final Scope getScope() {
         return scope;

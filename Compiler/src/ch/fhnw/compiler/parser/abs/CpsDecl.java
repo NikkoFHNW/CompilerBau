@@ -39,8 +39,8 @@ public class CpsDecl implements IAbs.ICpsDecl{
 
 	@Override
 	public int code(int loc) throws CodeTooSmallError {
-		// TODO Auto-generated method stub
-		return 0;
+		int loc1 = decl.code(loc);
+		return cpsDecl.code(loc1);
 	}
 
 	@Override
