@@ -14,8 +14,6 @@ public class CmdCps implements IAbs.ICmd {
     @Override
     public void check(boolean canInit) throws ContextError {
 
-    	cmd.check();
-    	if(next!=null)next.check();
     }
 
     @Override
@@ -36,6 +34,8 @@ public class CmdCps implements IAbs.ICmd {
 	@Override
 	public void check() throws ContextError {
 		// TODO Auto-generated method stub
-		
+
+    	cmd.check();
+    	if(next!=null)next.check();
 	}
 }

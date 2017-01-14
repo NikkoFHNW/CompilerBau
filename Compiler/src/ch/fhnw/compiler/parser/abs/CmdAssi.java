@@ -44,5 +44,6 @@ public class CmdAssi implements IAbs.ICmd {
 			throw new ContextError("Types of become assignment must match. expected: "
 					+tS.toString()+ " actual: " + tD.toString(), source.getLine());
 		
+		
 	}
 }

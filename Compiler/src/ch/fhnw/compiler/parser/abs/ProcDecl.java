@@ -49,6 +49,7 @@ public class ProcDecl implements IDecl {
 		if(globImp!=null)globImp.check(proc);
 		if(cpsDecl!=null)cpsDecl.checkDeclaration();
 		cmd.check();
+		Compiler.setScope(Compiler.getGlobalScope());
 		
 		
 	}
