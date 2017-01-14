@@ -1,5 +1,9 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Function;
+import ch.fhnw.compiler.context.Proc;
+import ch.fhnw.compiler.parser.abs.IAbs.ContextError;
 import ch.fhnw.compiler.parser.abs.IAbs.IDecl;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
@@ -33,6 +37,18 @@ public class ProcDecl implements IDecl {
 	@Override
 	public void checkDeclaration() throws ContextError {
 		// TODO Auto-generated method stub
+		
+		Proc proc = new Proc(ident.toString());
+		Compiler.setScope(proc.getScope());
+		if(!Compiler.getRoutineTable().addRoutine(proc)){
+			throw new ContextError("Process " + ident.toString() + " already declared", ident.getLineNr());
+			
+		}
+		param.check(proc);
+		globImp.check(proc);
+		cpsDecl.checkDeclaration();
+		cmd.check();
+		
 		
 	}
 

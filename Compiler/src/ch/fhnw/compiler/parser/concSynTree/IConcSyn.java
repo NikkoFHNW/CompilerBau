@@ -110,6 +110,12 @@ public interface IConcSyn {
         public interface IRecConstr extends IConcSyn {
             IAbs.ICmd toAbstrSyntax();
         };
+        public interface IRepRecData extends IConcSyn.IRecData{
+        	IAbs.IDecl toAbstrSyntax(IAbs.IDecl repRecD);
+        }
+        public interface IRecData extends IDecl {
+        	IAbs.IRecData toAbstrSyntax();
+        }
 
 
 

@@ -14,6 +14,6 @@ public class RecordDecl implements IConcSyn.IDecl {
 
     @Override
     public IAbs.IDecl toAbstrSyntax() {
-        return null;
+        return new ch.fhnw.compiler.parser.abs.RecordDecl(recident, recordData.toAbstrSyntax());
     }
 }

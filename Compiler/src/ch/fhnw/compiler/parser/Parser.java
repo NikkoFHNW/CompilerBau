@@ -767,9 +767,9 @@ public class Parser implements IParser {
 		OptChangeMode opCM = (OptChangeMode) optChangeMode();
 		TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 		consume(Terminal.COLON);
-		consume(Terminal.TYPE);
+		TokenTupel type=(TokenTupel)consume(Terminal.TYPE);
 		RepRecordData repRecordData = (RepRecordData) repRecordData();
-		return new RecordData(ident, repRecordData, opCM);
+		return new RecordData(ident,type, repRecordData, opCM);
 	}
 
 	private IConcSyn repRecordData() throws GrammarError {
@@ -779,8 +779,8 @@ public class Parser implements IParser {
 			OptChangeMode opc = (OptChangeMode) optChangeMode();
 			TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
 			consume(Terminal.COLON);
-			consume(Terminal.TYPE);
-			current = new RepRecordData(ident,opc);
+			TokenTupel type = (TokenTupel) consume(Terminal.TYPE);
+			current = new RepRecordData(ident,type,opc);
 
             if (head == null)
                 head = current;

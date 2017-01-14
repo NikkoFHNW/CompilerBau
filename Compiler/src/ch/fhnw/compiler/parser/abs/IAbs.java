@@ -1,7 +1,12 @@
 package ch.fhnw.compiler.parser.abs;
 
+import java.util.List;
+import java.util.Map;
+
 import ch.fhnw.compiler.context.Routine;
+import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
+import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
@@ -31,6 +36,7 @@ public interface IAbs {
 
     interface ICmd extends IAbs {
         void check(boolean canInit) throws ContextError;
+        void check() throws ContextError;
         int code(int loc) throws CodeTooSmallError;
     }
     interface IParam extends IAbs {
@@ -47,6 +53,7 @@ public interface IAbs {
     interface IExpr extends IAbs {
         TokenTupel checkR() throws ContextError;
         TokenTupel checkL(boolean canInit) throws ContextError;
+        TokenTupel checkL() throws ContextError;
         int code(int loc) throws CodeTooSmallError;
     }
     interface IExprList extends IAbs {
@@ -65,6 +72,13 @@ public interface IAbs {
                 throws ContextError;
     }
 
+    interface IRecData extends IDecl{
+    	Map<String,Type> getCompleteData();
+    	void getData(Map<String,Type> resL);
+    }
+    
+    
+    
     String toString(String indent);
     int getLine();
 

@@ -43,12 +43,18 @@ public class FunDecl implements IAbs.IDecl {
 	public void checkDeclaration() throws ContextError {
 		// TODO Auto-generated method stub
 		
-		Function func = new Function(ident.toString(), ident.getType());
+		Function func = new Function(ident.toString(), stoDecl.getType().getType());
 		Compiler.setScope(func.getScope());
 		if(!Compiler.getRoutineTable().addRoutine(func)){
 			throw new ContextError("Function " + ident.toString() + " already declared", ident.getLineNr());
 		}
 		pList.check(func);
+		stoDecl.checkDeclaration();
+		globImps.check(func);
+		localCpsStoDecl.checkDeclaration();
+		cpsCmd.check();
+		
+		
 		Compiler.setScope(Compiler.getGlobalScope());
 		
 	}

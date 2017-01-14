@@ -7,7 +7,7 @@ public class Store extends Symbol {
     private boolean initialized;
     private boolean isConst;
     private int address;
-    private boolean relative = false;
+//    private boolean relative = false; wofür relative?
     private boolean reference = false;
     
     public Store(
@@ -47,12 +47,16 @@ public class Store extends Symbol {
         this.address = address;
     }
 
-    public void setRelative(final boolean relative) {
-        this.relative = relative;
-    }
+//    public void setRelative(final boolean relative) {
+//        this.relative = relative;
+//    }
     
     public void setReference(final boolean reference) {
         this.reference = reference;
+    }
+    
+    public boolean getReference(){
+    	return reference;
     }
 
 //    public int codeLoad(final int loc) throws CodeTooSmallError {

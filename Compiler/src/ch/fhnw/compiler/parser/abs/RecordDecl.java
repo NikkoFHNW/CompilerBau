@@ -1,13 +1,27 @@
 package ch.fhnw.compiler.parser.abs;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.RecordStore;
+import ch.fhnw.compiler.parser.abs.IAbs.ContextError;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
+import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
 public class RecordDecl implements IAbs.IDecl {
 
 	TokenTupel recIdent;
-	RecordData recData;
+	IRecData recData;
 	
+	public RecordDecl(TokenTupel ri, IRecData rd) {
+		// TODO Auto-generated constructor stub
+		super();
+		recIdent=ri;
+		recData=rd;
+	}
 	
 	
 	@Override
@@ -26,6 +40,14 @@ public class RecordDecl implements IAbs.IDecl {
 	public void checkDeclaration() throws ContextError {
 		// TODO Auto-generated method stub
 		
+		
+		Map<String,Type> fields;
+		fields = recData.getCompleteData();
+		
+		RecordStore recSto = new RecordStore(recIdent.toString(),fields);
+		if(!Compiler.getScope().getRecordStoreTable().addRecordStore(recSto)){
+			throw new ContextError("Recordtype" + recIdent+"already declared", recIdent.getLineNr());
+		}
 	}
 
 	@Override

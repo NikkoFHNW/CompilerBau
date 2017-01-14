@@ -39,4 +39,10 @@ public class ExprDyadic implements IAbs.IExpr {
     public int getLine() {
         return 0;
     }
+
+	@Override
+	public TokenTupel checkL() throws ContextError {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -3,6 +3,7 @@ package ch.fhnw.compiler.context;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import ch.fhnw.compiler.scanner.data.Type;
 
@@ -13,7 +14,7 @@ public class RecordStore{
 	  public RecordStore(String recIdent, Map<String,Type> fields){
 		  this(recIdent);
 		  
-		  fieldListMap.putAll(fields);
+		  fieldListMap = fields;
 	
 	  }
 	  
@@ -27,6 +28,7 @@ public class RecordStore{
 
 	public RecordStore(String recIdent){
 		this.recIdent=recIdent;  
+		this.fieldListMap = new TreeMap<String, Type>();
 	  }
 
 	  

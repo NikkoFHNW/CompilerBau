@@ -29,4 +29,10 @@ public class CmdInput implements IAbs.ICmd {
     public int getLine() {
         return 0;
     }
+
+	@Override
+	public void check() throws ContextError {
+		// TODO Auto-generated method stub
+		
+	}
 }

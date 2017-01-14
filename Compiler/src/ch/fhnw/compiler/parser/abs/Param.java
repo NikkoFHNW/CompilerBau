@@ -67,10 +67,11 @@ public class Param implements IAbs.IParam {
 			}
 			
 			
-			
+			Store sto = new Store(ident, type, isC);
+			sto.setReference(optMechMode.getMode().equals(Mode.REF));
 			
 			if(!Compiler.getScope().getStoreTable().addStore(
-					new Store(ident, type, isC))){
+					sto)){
 				throw new ContextError("already declared parameter " + ident,optChangeMode.getLineNr() );
 			}
 		
@@ -113,9 +114,11 @@ public class Param implements IAbs.IParam {
 				
 			}
 			
+			Store tS = new Store(ident, type, isC);
+			tS.setReference(optMechMode.getMode().equals(Mode.REF));
 			
 			if(!Compiler.getScope().getStoreTable().addStore(//Type null heisst type-> recident
-					new Store(ident, type, isC))){
+					tS)){
 				throw new ContextError("no recidents as progparams", typedIdentOrRecParam.getLine());
 			}
 			
