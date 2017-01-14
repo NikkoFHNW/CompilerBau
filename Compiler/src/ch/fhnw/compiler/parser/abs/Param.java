@@ -53,8 +53,8 @@ public class Param implements IAbs.IParam {
 		if(routine==null){//Progparams
 			String ident ="";
 			Type type = null;
-			boolean isC;
-			isC = optChangeMode.getMode().equals(Mode.CONST);
+			boolean isC =false;
+			if(optChangeMode!=null)isC = optChangeMode.getMode().equals(Mode.CONST);
 			
 			if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
 				ch.fhnw.compiler.parser.abs.TypedIdent ti = (ch.fhnw.compiler.parser.abs.TypedIdent) typedIdentOrRecParam;
@@ -80,7 +80,8 @@ public class Param implements IAbs.IParam {
 			String ident ="";
 			Type type = null;
 			boolean isC;
-			isC = optChangeMode.getMode().equals(Mode.CONST);
+			isC=false;
+			if(optChangeMode!=null)isC = optChangeMode.getMode().equals(Mode.CONST);
 			
 			if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
 				ch.fhnw.compiler.parser.abs.TypedIdent ti = (ch.fhnw.compiler.parser.abs.TypedIdent) typedIdentOrRecParam;

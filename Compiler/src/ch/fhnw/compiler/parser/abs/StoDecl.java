@@ -23,7 +23,9 @@ public class StoDecl implements IAbs.IStoDecl {
 	
 	ch.fhnw.compiler.context.Store getStore(){
 		TypedIdent temp = (TypedIdent) typedId;
-		return new ch.fhnw.compiler.context.Store(temp.getIdent().toString(), temp.getType().getType(), cm.getMode().equals(Mode.CONST));
+		boolean isC = false;
+		if(cm!=null)cm.getMode().equals(Mode.CONST);
+		return new ch.fhnw.compiler.context.Store(temp.getIdent().toString(), temp.getType().getType(),isC );
 	}
 	
 	@Override

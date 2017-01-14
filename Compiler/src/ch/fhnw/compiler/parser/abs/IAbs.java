@@ -54,6 +54,7 @@ public interface IAbs {
         TokenTupel checkR() throws ContextError;
         TokenTupel checkL(boolean canInit) throws ContextError;
         TokenTupel checkL() throws ContextError;
+        TokenTupel check() throws ContextError;
         int code(int loc) throws CodeTooSmallError;
     }
     interface IExprList extends IAbs {

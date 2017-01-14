@@ -45,8 +45,9 @@ public class ProcDecl implements IDecl {
 			
 		}
 		param.check(proc);
-		globImp.check(proc);
-		cpsDecl.checkDeclaration();
+		
+		if(globImp!=null)globImp.check(proc);
+		if(cpsDecl!=null)cpsDecl.checkDeclaration();
 		cmd.check();
 		
 		

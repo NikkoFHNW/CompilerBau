@@ -70,7 +70,7 @@ public class RecordData implements IAbs.IRecData {
 	public void getData(Map<String,Type> res) {
 		// TODO Auto-generated method stub
 		res.put(ident.toString(), type.getType());
-		this.repRecData.getData(res);
+		if(repRecData!=null)this.repRecData.getData(res);
 	}
 
 }

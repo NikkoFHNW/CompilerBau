@@ -27,8 +27,9 @@ public class Program implements IAbs.IProgram {
 //    	cpsDecl.checkDeclaration();
 //    	cpsDecl.check(-1);
     	Compiler.setScope(new Scope(Compiler.getGlobalStoreTable(),Compiler.getRecordStoreTable()));
-    	params.check(null);
-    	cpsDecl.checkDeclaration();
+    	
+    	if(params!=null)params.check(null);
+    	if(cpsDecl!=null)cpsDecl.checkDeclaration();
     	cmd.check();
     	
     }

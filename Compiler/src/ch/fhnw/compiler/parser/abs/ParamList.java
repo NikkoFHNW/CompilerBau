@@ -34,6 +34,7 @@ public class ParamList implements IAbs.IParam {
 	public void check(Routine routine) throws ContextError {
 		// TODO Auto-generated method stub
 		param.check(routine);
+		if(next!=null)
 		next.check(routine);
 		
 	}

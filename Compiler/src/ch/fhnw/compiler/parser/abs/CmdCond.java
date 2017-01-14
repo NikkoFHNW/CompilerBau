@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class CmdCond implements IAbs.ICmd{
@@ -36,6 +37,12 @@ public class CmdCond implements IAbs.ICmd{
 	@Override
 	public void check() throws ContextError {
 		// TODO Auto-generated method stub
+		if(!expr.checkR().getType().equals(Type.BOOL))
+		throw new ContextError("need a bool value for if comands!", expr.getLine());
+		ifCmd.check();
+		elseCmd.check();
+		
+		
 		
 	}
 }

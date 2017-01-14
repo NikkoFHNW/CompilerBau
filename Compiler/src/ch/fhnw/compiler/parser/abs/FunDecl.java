@@ -49,10 +49,11 @@ public class FunDecl implements IAbs.IDecl {
 			throw new ContextError("Function " + ident.toString() + " already declared", ident.getLineNr());
 		}
 		pList.check(func);
-		stoDecl.checkDeclaration();
-		globImps.check(func);
-		localCpsStoDecl.checkDeclaration();
-		cpsCmd.check();
+		
+		if(stoDecl!=null)stoDecl.checkDeclaration();
+		if(globImps!=null)globImps.check(func);
+		if(localCpsStoDecl!=null)localCpsStoDecl.checkDeclaration();
+		if(cpsCmd!=null)cpsCmd.check();
 		
 		
 		Compiler.setScope(Compiler.getGlobalScope());
