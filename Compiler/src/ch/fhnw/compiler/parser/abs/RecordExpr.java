@@ -42,4 +42,10 @@ public class RecordExpr implements IAbs.IExpr{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public TokenTupel check() throws ContextError {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
