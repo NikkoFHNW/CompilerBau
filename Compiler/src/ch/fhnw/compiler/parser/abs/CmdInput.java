@@ -33,6 +33,6 @@ public class CmdInput implements IAbs.ICmd {
 	@Override
 	public void check() throws ContextError {
 		// TODO Auto-generated method stub
-		
+		expr.checkL();
 	}
 }

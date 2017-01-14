@@ -9,8 +9,11 @@ public class Store extends Symbol {
     private int address;
 //    private boolean relative = false; wofür relative?
     private boolean reference = false;
+    private String recType;
     
-    public Store(
+
+
+	public Store(
             final String ident, 
             final Type type, 
             final boolean isConst) {
@@ -19,6 +22,14 @@ public class Store extends Symbol {
         this.initialized = false;
         this.isConst = isConst;
     }
+	
+    public String getRecType() {
+		return recType;
+	}
+
+	public void setRecType(String recType) {
+		this.recType = recType;
+	}
     
     public boolean isConst() {
         return isConst;

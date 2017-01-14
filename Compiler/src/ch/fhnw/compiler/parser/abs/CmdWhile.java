@@ -1,5 +1,8 @@
 package ch.fhnw.compiler.parser.abs;
 
+import javax.swing.text.TabExpander;
+
+import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class CmdWhile implements IAbs.ICmd {
@@ -34,6 +37,10 @@ public class CmdWhile implements IAbs.ICmd {
 	@Override
 	public void check() throws ContextError {
 		// TODO Auto-generated method stub
+		Type t =expr.checkR().getType();
+		if(!t.equals(Type.BOOL))
+			throw new ContextError("expression must return bool value. actual: "+expr.toString(), expr.getLine());
+		cmd.check();
 		
 	}
 }
