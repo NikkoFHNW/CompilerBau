@@ -1,12 +1,14 @@
 package ch.fhnw.compiler.parser;
 
-import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.ICpsDecl;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IDecl;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.IParam;
 import ch.fhnw.compiler.scanner.data.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Parser implements IParser {
@@ -662,9 +664,17 @@ public class Parser implements IParser {
 
             case IDENT:
                 System.out.println("factor := IDENT");
+				boolean isInit = false;
                 TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-                IConcSyn.IExprList optInitOrExprList = (IConcSyn.IExprList) optInitOrExprList();
-                return new FactorIdent(ident, (OptInitOrExprList) optInitOrExprList);
+				if (terminal == Terminal.INIT) {
+					consume(Terminal.INIT);
+					isInit = true;
+				} else if (terminal == Terminal.LPAREN) {
+					ExprList exprList = (ExprList) exprList();
+					return new FactorExprList(ident, exprList.toAbstrSyntax());
+				}
+
+                return new FactorIdent(ident, isInit);
 
             case LPAREN:
                 System.out.println("factor := LPAREN");
@@ -695,49 +705,44 @@ public class Parser implements IParser {
         }
     }
 
-    private IConcSyn optInitOrExprList() throws GrammarError {
-		if (terminal == Terminal.INIT) {
-			System.out.println("optInitOrExprList := INIT");
-			consume(Terminal.INIT);
-			return new OptInitOrExprList(null);
-		} else if (terminal == Terminal.LPAREN) {
-			return new OptInitOrExprList((ExprList) exprList());
-		} else
-			return new OptInitOrExprListEps();
-    }
-
     private IConcSyn exprList() throws GrammarError {
-        System.out.println("exprList");
+		List<Expr> expressions = new LinkedList<>();
+		System.out.println("exprList");
         consume(Terminal.LPAREN);
-        OptExprRep optExprRep = (OptExprRep) optExprRep();
+		optExprRep(expressions);
+        OptExprRep optExprRep = new OptExprRep(expressions);
         consume(Terminal.RPAREN);
         return new ExprList(optExprRep);
     }
 
-    private IConcSyn optExprRep() throws GrammarError {
+	private void optExprRep(List<Expr> list) throws GrammarError {
         System.out.println("exprList optExprRep");
         Expr expr;
         try {
             expr = (Expr) expr();
+			list.add(expr);
         } catch (GrammarError e) {
-            return new OptExprRepEps();
+
         }
-        RepCommaExpr repCommaExpr = (RepCommaExpr) repCommaExpr();
-        return new OptExprRep(expr, repCommaExpr);
+
+        if (terminal == Terminal.COMMA) {
+			consume(Terminal.COMMA);
+			optExprRep(list);
+		}
     }
 
-    private IConcSyn repCommaExpr() throws GrammarError {
-        if (terminal == Terminal.COMMA) {
-            System.out.println("exprList optExprRep repCommaExpr");
-            consume(Terminal.COMMA);
-            Expr expr = (Expr) expr();
-            RepCommaExpr repCommaExpr = new RepCommaExpr(expr);
-            RepCommaExpr next = (RepCommaExpr) repCommaExpr();
-            repCommaExpr.setNext(next);
-            return repCommaExpr;
-        }
-        return new RepCommaExprEps();
-    }
+//    private IConcSyn repCommaExpr() throws GrammarError {
+//        if (terminal == Terminal.COMMA) {
+//            System.out.println("exprList optExprRep repCommaExpr");
+//            consume(Terminal.COMMA);
+//            Expr expr = (Expr) expr();
+//            RepCommaExpr repCommaExpr = new RepCommaExpr(expr);
+//            RepCommaExpr next = (RepCommaExpr) repCommaExpr();
+//            repCommaExpr.setNext(next);
+//            return repCommaExpr;
+//        }
+//        return new RepCommaExprEps();
+//    }
 
     private IConcSyn monadicOpr() throws GrammarError {
         System.out.println("monadicOpr");

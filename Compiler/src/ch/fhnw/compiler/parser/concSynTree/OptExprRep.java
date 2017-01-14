@@ -2,22 +2,22 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class OptExprRep implements IConcSyn.IOptExprRep{
-    Expr expr;
-    RepCommaExpr rep;
+import java.util.LinkedList;
+import java.util.List;
 
-    public OptExprRep(Expr expr, RepCommaExpr rep) {
-        this.expr = expr;
-        this.rep = rep;
+public class OptExprRep implements IConcSyn.IOptExprRep{
+    List<Expr> expressions;
+
+    public OptExprRep(List<Expr> expressions) {
+        this.expressions = expressions;
     }
 
     @Override
-    public IAbs.IExpr toAbstrSyntax() {
-        if (rep == null)
-            return expr.toAbstrSyntax();
-        else {
-            return rep.toAbstrSyntax(expr.toAbstrSyntax());
-        }
+    public List<IAbs.IExpr> toAbstrSyntax() {
+        List<IAbs.IExpr> result = new LinkedList<>();
+        for (Expr expr : expressions)
+            result.add(expr.toAbstrSyntax());
 
+        return result;
     }
 }

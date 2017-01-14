@@ -3,6 +3,8 @@ package ch.fhnw.compiler.parser.concSynTree;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
+import java.util.List;
+
 public interface IConcSyn {
 
         public interface IProgram extends IConcSyn {
@@ -90,10 +92,10 @@ public interface IConcSyn {
             IAbs.IExpr toAbstrSyntax();
         };
         public interface IExprList extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            List<IAbs.IExpr> toAbstrSyntax();
         };
         public interface IOptExprRep extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            List<IAbs.IExpr> toAbstrSyntax();
         };
         public interface IMonadicOpr extends IConcSyn {
             IAbs.IExpr toAbstrSyntax(IAbs.IExpr factor);

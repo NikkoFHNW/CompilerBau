@@ -5,9 +5,9 @@ import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class ExprStore implements IAbs.IExpr {
     String ident;
-    IsInitialization isInitialization;
+    boolean isInitialization;
 
-    public ExprStore(String ident, IsInitialization isInitialization) {
+    public ExprStore(String ident, boolean isInitialization) {
         this.ident = ident;
         this.isInitialization = isInitialization;
     }

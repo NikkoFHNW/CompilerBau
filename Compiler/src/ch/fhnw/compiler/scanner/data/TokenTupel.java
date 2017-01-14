@@ -9,11 +9,15 @@ public class TokenTupel extends Token {
 	private int intVal;
 	private String stringVal;
 
-    private enum ConcreteTyp {
+    public enum ConcreteTyp {
 		OPERATOR,TYPE,BOOLEAN,MODE,STRING,INT
 	}
 
 	private ConcreteTyp conc;
+
+    public ConcreteTyp getConcType() {
+        return conc;
+    }
 
     private TokenTupel(Terminal t) {
         super(t, -1);

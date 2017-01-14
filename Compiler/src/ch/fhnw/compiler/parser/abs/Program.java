@@ -43,6 +43,7 @@ public class Program implements IAbs.IProgram {
         for (Routine routine : Compiler.getRoutineTable().getTable().values()) {
             routine.codeCalls();
         }
+
         return loc1;
     }
 
