@@ -1,17 +1,18 @@
 package ch.fhnw.compiler.context;
 
+import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Type;
-
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 public class Store extends Symbol {
     private boolean writeable;
     private boolean initialized;
     private boolean isConst;
     private int address;
-//    private boolean relative = false; wofür relative?
+    private boolean relative = false; //wofï¿½r relative? => Frag big L.. 2 verschiedene calls auf VM
     private boolean reference = false;
     private String recType;
     
-
 
 	public Store(
             final String ident, 
@@ -70,28 +71,27 @@ public class Store extends Symbol {
     	return reference;
     }
 
-//    public int codeLoad(final int loc) throws CodeTooSmallError {
-//        int loc1 = codeRef(loc);
-//        
-//        IMLCompiler.getVM().Deref(loc1++);
-//        
-//        return loc1;
-//    }
+    public int codeLoad(final int loc) throws ICodeArray.CodeTooSmallError {
+        int loc1 = codeRef(loc);
+
+        Compiler.getCodeArray().put(loc1++, new IInstructions.Deref());
+        return loc1;
+    }
     
-//    public int codeRef(final int loc) throws CodeTooSmallError {
-//        int loc1 = loc;
-//        if (relative) {
-//            IMLCompiler.getVM().LoadRel(loc1++, address);
-//        } else {
-//            IMLCompiler.getVM().IntLoad(loc1++, address);
-//        }
-//        
-//        if (reference) {
-//            IMLCompiler.getVM().Deref(loc1++);
-//        }
-//        
-//        return loc1;
-//    }
+    public int codeRef(final int loc) throws ICodeArray.CodeTooSmallError {
+        int loc1 = loc;
+        if (relative) {
+            Compiler.getCodeArray().put(loc1++, new IInstructions.LoadAddrRel(address));
+        } else {
+            Compiler.getCodeArray().put(loc1++, new IInstructions.LoadImInt(address));
+        }
+
+        if (reference) {
+            Compiler.getCodeArray().put(loc1++, new IInstructions.Deref());
+        }
+
+        return loc1;
+    }
     
     public Store clone() {
         Store store = new Store(

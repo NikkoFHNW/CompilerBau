@@ -36,7 +36,7 @@ public class CmdProcCall implements IAbs.ICmd {
 	@Override
 	public void check() throws ContextError {
 		// TODO Auto-generated method stub
-		routineCall.c
-		
+//		routineCall.c
+
 	}
 }

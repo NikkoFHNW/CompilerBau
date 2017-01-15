@@ -1,5 +1,7 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
@@ -23,8 +25,14 @@ public class ExprStore implements IAbs.IExpr {
     }
 
     @Override
-    public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+    public int code(final int loc) throws ICodeArray.CodeTooSmallError {
+        Store store = Compiler.getScope().getStoreTable().getStore(ident);
+        return store.codeLoad(loc);
+    }
+
+    public int codeRef(final int loc) throws ICodeArray.CodeTooSmallError {
+        Store store = Compiler.getScope().getStoreTable().getStore(ident);
+        return store.codeRef(loc);
     }
 
     @Override

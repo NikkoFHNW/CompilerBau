@@ -470,7 +470,7 @@ public class Parser implements IParser {
                 ident = (TokenTupel) consume(Terminal.IDENT);
                 consume(Terminal.BECOMES);
                 consume(Terminal.LPAREN);
-                AbstractRecConstr recconstr = (AbstractRecConstr) recConstr();
+                List<TokenTupel> recconstr = recConstr();
                 consume(Terminal.RPAREN);
                 result = new CmdRec(ident, recident, recconstr);
                 break;
@@ -490,45 +490,43 @@ public class Parser implements IParser {
 		return result;
     }
 
-    private IConcSyn recConstr() throws GrammarError {
+    private List<TokenTupel> recConstr() throws GrammarError {
+		List<TokenTupel> result = new LinkedList<>();
+
 		if (terminal == Terminal.IDENT) {
 			System.out.println("recConstr ::= IDENT First");
 			TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-			RepCommaIdentLiteral repCommaIdentLiteral = (RepCommaIdentLiteral) repCommaIdentLiteral();
-			return new RecConstrIdentFirst(ident, repCommaIdentLiteral);
+			result.add(ident);
+
 		} else if (terminal == Terminal.LITERAL) {
 			System.out.println("recConstr ::= LITERAL first");
 			TokenTupel literal = (TokenTupel) consume(Terminal.LITERAL);
-			RepCommaIdentLiteral repCommaIdentLiteral = (RepCommaIdentLiteral) repCommaIdentLiteral();
-			return new RecConstrLiteralFirst(literal, repCommaIdentLiteral);
+			result.add(literal);
 		} else
 			throw new GrammarError("recConstr", 0);
+
+		repCommaIdentLiteral(result);
+		return result;
 	}
 
-	private IConcSyn repCommaIdentLiteral() throws GrammarError {
-		RepCommaIdentLiteral head = null, current;
+	private List<TokenTupel> repCommaIdentLiteral(List<TokenTupel> list) throws GrammarError {
 
-		while (terminal == Terminal.COMMA) {
+		if (terminal == Terminal.COMMA) {
 			consume(Terminal.COMMA);
 
 			if (terminal == Terminal.IDENT) {
 				System.out.println("repCommaIdentLiteral ::= IDENT");
-				TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-				current = new RepCommaIdentLiteral(ident, null);
+				list.add((TokenTupel) consume(Terminal.IDENT));
 			} else if (terminal == Terminal.LITERAL) {
 				System.out.println("repCommaIdentLiteral ::= LITERAL");
-				TokenTupel literal = (TokenTupel) consume(Terminal.LITERAL);
-				current = new RepCommaIdentLiteral(null, literal);
+				list.add((TokenTupel) consume(Terminal.LITERAL));
 			}
 			else
 				throw new GrammarError("repCommaIdentLiteral", 0);
 
-			if (head == null)
-				head = current;
-			else
-				head.setNext(current);
+			repCommaIdentLiteral(list);
 		}
-		return head;
+		return list;
 	}
 
 	private IConcSyn optGlobInits() throws GrammarError {
