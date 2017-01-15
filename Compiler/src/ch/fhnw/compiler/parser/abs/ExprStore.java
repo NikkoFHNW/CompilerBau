@@ -19,7 +19,7 @@ public class ExprStore implements IAbs.IExpr {
     @Override
     public TokenTupel checkR() throws ContextError {
     	TokenTupel res=null;
-    	if(isInitialization.equals(IsInitialization.INITIALIZATION)){
+    	if(isInitialization==true){
     		throw new ContextError("cannot initialise here", 0);
     	}
     	Store sto = Compiler.getScope().getStoreTable().getStore(ident);
@@ -35,7 +35,7 @@ public class ExprStore implements IAbs.IExpr {
     @Override
     public TokenTupel checkL(boolean canInit) throws ContextError {
     	TokenTupel res=null;
-    	if(isInitialization.equals(IsInitialization.INITIALIZATION)){
+    	if(isInitialization==true){
     		Store sto = Compiler.getScope().getStoreTable().getStore(ident);
         	if(sto==null)throw new ContextError(ident + " wasn't declared.", 0);
         	sto.initialize();
