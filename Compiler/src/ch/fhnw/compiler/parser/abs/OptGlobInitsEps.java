@@ -1,6 +1,8 @@
 package ch.fhnw.compiler.parser.abs;
 
-public class OptGlobInitsEps implements IAbs {
+import ch.fhnw.compiler.scanner.data.TokenTupel;
+
+public class OptGlobInitsEps implements IAbs.IGlobInit {
 
 	@Override
 	public String toString(String indent) {
@@ -12,6 +14,18 @@ public class OptGlobInitsEps implements IAbs {
 	public int getLine() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Object check(Object initList) throws ContextError {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TokenTupel check() throws ContextError {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

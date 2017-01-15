@@ -26,4 +26,10 @@ public class GlobalInit implements IAbs.IGlobInit{
     public int getLine() {
         return 0;
     }
+
+	@Override
+	public TokenTupel check() throws ContextError {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

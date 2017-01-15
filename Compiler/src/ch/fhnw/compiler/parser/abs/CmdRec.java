@@ -23,6 +23,8 @@ public class CmdRec implements IAbs.ICmd {
     @Override
     public void check(boolean canInit) throws ContextError {
 
+
+
     }
 
     @Override
@@ -52,6 +54,8 @@ public class CmdRec implements IAbs.ICmd {
 			throw new ContextError("already declared " + ident +".", ident.getLineNr());
 		}
 		
+		recConstr.
+//		recConstr.g
 //		recConstr.g
 	}
 }
