@@ -5,6 +5,7 @@ import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.Store;
+import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;

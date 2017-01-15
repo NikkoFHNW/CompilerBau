@@ -23,7 +23,6 @@ public class CmdRec implements IAbs.ICmd {
     @Override
     public void check(boolean canInit) throws ContextError {
 
-    	
     }
 
     @Override
