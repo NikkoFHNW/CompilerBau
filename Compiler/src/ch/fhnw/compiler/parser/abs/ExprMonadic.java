@@ -1,21 +1,51 @@
 package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.scanner.data.Operator;
+import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
+import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class ExprMonadic implements IAbs.IExpr {
-    Operator operator;
+    TokenTupel operator;
     IExpr expr;
 
-    public ExprMonadic(Operator operator, IExpr expr) {
+    public ExprMonadic(TokenTupel operator, IExpr expr) {
         this.operator = operator;
         this.expr = expr;
     }
 
     @Override
     public TokenTupel checkR() throws ContextError {
-        return null;
+        TokenTupel e = expr.checkR();
+        TokenTupel res;
+        switch(operator.getOp()){
+        case PLUS:
+        case MINUS:
+            if (e.getType() == Type.INT32) {
+            	res = new TokenTupel(Terminal.TYPE, Type.INT32);            			
+                return res;
+            } else {
+                throw new ContextError(
+                        "Type error in Operator "
+                        + operator.getOp(),
+                        operator.getLineNr());
+            }
+        case NOT:
+	        if (e.getType() == Type.BOOL) {
+	        	res = new TokenTupel(Terminal.TYPE, Type.BOOL);
+	            return res;
+	        } else {
+	            throw new ContextError(
+                        "Type error in Operator "
+                        + operator.getOp(),
+                        operator.getLineNr());
+	        }
+        default:    throw new ContextError(
+                "Not a monadic Operator:  "
+                + operator.getOp(),
+                operator.getLineNr());
+        }
     }
 
     @Override
@@ -41,7 +71,11 @@ public class ExprMonadic implements IAbs.IExpr {
 	@Override
 	public TokenTupel checkL() throws ContextError {
 		// TODO Auto-generated method stub
-		return null;
+        throw new ContextError(
+                "Found operator " 
+                + operator.getOp() 
+                + "in the left part of an assignement",
+                this.expr.getLine());
 	}
 
 	@Override

@@ -14,6 +14,6 @@ public class MonadicOpr implements IMonadicOpr{
 
     @Override
     public IAbs.IExpr toAbstrSyntax(IAbs.IExpr factor) {
-        return new ExprMonadic(monadicOpr.getOp(), factor);
+        return new ExprMonadic(monadicOpr, factor);
     }
 }

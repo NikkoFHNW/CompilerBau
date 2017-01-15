@@ -2,7 +2,11 @@ package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.Store;
+import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
+import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
 public class ExprStore implements IAbs.IExpr {
@@ -16,12 +20,39 @@ public class ExprStore implements IAbs.IExpr {
 
     @Override
     public TokenTupel checkR() throws ContextError {
-        return null;
+    	TokenTupel res=null;
+    	if(isInitialization==true){
+    		throw new ContextError("cannot initialise here", 0);
+    	}
+    	Store sto = Compiler.getScope().getStoreTable().getStore(ident);
+    	if(sto==null)throw new ContextError(ident + " wasn't declared.", 0);
+    	if(!sto.isInitialized())throw new ContextError(ident +"hasn't been initialised yet", 0);
+    	Type t = sto.getType();
+
+    	res = new TokenTupel(Terminal.TYPE, t);
+
+        return res;
     }
 
     @Override
     public TokenTupel checkL(boolean canInit) throws ContextError {
-        return null;
+    	TokenTupel res=null;
+    	if(isInitialization==true){
+    		Store sto = Compiler.getScope().getStoreTable().getStore(ident);
+        	if(sto==null)throw new ContextError(ident + " wasn't declared.", 0);
+        	sto.initialize();
+        	Type t = sto.getType();
+        	res = new TokenTupel(Terminal.TYPE,t);
+        	return res;
+    	}
+    	else{
+    		Store sto = Compiler.getScope().getStoreTable().getStore(ident);
+        	if(sto==null)throw new ContextError(ident + " wasn't declared.", 0);
+        	if(!sto.isInitialized())throw new ContextError(ident +"hasn't been initialised yet", 0);
+        	Type t = sto.getType();
+        	res = new TokenTupel(Terminal.TYPE,t);
+        	return res;
+    	}
     }
 
     @Override
