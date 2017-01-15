@@ -52,6 +52,6 @@ public class CmdRec implements IAbs.ICmd {
 			throw new ContextError("already declared " + ident +".", ident.getLineNr());
 		}
 		
-		recConstr.g
+		recConstr.
 	}
 }

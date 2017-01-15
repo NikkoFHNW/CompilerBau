@@ -13,7 +13,7 @@ public class OptGlobInits implements IConcSyn.IOptGlobInits {
     @Override
     public IAbs.IGlobInit toAbstrSyntax() {
         if (globInits == null)
-            return null;
+            return new OptGlobInitsEps().toAbstrSyntax();
         else
             return globInits.toAbstrSyntax();
     }

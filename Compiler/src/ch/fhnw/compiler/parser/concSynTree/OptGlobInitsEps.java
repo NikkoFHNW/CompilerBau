@@ -10,6 +10,6 @@ public class OptGlobInitsEps extends OptGlobInits implements IConcSyn{
 	}
 	
 	public IGlobInit toAbstrSyntax(){
-		return null;
+		return new ch.fhnw.compiler.parser.abs.OptGlobInitsEps();
 	}
 }

@@ -73,6 +73,7 @@ public interface IAbs {
     interface IGlobInit extends IAbs {
         Object check(Object initList)
                 throws ContextError;
+        TokenTupel check() throws ContextError;
     }
 
     interface IRecData extends IDecl{
