@@ -39,6 +39,10 @@ public class RecordStore{
 	 public Type getFieldType(String s){
 		  return fieldListMap.get(s);
 	  }
+	 
+	 public Map<String, Type> getFieldListMap(){
+		 return this.fieldListMap;
+	 }
 	  
 	
 	
