@@ -1,6 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.parser.abs.RecordExpr;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RecordFactor extends AbstractFactor implements IConcSyn.IFactor {
@@ -14,6 +15,6 @@ public class RecordFactor extends AbstractFactor implements IConcSyn.IFactor {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return null;
+        return new RecordExpr(ident1, ident2);
     }
 }
