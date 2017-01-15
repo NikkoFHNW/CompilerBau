@@ -3,6 +3,8 @@ package ch.fhnw.compiler.parser.abs;
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.Terminal;
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
@@ -26,9 +28,9 @@ public class ExprStore implements IAbs.IExpr {
     	if(sto==null)throw new ContextError(ident + " wasn't declared.", 0);
     	if(!sto.isInitialized())throw new ContextError(ident +"hasn't been initialised yet", 0);
     	Type t = sto.getType();
-    	
+
     	res = new TokenTupel(Terminal.TYPE, t);
-    	
+
         return res;
     }
 
@@ -54,8 +56,14 @@ public class ExprStore implements IAbs.IExpr {
     }
 
     @Override
-    public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+    public int code(final int loc) throws ICodeArray.CodeTooSmallError {
+        Store store = Compiler.getScope().getStoreTable().getStore(ident);
+        return store.codeLoad(loc);
+    }
+
+    public int codeRef(final int loc) throws ICodeArray.CodeTooSmallError {
+        Store store = Compiler.getScope().getStoreTable().getStore(ident);
+        return store.codeRef(loc);
     }
 
     @Override

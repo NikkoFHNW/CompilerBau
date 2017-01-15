@@ -1,7 +1,9 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public class CmdAssi implements IAbs.ICmd {
 
@@ -22,7 +24,14 @@ public class CmdAssi implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+        int loc1 = destination.code(loc);
+        if (!(source instanceof ExprStore)) {
+            loc1 = destination.code(loc1);
+        } else {
+            loc1 = ((ExprStore) destination).codeRef(loc1);
+            Compiler.getCodeArray().put(loc1++, new IInstructions.Store());
+        }
+        return loc1;
     }
 
     @Override
