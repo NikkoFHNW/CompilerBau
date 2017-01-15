@@ -3,11 +3,13 @@ package ch.fhnw.compiler.parser.abs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 
+import java.util.List;
+
 public class RoutineCall implements IAbs.IExpr {
     TokenTupel ident;
-    IExpr exprList;
+    List<IExpr> exprList;
 
-    public RoutineCall(TokenTupel ident, IExpr exprList) {
+    public RoutineCall(TokenTupel ident, List<IExpr> exprList) {
         this.ident = ident;
         this.exprList = exprList;
     }
@@ -16,7 +18,7 @@ public class RoutineCall implements IAbs.IExpr {
         return ident;
     }
 
-    public IExpr getExprList() {
+    public List<IExpr> getExprList() {
         return exprList;
     }
 

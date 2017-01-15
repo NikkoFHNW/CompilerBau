@@ -2,7 +2,9 @@ package ch.fhnw.compiler.parser.abs;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import ch.fhnw.compiler.context.Parameter;
 import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
@@ -57,15 +59,15 @@ public interface IAbs {
         TokenTupel check() throws ContextError;
         int code(int loc) throws CodeTooSmallError;
     }
-    interface IExprList extends IAbs {
-        void check(
+//    interface IExprList extends IAbs {
+//        void check(
 //                List<Parameter> paramList,
 //                Set<String> aliasList,
 //                boolean canInit)
 //                throws ContextError;
 //        int code(int loc
-             ) throws CodeTooSmallError;
-    }
+//             ) throws CodeTooSmallError;
+//    }
 
     //possible TODO: return Set
     interface IGlobInit extends IAbs {

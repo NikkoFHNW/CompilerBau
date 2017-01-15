@@ -2,6 +2,8 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
+import java.util.List;
+
 public class ExprList implements IConcSyn.IExprList {
     OptExprRep optExprRep;
 
@@ -11,7 +13,7 @@ public class ExprList implements IConcSyn.IExprList {
 
 
     @Override
-    public IAbs.IExpr toAbstrSyntax() {
+    public List<IAbs.IExpr> toAbstrSyntax() {
         return optExprRep.toAbstrSyntax();
     }
 }

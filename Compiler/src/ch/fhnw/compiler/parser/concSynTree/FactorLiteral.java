@@ -14,7 +14,12 @@ public class FactorLiteral extends AbstractFactor {
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        Value value = new Value(literal.getIntVal());
+        Value value = null;
+        if (literal.getConcType() == TokenTupel.ConcreteTyp.BOOLEAN) {
+            value = new Value(literal.getBoolVal());
+        } else if (literal.getConcType() == TokenTupel.ConcreteTyp.INT) {
+            value = new Value(literal.getIntVal());
+        }
         return new ExprLiteral(value);
     }
 }

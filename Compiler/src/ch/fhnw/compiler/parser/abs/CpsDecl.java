@@ -27,7 +27,8 @@ public class CpsDecl implements IAbs.ICpsDecl{
 	@Override
 	public void checkDeclaration() throws ContextError {
 		decl.checkDeclaration();
-		cpsDecl.checkDeclaration();
+        if (cpsDecl != null)
+		    cpsDecl.checkDeclaration();
 		
 	}
 

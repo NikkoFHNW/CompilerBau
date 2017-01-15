@@ -6,6 +6,9 @@ import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.parser.abs.RoutineCall;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CmdCall extends AbstractCmd {
     TokenTupel ident;
     ExprList exprList;
