@@ -42,7 +42,7 @@ public class FunDecl implements IAbs.IDecl {
 	@Override
 	public int getLine() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ident.getLineNr();
 	}
 
 	@Override

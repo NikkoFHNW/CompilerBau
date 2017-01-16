@@ -8,9 +8,9 @@ public class ParamRecord implements IAbs.IParam {
     TokenTupel ident;
     TokenTupel recident;
 
-    public ParamRecord(TokenTupel ident1, TokenTupel ident2) {
-        this.ident = ident1;
-        this.recident = ident2;
+    public ParamRecord(TokenTupel ident, TokenTupel recident) {
+        this.ident = ident;
+        this.recident = recident;
     }
 
     @Override

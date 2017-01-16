@@ -7,11 +7,11 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class Program implements IConcSyn.IProgram {
     TokenTupel ident;
-    ProgParamList progParamList;
+    ProgramParam progParamList;
     IDecl optGlobalCpsDecl;
     CpsCmd cpsCmd;
 
-    public Program(TokenTupel ident, ProgParamList progParamList, IDecl optGlobalCpsDecl, CpsCmd cpsCmd) {
+    public Program(TokenTupel ident, ProgramParam progParamList, IDecl optGlobalCpsDecl, CpsCmd cpsCmd) {
         this.ident = ident;
         this.progParamList = progParamList;
         this.optGlobalCpsDecl = optGlobalCpsDecl;

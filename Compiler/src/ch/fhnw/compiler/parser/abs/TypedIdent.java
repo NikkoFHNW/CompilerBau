@@ -37,8 +37,7 @@ public class TypedIdent implements IAbs.IParam {
 	
 	@Override
 	public String toString(String indent) {
-		// TODO Auto-generated method stub
-		return ident.toString();
+		return ident.getStringVal();
 	}
 
 	@Override

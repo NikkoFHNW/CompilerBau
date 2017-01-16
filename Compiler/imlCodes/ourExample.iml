@@ -3,18 +3,15 @@ program room(in  id:int32, in  daysOfStay:int32,
 global
 rec Guest: {var id:int32, var daysOfStay:int32, var checkedIn:bool};
 
-
     fun checkIn (in ref .g:Guest) returns var isCheckedIn:bool
-    local
-        var isCheckedIn:bool
+
     do
     .g.checkedIn:=true;
-    isCheckedIn:=true
+    isCheckedIn init :=true
     endfun;
 
     fun checkOut (in ref .g:Guest) returns var isCheckedIn:bool
-    local
-        var isCheckedIn:bool
+
     do
     .g.checkedIn:=false;
     isCheckedIn:=false

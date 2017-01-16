@@ -16,6 +16,6 @@ public class FactorIdent extends AbstractFactor{
 
     @Override
     public IAbs.IExpr toAbstrSyntax() {
-        return new ExprStore(ident.toString(),isInitialization);
+        return new ExprStore(ident.getStringVal(),isInitialization);
     };
 }

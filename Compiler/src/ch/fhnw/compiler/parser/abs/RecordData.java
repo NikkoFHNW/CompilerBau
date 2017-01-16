@@ -61,16 +61,17 @@ public class RecordData implements IAbs.IRecData {
 	}
 	@Override
 	public Map<String,Type> getCompleteData() {
-		// TODO Auto-generated method stub
 		Map<String,Type> res =  new TreeMap<String, Type>();
 		this.getData(res);
 		return res;
 	}
+
 	@Override
 	public void getData(Map<String,Type> res) {
 		// TODO Auto-generated method stub
-		res.put(ident.toString(), type.getType());
-		if(repRecData!=null)this.repRecData.getData(res);
+		res.put(ident.getStringVal(), type.getType());
+		if(repRecData!=null
+				)this.repRecData.getData(res);
 	}
 
 }

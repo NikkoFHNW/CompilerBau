@@ -19,7 +19,7 @@ public class RecordData implements IConcSyn.IRecData {
 
     @Override
     public IAbs.IRecData toAbstrSyntax() {
-        return new ch.fhnw.compiler.parser.abs.RecordData(ident,
-        		type,optChangeMode.toAbstrSyntax(),repRecordData.toAbstrSyntax());
+        return new ch.fhnw.compiler.parser.abs.RecordData(ident, type,
+        		optChangeMode.toAbstrSyntax(),repRecordData.toAbstrSyntax());
     }
 }

@@ -48,7 +48,7 @@ public class Param implements IAbs.IParam {
 	@Override
 	public void check(Routine routine) throws ContextError {
 		// TODO Auto-generated method stub
-
+        String rectype = null;
 		//Erste variante, misachtet bisschen die struktur (ungebrauchte checks bei childs)
 		//aber changemode wird contextuell gespeichert resp. beachtet.
 		if(routine==null){//Progparams
@@ -90,7 +90,7 @@ public class Param implements IAbs.IParam {
 			
 			if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
 				ch.fhnw.compiler.parser.abs.TypedIdent ti = (ch.fhnw.compiler.parser.abs.TypedIdent) typedIdentOrRecParam;
-				ident = ti.getIdent().toString();
+				ident = ti.getIdent().getStringVal();
 				type = ti.getType().getType();
 				
 				routine.addParam(new Parameter(
@@ -115,7 +115,9 @@ public class Param implements IAbs.IParam {
 
 				if(Compiler.getRecordStoreTable().getTable().containsKey(pr.recident.getStringVal())){
 					RecordStore rs = Compiler.getRecordStoreTable().getRecordStore(pr.recident.getStringVal());
+//                    rs.setRecIdent(pr.recident.getStringVal());
 					Compiler.getScope().getRecordStoreTable().addRecordStore(rs);
+                    rectype = rs.getRecIdent();
 				}else{
 					throw new ContextError("The used Recordtype " + pr.recident.toString() + " doesn't exist in this Programm.",
 							optChangeMode != null ? optChangeMode.getLineNr() : 0);
@@ -124,6 +126,8 @@ public class Param implements IAbs.IParam {
 			}
 			
 			Store tS = new Store(ident, type, isC);
+            if (rectype != null)
+                tS.setRecType(rectype);
 			tS.setReference(optMechMode.getMode().equals(Mode.REF));
 			
 			if(!Compiler.getScope().getStoreTable().addStore(//Type null heisst type-> recident

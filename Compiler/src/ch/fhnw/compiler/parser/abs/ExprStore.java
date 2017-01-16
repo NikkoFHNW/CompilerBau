@@ -2,6 +2,7 @@ package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.Store;
+import ch.fhnw.compiler.context.StoreTable;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.Store;
@@ -25,9 +26,12 @@ public class ExprStore implements IAbs.IExpr {
     	if(isInitialization==true){
     		throw new ContextError("cannot initialise here", 0);
     	}
+
     	Store sto = Compiler.getScope().getStoreTable().getStore(ident);
-    	if(sto==null)throw new ContextError(ident + " wasn't declared.", 0);
-    	if(!sto.isInitialized())throw new ContextError(ident +"hasn't been initialised yet", 0);
+    	if(sto==null)
+    		throw new ContextError(ident + " wasn't declared.", 0);
+    	if(!sto.isInitialized())
+    		throw new ContextError(ident +"hasn't been initialised yet", 0);
     	Type t = sto.getType();
 
     	res = new TokenTupel(Terminal.TYPE, t);
