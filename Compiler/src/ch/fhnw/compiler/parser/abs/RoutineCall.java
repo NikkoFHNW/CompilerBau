@@ -40,7 +40,7 @@ public class RoutineCall implements IAbs.IExpr {
         int loc1 = loc;
         int size = 0;
 
-        if (Compiler.getRoutineTable().getRoutine(ident.toString()).getRoutineType()
+        if (Compiler.getRoutineTable().getRoutine(ident.getStringVal()).getRoutineType()
                 == Routine.RoutineTypes.FUNCTION) {
             size = 1;
         }
@@ -50,7 +50,7 @@ public class RoutineCall implements IAbs.IExpr {
             loc1 = e.code(loc1);
 
         }
-        Compiler.getRoutineTable().getRoutine(ident.toString()).addCall(loc1++);
+        Compiler.getRoutineTable().getRoutine(ident.getStringVal()).addCall(loc1++);
         return loc1;
     }
 

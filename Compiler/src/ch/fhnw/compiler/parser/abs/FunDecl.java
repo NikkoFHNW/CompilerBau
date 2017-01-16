@@ -71,6 +71,8 @@ public class FunDecl implements IAbs.IDecl {
 
 	@Override
 	public int code(int loc) throws CodeTooSmallError {
+		System.out.println("code fun");
+
 		int loc1 = loc;
 
 		final int jumpLoc = loc++;

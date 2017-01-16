@@ -24,7 +24,6 @@ public class ExprLiteral implements IAbs.IExpr {
 
     @Override
     public TokenTupel checkL(boolean canInit) throws ContextError {
-    	
     	return null;
     }
 
@@ -51,12 +50,11 @@ public class ExprLiteral implements IAbs.IExpr {
 	@Override
 	public TokenTupel checkL() throws ContextError {
 		// TODO
-//		String msg;
-//    	if(value.isBool())msg=value.boolValue.toString();
-//    	else msg = value.intValue.toString();
-//
-//        throw new ContextError("can't use Literal " + msg + " on left.", value.getLine());
-        return null;
+		String msg;
+    	if(value.isBool())msg=value.boolValue.toString();
+    	else msg = value.intValue.toString();
+
+        throw new ContextError("can't use Literal " + msg + " on left.", value.getLine());
 	}
 
 	@Override

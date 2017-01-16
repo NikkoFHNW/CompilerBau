@@ -7,6 +7,8 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
+import java.util.Map;
+
 public class Program implements IAbs.IProgram {
 
     TokenTupel ident;
@@ -30,19 +32,27 @@ public class Program implements IAbs.IProgram {
     	
     	if(params!=null)
     	    params.check(null);
+
     	if(cpsDecl!=null)
     	    cpsDecl.checkDeclaration();
 
     	cmd.check();
-    	
     }
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
+        System.out.println("code prog");
         int loc1 = cmd.code(loc);
         Compiler.getCodeArray().put(loc1, new IInstructions.Stop());
+
+        if (params!= null) {
+            loc1 = params.code(loc1);
+        }
+
         if(cpsDecl != null)
             loc1 = cpsDecl.code(loc1 + 1);
+
+        Map<String, Routine> i = Compiler.getRoutineTable().getTable();
         for (Routine routine : Compiler.getRoutineTable().getTable().values()) {
             routine.codeCalls();
         }

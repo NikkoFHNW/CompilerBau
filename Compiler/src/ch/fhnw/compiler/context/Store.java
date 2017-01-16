@@ -82,7 +82,6 @@ public class Store extends Symbol {
 
     public int codeLoad(final int loc) throws ICodeArray.CodeTooSmallError {
         int loc1 = codeRef(loc);
-
         Compiler.getCodeArray().put(loc1++, new IInstructions.Deref());
         return loc1;
     }

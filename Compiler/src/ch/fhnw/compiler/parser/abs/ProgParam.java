@@ -2,18 +2,23 @@ package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.Routine;
+import ch.fhnw.compiler.context.Scope;
 import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.parser.abs.IAbs.IParam;
 import ch.fhnw.compiler.scanner.data.Mode;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
+import ch.fhnw.lederer.virtualmachineFS2015.CodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public class ProgParam implements IAbs.IParam{
 	
     TokenTupel optFlowMode;
 //    TokenTupel optMechMode;
     TokenTupel optChangeMode;
+
     IParam typedIdentOrRecParam;
 
     private Store store;
@@ -93,8 +98,37 @@ public class ProgParam implements IAbs.IParam{
 
 	@Override
 	public int code(int i) throws CodeTooSmallError {
-		// TODO Auto-generated method stub
-		return 0;
+         ICodeArray codeArr = Compiler.getCodeArray();
+        int loc = i;
+        Store store = null;
+
+        if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent) {
+            TypedIdent typedIdent = (TypedIdent) typedIdentOrRecParam;
+            store = Compiler.getScope().getStoreTable().getStore(typedIdent.toString());
+
+
+        } else if (typedIdentOrRecParam instanceof ParamRecord) {
+            ParamRecord paramRecord = (ParamRecord) typedIdentOrRecParam;
+            Scope x = Compiler.getScope();
+            String s = paramRecord.toString();
+            store = Compiler.getScope().getStoreTable().getStore(s);
+        }
+
+        if (store.getType() == Type.INT32)
+            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
+
+
+
+        codeArr.put(loc++, new IInstructions.AllocBlock(1));
+        codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
+        codeArr.put(loc++, new IInstructions.Deref());
+        codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
+        codeArr.put(loc++, new IInstructions.Store());
+
+        if (next != null)
+            loc = next.code(loc);
+
+        return loc;
 	}
 
 }

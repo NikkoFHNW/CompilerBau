@@ -25,7 +25,9 @@ public class CmdAssi implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
+        System.out.println("code assi");
         int loc1 = destination.code(loc);
+
         if (!(source instanceof ExprStore)) {
             loc1 = destination.code(loc1);
         } else {
@@ -47,7 +49,8 @@ public class CmdAssi implements IAbs.ICmd {
 
 	@Override
 	public void check() throws ContextError {
-		// TODO Auto-generated method stub
+
+        // TODO Auto-generated method stub
         TokenTupel dest = destination.checkL();
         Type tS = null, tD = null;
         if (dest != null)

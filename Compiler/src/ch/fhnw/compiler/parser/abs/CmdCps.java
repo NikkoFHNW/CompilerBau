@@ -13,14 +13,15 @@ public class CmdCps implements IAbs.ICmd {
 
     @Override
     public void check(boolean canInit) throws ContextError {
-
     }
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
         loc = cmd.code(loc);
+
         if (next == null)
             return loc;
+
         return next.code(loc);
     }
 

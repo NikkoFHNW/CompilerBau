@@ -86,7 +86,9 @@ public class Compiler {
  			absProg.check();
             absProg.code(0);
             codeArray.resize();
-//            codeArray.toString();
+
+            System.out.println("\n--------------------------------------------------------------------\n");
+            System.out.println(codeArray.toString());
             VirtualMachine vm = new VirtualMachine(codeArray, 1000);
 
 
@@ -98,12 +100,11 @@ public class Compiler {
 			e.printStackTrace();
 		} catch (ICodeArray.CodeTooSmallError codeTooSmallError) {
             codeTooSmallError.printStackTrace();
-        } catch (IVirtualMachine.ExecutionError executionError) {
+        }
+        catch (IVirtualMachine.ExecutionError executionError) {
             executionError.printStackTrace();
         }
     }
-
-    
     
     //------------MAIN------------
     public static void main(String[] args) {

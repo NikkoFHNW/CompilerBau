@@ -36,7 +36,8 @@ public class CmdRec implements IAbs.ICmd {
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
         int loc1 = loc;
         Store store = Compiler.getGlobalStoreTable().getStore(ident.getStringVal());
-        RecordStore recordStore = Compiler.getRecordStoreTable().getRecordStore(recident.toString());
+        RecordStore recordStore = Compiler.getRecordStoreTable().getRecordStore(recident.getStringVal());
+
         loc1 = store.codeLoad(loc1);
         Compiler.getCodeArray().put(loc1++, new IInstructions.Store());
         return loc1;

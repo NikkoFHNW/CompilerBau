@@ -1,4 +1,4 @@
-program factorial(in n:int32, out f:int1024)
+program factorial(in n:int32, out f:int32)
 global
   fun fact32(n:int32) returns var fact:int32
   local
@@ -12,7 +12,7 @@ global
     endwhile
   endfun;
 
-  fun fact64(n:int32) returns var fact:int64
+  fun fact64(n:int32) returns var fact:int32
   local
     var i:int32
   do
@@ -24,7 +24,7 @@ global
     endwhile
   endfun;
 
-  fun fact1024(n:int32) returns var fact:int1024
+  fun fact1024(n:int32) returns var fact:int32
   local
     var i:int32
   do
