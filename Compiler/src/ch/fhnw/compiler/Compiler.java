@@ -11,6 +11,7 @@ import ch.fhnw.compiler.parser.concSynTree.Program;
 import ch.fhnw.compiler.scanner.Scanner;
 import ch.fhnw.compiler.scanner.data.*;
 import ch.fhnw.lederer.virtualmachineFS2015.CodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.IVirtualMachine;
 import ch.fhnw.lederer.virtualmachineFS2015.VirtualMachine;
 
@@ -58,11 +59,19 @@ public class Compiler {
         return scope;
     }
 
+    public static void returnToParentScope() {
+        if (scope != null)
+            scope.returnToParentScope();
+    }
+
     public static Scope getGlobalScope(){
         return new Scope(globalStoreTable,recordStoreTable);
     }
 
     public static void setScope(Scope scope) {
+        if (Compiler.scope != null) {
+            scope.setParent(Compiler.scope);
+        }
         Compiler.scope = scope;
     }
 
@@ -75,13 +84,23 @@ public class Compiler {
  			Program prog = parser.parse();
  			ch.fhnw.compiler.parser.abs.IAbs.IProgram absProg = prog.toAbstrSyntax();
  			absProg.check();
- 		} catch (GrammarError e) {
+            absProg.code(0);
+            codeArray.resize();
+//            codeArray.toString();
+            VirtualMachine vm = new VirtualMachine(codeArray, 1000);
+
+
+        } catch (GrammarError e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
  		} catch (ContextError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (ICodeArray.CodeTooSmallError codeTooSmallError) {
+            codeTooSmallError.printStackTrace();
+        } catch (IVirtualMachine.ExecutionError executionError) {
+            executionError.printStackTrace();
+        }
     }
 
     

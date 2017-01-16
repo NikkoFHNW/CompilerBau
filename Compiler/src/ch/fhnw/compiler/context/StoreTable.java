@@ -37,6 +37,10 @@ public class StoreTable {
     public Map<String, Store> getTable() {
         return storeMap;
     }
+
+    public int getCount() {
+        return storeMap.size();
+    }
     
     public StoreTable clone() {
         StoreTable newTable = new StoreTable();

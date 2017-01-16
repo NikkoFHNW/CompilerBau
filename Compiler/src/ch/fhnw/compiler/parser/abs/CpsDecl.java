@@ -2,7 +2,7 @@ package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
-public class CpsDecl implements IAbs.ICpsDecl{
+public class CpsDecl implements IAbs.IDecl{
 	
 	IDecl decl;
 	IDecl cpsDecl;
@@ -33,21 +33,18 @@ public class CpsDecl implements IAbs.ICpsDecl{
 	}
 
 	@Override
-	public void check(int locals) throws ContextError {
-		// TODO Auto-generated method stub
-		
+	public int check(int locals) throws ContextError {
+		return 0;
 	}
+
 
 	@Override
 	public int code(int loc) throws CodeTooSmallError {
 		int loc1 = decl.code(loc);
+		if (cpsDecl == null)
+			return loc1;
 		return cpsDecl.code(loc1);
 	}
 
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

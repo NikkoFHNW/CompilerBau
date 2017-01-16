@@ -1,8 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
-import ch.fhnw.compiler.scanner.data.Token;
-import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class Decl implements IConcSyn.IDecl {
     StoDecl stoDecl;

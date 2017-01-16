@@ -19,6 +19,8 @@ public class CmdCps implements IAbs.ICmd {
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
         loc = cmd.code(loc);
+        if (next == null)
+            return loc;
         return next.code(loc);
     }
 

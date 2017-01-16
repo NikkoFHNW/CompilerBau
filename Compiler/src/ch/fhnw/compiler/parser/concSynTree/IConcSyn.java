@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
@@ -8,19 +9,18 @@ import java.util.List;
 public interface IConcSyn {
 
         public interface IProgram extends IConcSyn {
-            IAbs.IProgram toAbstrSyntax();
+            IAbs.IProgram toAbstrSyntax() throws GrammarError;
         };
         public interface IDecl extends IConcSyn {
-            IAbs.IDecl toAbstrSyntax();
+            IAbs.IDecl toAbstrSyntax() throws GrammarError;
         };
         public interface IStoDecl extends IDecl {
-            @Override
-            IAbs.IStoDecl toAbstrSyntax();
+            IAbs.IDecl toAbstrSyntax();
         };
         public interface IFunDecl extends IDecl { };
         public interface IProcDecl extends IDecl { };
         public interface ICpsDecl extends IConcSyn {
-            IAbs.ICpsDecl toAbstrSyntax();
+            IAbs.IDecl toAbstrSyntax() throws GrammarError;
         };
         public interface IParamList extends IConcSyn {
             IAbs.IParam toAbstrSyntax();
@@ -47,7 +47,7 @@ public interface IConcSyn {
             IAbs.IGlobImp toAbstrSyntax(IRepCommaGlobImp repGlobImp);
         };
         public interface ICmd extends IConcSyn {
-            IAbs.ICmd toAbstrSyntax();
+            IAbs.ICmd toAbstrSyntax() throws GrammarError;
         };
         public interface ICpsCmd extends IConcSyn {
             IAbs.ICmd toAbstrSyntax(ICpsCmd next);
@@ -62,40 +62,40 @@ public interface IConcSyn {
             IAbs.IGlobInit toAbstrSyntax();
         };
         public interface IExpr extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax() throws GrammarError;
         };
         public interface IRepTerm1 extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) throws GrammarError;
         };
         public interface ITerm1 extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax() throws GrammarError;
         };
         public interface ITerm2 extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax() throws GrammarError;
         };
         public interface IRepTerm3 extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) throws GrammarError;
         };
         public interface IOptTerm2 extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) throws GrammarError;
         };
         public interface ITerm3 extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax() throws GrammarError;
         };
         public interface IRepFactor extends IConcSyn {
             IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
         };
         public interface IRepCommaExpr extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr);
+            IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) throws GrammarError;
         };
         public interface IFactor extends IConcSyn {
-            IAbs.IExpr toAbstrSyntax();
+            IAbs.IExpr toAbstrSyntax() throws GrammarError;
         };
         public interface IExprList extends IConcSyn {
-            List<IAbs.IExpr> toAbstrSyntax();
+            List<IAbs.IExpr> toAbstrSyntax() throws GrammarError;
         };
         public interface IOptExprRep extends IConcSyn {
-            List<IAbs.IExpr> toAbstrSyntax();
+            List<IAbs.IExpr> toAbstrSyntax() throws GrammarError;
         };
         public interface IMonadicOpr extends IConcSyn {
             IAbs.IExpr toAbstrSyntax(IAbs.IExpr factor);
@@ -116,7 +116,7 @@ public interface IConcSyn {
         	IAbs.IDecl toAbstrSyntax(IAbs.IDecl repRecD);
         }
         public interface IRecData extends IDecl {
-        	IAbs.IRecData toAbstrSyntax();
+        	IAbs.IDecl toAbstrSyntax();
         }
 
 

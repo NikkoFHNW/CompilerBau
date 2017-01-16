@@ -1,7 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.abs.ExprDyadic;
-import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.error.GrammarError;
+import ch.fhnw.compiler.parser.abs.*;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RepTerm3 implements IConcSyn.IRepTerm3 {
@@ -20,13 +20,14 @@ public class RepTerm3 implements IConcSyn.IRepTerm3 {
 
 
     @Override
-    public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
-        if (this.next != null) {
+    public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) throws GrammarError {
+        if (next!= null && !(this.next instanceof RepTerm3Eps)) {
             ExprDyadic exprDyadic = new ExprDyadic(addOpr, expr, term3.toAbstrSyntax());
             return next.toAbstrSyntax(exprDyadic);
-        } else {
-            return new ExprDyadic(addOpr, expr, null);
-        }
+        } else if (term3 != null)
+            return term3.toAbstrSyntax();
+
+        return (IAbs.IExpr) new ch.fhnw.compiler.parser.abs.RepTerm3Eps();
 
     }
 }

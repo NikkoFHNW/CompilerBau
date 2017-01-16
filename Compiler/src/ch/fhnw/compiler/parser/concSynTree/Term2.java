@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class Term2 implements IConcSyn.ITerm2 {
@@ -12,8 +13,8 @@ public class Term2 implements IConcSyn.ITerm2 {
     }
 
     @Override
-    public IAbs.IExpr toAbstrSyntax() {
-        if (repTerm3 != null)
+    public IAbs.IExpr toAbstrSyntax() throws GrammarError {
+        if (!(repTerm3 instanceof RepTerm3Eps))
             return repTerm3.toAbstrSyntax(term3.toAbstrSyntax());
         else
             return term3.toAbstrSyntax();

@@ -8,7 +8,7 @@ public class OptGlobalcpsDeclEps extends OptGlobalCpsDecl implements IConcSyn {
 		super(null);
 	}
 	
-	public ch.fhnw.compiler.parser.abs.IAbs.ICpsDecl toAbstrSyntax(){
+	public IAbs.IDecl toAbstrSyntax(){
 		return null;
 	}
 

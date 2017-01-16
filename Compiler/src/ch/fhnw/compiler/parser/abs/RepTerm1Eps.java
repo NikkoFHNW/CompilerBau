@@ -1,6 +1,9 @@
 package ch.fhnw.compiler.parser.abs;
 
-public class RepTerm1Eps implements IAbs {
+import ch.fhnw.compiler.scanner.data.TokenTupel;
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+
+public class RepTerm1Eps implements IAbs.IExpr {
 
 	@Override
 	public String toString(String indent) {
@@ -14,4 +17,28 @@ public class RepTerm1Eps implements IAbs {
 		return 0;
 	}
 
+	@Override
+	public TokenTupel checkR() throws ContextError {
+		return null;
+	}
+
+	@Override
+	public TokenTupel checkL(boolean canInit) throws ContextError {
+		return null;
+	}
+
+	@Override
+	public TokenTupel checkL() throws ContextError {
+		return null;
+	}
+
+	@Override
+	public TokenTupel check() throws ContextError {
+		return null;
+	}
+
+	@Override
+	public int code(int loc) throws ICodeArray.CodeTooSmallError {
+		return 0;
+	}
 }

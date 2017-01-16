@@ -29,18 +29,23 @@ public class ParamRecord implements IAbs.IParam {
     }
 
     @Override
-    public int codeIn(int loc, int count, int locals) throws ICodeArray.CodeTooSmallError {
+    public int code(int i) throws ICodeArray.CodeTooSmallError {
         return 0;
     }
 
-    @Override
-    public int codeOut(int loc, int count, int locals) throws ICodeArray.CodeTooSmallError {
-        return 0;
-    }
+//    @Override
+//    public int codeIn(int loc, int count, int locals) throws ICodeArray.CodeTooSmallError {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int codeOut(int loc, int count, int locals) throws ICodeArray.CodeTooSmallError {
+//        return 0;
+//    }
 
     @Override
     public String toString(String indent) {
-        return null;
+        return ident.toString();
     }
 
     @Override

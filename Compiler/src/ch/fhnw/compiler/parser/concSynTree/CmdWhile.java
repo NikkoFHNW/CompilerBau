@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class CmdWhile extends AbstractCmd {
@@ -12,7 +13,7 @@ public class CmdWhile extends AbstractCmd {
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax() {
+    public IAbs.ICmd toAbstrSyntax() throws GrammarError {
         return new ch.fhnw.compiler.parser.abs.CmdWhile(expr.toAbstrSyntax(), cpsCmd.toAbstrSyntax());
     }
 }

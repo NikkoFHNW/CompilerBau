@@ -5,7 +5,9 @@ import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public class TypedIdent implements IAbs.IParam {
 
@@ -36,7 +38,7 @@ public class TypedIdent implements IAbs.IParam {
 	@Override
 	public String toString(String indent) {
 		// TODO Auto-generated method stub
-		return null;
+		return ident.toString();
 	}
 
 	@Override
@@ -49,9 +51,8 @@ public class TypedIdent implements IAbs.IParam {
 
 	@Override
 	public void check(Routine routine) throws ContextError {
-		// TODO Auto-generated method stub
 		Store sto = new Store(ident.toString(), type.getType(), false);
-		
+
 		if(!Compiler.getScope().addStore(sto)){
 			throw new ContextError("already declared "+ident.toString(), 0);
 		}
@@ -71,15 +72,25 @@ public class TypedIdent implements IAbs.IParam {
 	}
 
 	@Override
-	public int codeIn(int loc, int count, int locals) throws CodeTooSmallError {
-		// TODO Auto-generated method stub
-		return 0;
+	public int code(int i) throws CodeTooSmallError {
+		int loc = i;
+		Store store = Compiler.getGlobalStoreTable().getStore(ident.toString());
+		Compiler.getCodeArray().put(loc++, new IInstructions.LoadAddrRel(store.getRelAdress()));
+		Compiler.getCodeArray().put(loc++, new IInstructions.Store());
+
+		return loc;
 	}
 
-	@Override
-	public int codeOut(int loc, int count, int locals) throws CodeTooSmallError {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int codeIn(int loc, int count, int locals) throws CodeTooSmallError {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public int codeOut(int loc, int count, int locals) throws CodeTooSmallError {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 }

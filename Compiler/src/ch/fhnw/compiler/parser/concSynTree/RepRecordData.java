@@ -1,10 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.abs.ExprDyadic;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.parser.abs.RecordData;
-import ch.fhnw.compiler.parser.abs.RecordDecl;
-import ch.fhnw.compiler.parser.abs.StoDecl;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class RepRecordData  implements IConcSyn.IRepRecData {
@@ -45,7 +42,7 @@ public class RepRecordData  implements IConcSyn.IRepRecData {
 	}
 
 	@Override
-	public ch.fhnw.compiler.parser.abs.IAbs.IRecData toAbstrSyntax() {
+	public IAbs.IRecData toAbstrSyntax() {
 		// TODO Auto-generated method stub
 		return null;
 	}

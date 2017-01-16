@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.CmdProcCall;
 import ch.fhnw.compiler.parser.abs.GlobalInit;
 import ch.fhnw.compiler.parser.abs.IAbs;
@@ -21,7 +22,7 @@ public class CmdCall extends AbstractCmd {
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax() {
+    public IAbs.ICmd toAbstrSyntax() throws GrammarError {
         RoutineCall routineCall = new RoutineCall(ident, exprList.toAbstrSyntax());
         return new CmdProcCall(routineCall, optGlobInits.toAbstrSyntax());
     }

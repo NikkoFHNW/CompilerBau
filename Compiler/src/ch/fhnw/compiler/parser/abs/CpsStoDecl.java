@@ -1,9 +1,11 @@
 package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.parser.abs.IAbs.ICpsDecl;
+import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
-public class CpsStoDecl implements ICpsDecl {
+public class CpsStoDecl implements IAbs.IStoDecl{
 	
 	IStoDecl stoDecl;
 	IStoDecl repStoDecl;
@@ -32,13 +34,13 @@ public class CpsStoDecl implements ICpsDecl {
 		// TODO Auto-generated method stub
 
 		stoDecl.checkDeclaration();
-		repStoDecl.checkDeclaration();
+		if (repStoDecl != null)
+			repStoDecl.checkDeclaration();
 	}
 
 	@Override
-	public void check(int locals) throws ContextError {
-		// TODO Auto-generated method stub
-
+	public int check(int locals) throws ContextError {
+		return 0;
 	}
 
 	@Override
@@ -47,10 +49,19 @@ public class CpsStoDecl implements ICpsDecl {
 		return 0;
 	}
 
+
 	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public TokenTupel getType() {
+		return null;
 	}
 
+	@Override
+	public String getIdent() {
+		return null;
+	}
+
+	@Override
+	public IInstructions.Store check() throws ContextError {
+		return null;
+	}
 }

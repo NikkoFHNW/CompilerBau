@@ -1,10 +1,12 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Operator;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public class ExprMonadic implements IAbs.IExpr {
     TokenTupel operator;
@@ -55,7 +57,23 @@ public class ExprMonadic implements IAbs.IExpr {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+        int loc1 = expr.code(loc);
+        if (operator.getTerminal() == Terminal.ADDOPR) {
+            if ((operator).getOp() == Operator.MINUS) {
+                Compiler.getCodeArray().put(loc1, new IInstructions.NegInt());
+                return loc1 + 1;
+            } else {
+                return loc1;
+            }
+        } else if (operator.getTerminal() == Terminal.NOT) {
+            Compiler.getCodeArray().put(loc1++, new IInstructions.CondJump(loc1+2));
+            Compiler.getCodeArray().put(loc1++, new IInstructions.LoadImInt(0));
+            Compiler.getCodeArray().put(loc1++, new IInstructions.UncondJump(loc1+1));
+            Compiler.getCodeArray().put(loc1++, new IInstructions.LoadImInt(1));
+            return loc1;
+        } else {
+            throw new RuntimeException();
+        }
     }
 
     @Override

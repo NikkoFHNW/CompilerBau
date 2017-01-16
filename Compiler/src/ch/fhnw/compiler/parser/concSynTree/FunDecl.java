@@ -1,20 +1,21 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class FunDecl implements IConcSyn.IFunDecl {
 	TokenTupel ident;
-	ParamList pList;
+	Param pList;
 	StoDecl stoDecl;
 	OptGlobalglobImps optglobimps;
-	ICpsDecl optLocalcpsStoDecl;
+	IDecl optLocalcpsStoDecl;
 	CpsCmd cpscmd;
 
 
-	public FunDecl(TokenTupel ident, ParamList pList, StoDecl stoDecl, OptGlobalglobImps optglobimps, ICpsDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
+	public FunDecl(TokenTupel ident, Param pListHead, StoDecl stoDecl, OptGlobalglobImps optglobimps, IDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
 		this.ident = ident;
-		this.pList = pList;
+		this.pList = pListHead;
 		this.stoDecl = stoDecl;
 		this.optglobimps = optglobimps;
 		this.optLocalcpsStoDecl = optLocalcpsStoDecl;
@@ -22,7 +23,7 @@ public class FunDecl implements IConcSyn.IFunDecl {
 	}
 
 	@Override
-	public IAbs.IDecl toAbstrSyntax() {
+	public IAbs.IDecl toAbstrSyntax() throws GrammarError {
 		return new ch.fhnw.compiler.parser.abs.FunDecl(ident,pList.toAbstrSyntax(),stoDecl.toAbstrSyntax(),optglobimps.toAbstrSyntax(),optLocalcpsStoDecl.toAbstrSyntax(),cpscmd.toAbstrSyntax());
 	}
 }

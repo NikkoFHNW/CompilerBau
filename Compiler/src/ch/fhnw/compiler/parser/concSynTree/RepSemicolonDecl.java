@@ -1,6 +1,8 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.abs.IAbs;
+import ch.fhnw.compiler.error.GrammarError;
+import ch.fhnw.compiler.parser.abs.*;
+import ch.fhnw.compiler.parser.abs.CpsDecl;
 
 public class RepSemicolonDecl implements IConcSyn.IDecl {
     IDecl decl;
@@ -12,7 +14,7 @@ public class RepSemicolonDecl implements IConcSyn.IDecl {
     }
 
     @Override
-    public IAbs.IDecl toAbstrSyntax() {
-        return null;
+    public IAbs.IDecl toAbstrSyntax() throws GrammarError {
+        return new CpsDecl(decl.toAbstrSyntax(), repSemicolonDecl.toAbstrSyntax());
     }
 }

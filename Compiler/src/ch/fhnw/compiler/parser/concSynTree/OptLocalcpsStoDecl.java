@@ -1,6 +1,5 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
-import ch.fhnw.compiler.parser.abs.CpsStoDecl;
 import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.scanner.data.Token;
 
@@ -15,7 +14,7 @@ public class OptLocalcpsStoDecl implements IConcSyn.ICpsDecl {
 
 
     @Override
-    public IAbs.ICpsDecl toAbstrSyntax() {
+    public IAbs.IDecl toAbstrSyntax() {
         return new ch.fhnw.compiler.parser.abs.OptLocalcpsStoDecl(cpsStoDecl.toAbstrSyntax());
     }
 }

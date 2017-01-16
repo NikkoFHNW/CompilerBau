@@ -10,11 +10,11 @@ import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 public class Program implements IAbs.IProgram {
 
     TokenTupel ident;
-    ICpsDecl cpsDecl;
+    IDecl cpsDecl;
     ICmd cmd;
     IParam params;
 
-    public Program(TokenTupel ident, ICpsDecl cpsDecl, ICmd cmd, IParam params) {
+    public Program(TokenTupel ident, IDecl cpsDecl, ICmd cmd, IParam params) {
         this.ident = ident;
         this.cpsDecl = cpsDecl;
         this.cmd = cmd;

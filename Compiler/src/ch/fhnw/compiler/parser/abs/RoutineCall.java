@@ -1,7 +1,10 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 import java.util.List;
 
@@ -34,7 +37,21 @@ public class RoutineCall implements IAbs.IExpr {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+        int loc1 = loc;
+        int size = 0;
+
+        if (Compiler.getRoutineTable().getRoutine(ident.toString()).getRoutineType()
+                == Routine.RoutineTypes.FUNCTION) {
+            size = 1;
+        }
+
+        Compiler.getCodeArray().put(loc1++, new IInstructions.AllocBlock(size)); //Block vs stack
+        for (IExpr e : exprList) {
+            loc1 = e.code(loc1);
+
+        }
+        Compiler.getRoutineTable().getRoutine(ident.toString()).addCall(loc1++);
+        return loc1;
     }
 
     @Override
@@ -44,7 +61,7 @@ public class RoutineCall implements IAbs.IExpr {
 
     @Override
     public int getLine() {
-        return 0;
+        return ident.getLineNr();
     }
 
 	@Override

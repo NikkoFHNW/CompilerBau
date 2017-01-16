@@ -9,9 +9,10 @@ public class Store extends Symbol {
     private boolean initialized;
     private boolean isConst;
     private int address;
-    private boolean relative = false; //wof�r relative? => Frag big L.. 2 verschiedene calls auf VM
+    private boolean relative = false; //wof�r relative? => Frag big L, 2 verschiedene calls auf VM
     private boolean reference = false;
     private String recType;
+    private int relAdress;
     
 
 	public Store(
@@ -50,7 +51,15 @@ public class Store extends Symbol {
             writeable = false;
         }
     }
-    
+
+    public void setRelAdress(int relAdress) {
+        this.relAdress = relAdress;
+    }
+
+    public int getRelAdress() {
+        return relAdress;
+    }
+
     public int getAddress() {
         return address;
     }
@@ -59,9 +68,9 @@ public class Store extends Symbol {
         this.address = address;
     }
 
-//    public void setRelative(final boolean relative) {
-//        this.relative = relative;
-//    }
+    public void setRelative(final boolean relative) {
+        this.relative = relative;
+    }
     
     public void setReference(final boolean reference) {
         this.reference = reference;

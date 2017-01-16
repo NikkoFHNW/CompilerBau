@@ -30,7 +30,7 @@ public class ExprFunCall implements IAbs.IExpr {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+            return routineCall.code(loc);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ExprFunCall implements IAbs.IExpr {
 
     @Override
     public int getLine() {
-        return 0;
+        return routineCall.getLine();
     }
 
 	@Override

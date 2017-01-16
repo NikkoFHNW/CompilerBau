@@ -1,7 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
-import ch.fhnw.compiler.scanner.data.Token;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class ProcDecl implements IConcSyn.IProcDecl {
@@ -20,7 +20,7 @@ public class ProcDecl implements IConcSyn.IProcDecl {
     }
 
     @Override
-    public IAbs.IDecl toAbstrSyntax() {
+    public IAbs.IDecl toAbstrSyntax() throws GrammarError {
         return new ch.fhnw.compiler.parser.abs.ProcDecl( ident, param.toAbstrSyntax(), optGlobalglobImps.toAbstrSyntax(), optLocalcpsStoDecl.toAbstrSyntax(),cpsCmd.toAbstrSyntax());
     }
 }

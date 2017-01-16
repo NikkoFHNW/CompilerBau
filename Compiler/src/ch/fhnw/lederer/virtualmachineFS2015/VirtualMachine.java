@@ -134,6 +134,20 @@ public class VirtualMachine implements IVirtualMachine {
         }
     }
 
+    public class EnterExec extends Enter implements IExecInstr {
+
+        EnterExec(int size, int extreme) {
+            super(size, extreme);
+        }
+
+        @Override
+        public void execute() throws ExecutionError {
+            sp = fp + 3 + this.size;
+            if (sp > hp + 1) { throw new ExecutionError(SP_OVER_HP); }
+            pc = pc + 1;
+        }
+    }
+
     public class ReturnExec extends Return implements IExecInstr {
         public ReturnExec(int size) { super(size); }
 

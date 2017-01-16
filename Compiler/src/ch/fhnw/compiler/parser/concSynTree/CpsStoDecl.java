@@ -2,7 +2,7 @@ package ch.fhnw.compiler.parser.concSynTree;
 
 import ch.fhnw.compiler.parser.abs.IAbs;
 
-public class CpsStoDecl implements IConcSyn.ICpsDecl {
+public class CpsStoDecl implements IConcSyn.IStoDecl {
     StoDecl stoDecl;
     RepSemicolonStoDecl repSemicolonStoDecl;
 
@@ -12,7 +12,7 @@ public class CpsStoDecl implements IConcSyn.ICpsDecl {
     }
 
     @Override
-    public IAbs.ICpsDecl toAbstrSyntax() {
+    public IAbs.IStoDecl toAbstrSyntax() {
         return new ch.fhnw.compiler.parser.abs.CpsStoDecl(stoDecl.toAbstrSyntax(),repSemicolonStoDecl.toAbstrSyntax());
     }
 }

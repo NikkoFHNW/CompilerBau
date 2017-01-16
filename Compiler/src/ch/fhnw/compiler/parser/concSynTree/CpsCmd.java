@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.CmdCps;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
@@ -19,10 +20,11 @@ public class CpsCmd implements IConcSyn.ICmd {
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax() {
+    public IAbs.ICmd toAbstrSyntax() throws GrammarError {
         if (next != null) {
             return new CmdCps(cmd.toAbstrSyntax(), (CmdCps) next.toAbstrSyntax());
         }
+
         return new CmdCps(cmd.toAbstrSyntax(), null);
     }
 

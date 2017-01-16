@@ -126,6 +126,12 @@ public class TokenTupel extends Token {
     public Type getType(){
     	return typ;
     }
+
+    public String getStringVal() {
+        return stringVal;
+    }
+
+
     public String toString(){
 		
 		String res;

@@ -45,8 +45,9 @@ public interface IAbs {
         void check(Routine routine) throws ContextError;
         void checkInit() throws ContextError;
         int calculateAddress(int count, int locals);
-        int codeIn(int loc, int count, int locals) throws CodeTooSmallError;
-        int codeOut(int loc, int count, int locals) throws CodeTooSmallError;
+        int code (int i) throws CodeTooSmallError;
+//        int codeIn(int loc, int count, int locals) throws CodeTooSmallError;
+//        int codeOut(int loc, int count, int locals) throws CodeTooSmallError;
     }
     interface IGlobImp extends IAbs {
         void check(Routine routine) throws ContextError;

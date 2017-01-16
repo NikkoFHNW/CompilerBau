@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.*;
 
 public class RepCommaExpr implements IConcSyn.IRepCommaExpr {
@@ -16,7 +17,7 @@ public class RepCommaExpr implements IConcSyn.IRepCommaExpr {
 
 
     @Override
-    public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) {
+    public IAbs.IExpr toAbstrSyntax(IAbs.IExpr expr) throws GrammarError {
         if (next instanceof RepCommaExprEps)
             return this.expr.toAbstrSyntax();
         else

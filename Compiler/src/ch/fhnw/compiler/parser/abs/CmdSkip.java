@@ -12,7 +12,7 @@ public class CmdSkip implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+        return loc;
     }
 
     @Override

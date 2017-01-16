@@ -1,12 +1,18 @@
 package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.context.Routine;
+import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray.CodeTooSmallError;
 
 public class ParamList implements IAbs.IParam {
 	
 	IParam param;
 	IParam next;
+
+	/*
+	* Obsolete!! Param hat next
+	*
+	* */
 
 	
 
@@ -35,7 +41,7 @@ public class ParamList implements IAbs.IParam {
 		// TODO Auto-generated method stub
 		param.check(routine);
 		if(next!=null)
-		next.check(routine);
+			next.check(routine);
 		
 	}
 
@@ -52,15 +58,20 @@ public class ParamList implements IAbs.IParam {
 	}
 
 	@Override
-	public int codeIn(int loc, int count, int locals) throws CodeTooSmallError {
-		// TODO Auto-generated method stub
+	public int code(int i) throws CodeTooSmallError {
 		return 0;
 	}
 
-	@Override
-	public int codeOut(int loc, int count, int locals) throws CodeTooSmallError {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int codeIn(int loc, int count, int locals) throws CodeTooSmallError {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public int codeOut(int loc, int count, int locals) throws CodeTooSmallError {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 }

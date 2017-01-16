@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.CmdCond;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
@@ -15,7 +16,7 @@ public class CmdIf extends AbstractCmd {
     }
 
     @Override
-    public IAbs.ICmd toAbstrSyntax() {
+    public IAbs.ICmd toAbstrSyntax() throws GrammarError {
         return new CmdCond(expr1.toAbstrSyntax(), cpsCmd1.toAbstrSyntax(), cpsCmd2.toAbstrSyntax());
     }
 }

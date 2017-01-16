@@ -14,6 +14,6 @@ public class OptParamRepCommaParam implements IConcSyn.IOptParamRepCommaParam {
 
     @Override
     public IAbs.IParam toAbstrSyntax() {
-        return null;
+        return repCommaParam.toAbstrSyntax();
     }
 }

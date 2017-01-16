@@ -44,7 +44,7 @@ public class RecordDecl implements IAbs.IDecl {
 		Map<String,Type> fields;
 		fields = recData.getCompleteData();
 		
-		RecordStore recSto = new RecordStore(recIdent.toString(),fields);
+		RecordStore recSto = new RecordStore(recIdent.getStringVal(),fields);
 		if(!Compiler.getScope().getRecordStoreTable().addRecordStore(recSto)){
 			throw new ContextError("Recordtype" + recIdent+"already declared", recIdent.getLineNr());
 		}

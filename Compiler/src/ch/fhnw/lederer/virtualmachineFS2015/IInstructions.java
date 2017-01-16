@@ -64,6 +64,22 @@ public interface IInstructions {
         }
     }
 
+    class Enter implements IInstr {
+        protected final int size;
+        protected final int extreme;
+
+        public Enter(final int size, final int extreme) {
+            this.size = size;
+            this.extreme = extreme;
+        }
+
+        @Override
+        public IExecInstr toExecInstr(VirtualMachine vm) {
+            return vm.new EnterExec(size, extreme);
+        }
+
+    }
+
     class Return implements IInstr {
         protected int size;
         public Return(int size) { this.size= size; }

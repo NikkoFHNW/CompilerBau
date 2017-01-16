@@ -1,7 +1,7 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
-import ch.fhnw.compiler.scanner.data.Token;
 
 public class OptGlobalCpsDecl implements IConcSyn.ICpsDecl {
     CpsDecl cpsDecl;
@@ -11,7 +11,7 @@ public class OptGlobalCpsDecl implements IConcSyn.ICpsDecl {
     }
 
     @Override
-    public IAbs.ICpsDecl toAbstrSyntax() {
+    public IAbs.IDecl toAbstrSyntax() throws GrammarError {
         return cpsDecl.toAbstrSyntax();
     }
 }

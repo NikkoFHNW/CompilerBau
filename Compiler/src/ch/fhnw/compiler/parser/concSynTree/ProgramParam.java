@@ -8,7 +8,9 @@ public class ProgramParam implements IConcSyn.IParam {
     OptChangeMode optChangeMode;
     TypedIdent typedIdent;
 
-    public ProgramParam(OptFlowMode optFlowMode, OptChangeMode optChangeMode, TypedIdent typedIdent) {
+    ProgramParam next;
+
+    public ProgramParam(OptFlowMode optFlowMode, OptChangeMode optChangeMode, TypedIdent typedIdent, ProgramParam next) {
         this.optFlowMode = optFlowMode;
         this.optChangeMode = optChangeMode;
         this.typedIdent = typedIdent;
@@ -16,6 +18,6 @@ public class ProgramParam implements IConcSyn.IParam {
 
     @Override
     public IAbs.IParam toAbstrSyntax() {
-        return new Param(optFlowMode.toAbstrSyntax(), null,  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax());
+        return new Param(optFlowMode.toAbstrSyntax(), null,  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax(), next.toAbstrSyntax());
     }
 }

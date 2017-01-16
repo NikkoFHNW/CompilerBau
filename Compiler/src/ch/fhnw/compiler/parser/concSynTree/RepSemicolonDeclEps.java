@@ -8,7 +8,7 @@ public class RepSemicolonDeclEps extends RepSemicolonDecl implements IConcSyn {
 		super(null, null);
 	}
 	
-	public ch.fhnw.compiler.parser.abs.IAbs.IDecl toAbstrSyntax(){
+	public IAbs.IDecl toAbstrSyntax(){
 		return null;
 	}
 }

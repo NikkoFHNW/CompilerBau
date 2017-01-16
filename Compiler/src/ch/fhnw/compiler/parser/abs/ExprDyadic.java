@@ -1,10 +1,13 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Operator;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Operators;
 
 public class ExprDyadic implements IAbs.IExpr {
     TokenTupel operator;
@@ -101,8 +104,63 @@ public class ExprDyadic implements IAbs.IExpr {
     }
 
     @Override
-    public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+    public int code(final int loc) throws ICodeArray.CodeTooSmallError {
+        ICodeArray codeArray = Compiler.getCodeArray();
+        int loc1 = expr1.code(loc);
+        if (operator.getOp() != Operator.CAND
+                && operator.getOp() != Operator.COR) {
+            loc1 = expr2.code(loc1);
+            switch (operator.getOp()) {
+                case PLUS:
+                    codeArray.put(loc1, new IInstructions.AddInt());
+                    break;
+                case MINUS:
+                    codeArray.put(loc1, new IInstructions.SubInt());
+                    break;
+                case TIMES:
+                    codeArray.put(loc1, new IInstructions.MultInt());
+                    break;
+                case DIV:
+                    codeArray.put(loc1, new IInstructions.DivTruncInt());
+                    break;
+                case MOD:
+                    codeArray.put(loc1, new IInstructions.ModTruncInt());
+                    break;
+                case EQ:
+                    codeArray.put(loc1, new IInstructions.EqInt());
+                    break;
+                case NE:
+                    codeArray.put(loc1, new IInstructions.NeInt());
+                    break;
+                case GT:
+                    codeArray.put(loc1, new IInstructions.GtInt());
+                    break;
+                case LT:
+                    codeArray.put(loc1, new IInstructions.LtInt());
+                    break;
+                case GE:
+                    codeArray.put(loc1, new IInstructions.GeInt());
+                    break;
+                case LE:
+                    codeArray.put(loc1, new IInstructions.LeInt());
+                    break;
+                default:
+                    throw new RuntimeException();
+            }
+            return loc1 + 1;
+        } else if (operator.getOp() == Operator.CAND) {
+            int loc2 = expr2.code(loc1 + 1);
+            codeArray.put(loc2++, new IInstructions.UncondJump(loc2+1));
+            codeArray.put(loc1, new IInstructions.CondJump(loc2));
+            codeArray.put(loc2++, new IInstructions.LoadImInt(0));
+            return loc2;
+        } else {
+            int loc2 = expr2.code(loc1 + 2);
+            codeArray.put(loc2++, new IInstructions.UncondJump(loc2+1));
+            codeArray.put(loc1, new IInstructions.CondJump(loc2+2));
+            codeArray.put(loc2++, new IInstructions.LoadImInt(1));
+            return loc2;
+        }
     }
 
     @Override
@@ -112,18 +170,17 @@ public class ExprDyadic implements IAbs.IExpr {
 
     @Override
     public int getLine() {
-        return 0;
+        return expr1.getLine();
     }
 
 	@Override
 	public TokenTupel checkL() throws ContextError {
 		// TODO Auto-generated method stub
-		throw new ContextError("should be called as rightexpr", this.expr1.getLine());
+		throw new ContextError("should be called as rightexpr", this.getLine());
 	}
 
 	@Override
 	public TokenTupel check() throws ContextError {
-		// TODO Auto-generated method stub
-		return null;
+        return null;
 	}
 }

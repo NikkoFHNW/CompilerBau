@@ -7,8 +7,7 @@ public class RecordStoreTable {
 	private Map<String, RecordStore> recordMap;
 	
 	public RecordStoreTable() {
-		// TODO Auto-generated constructor stub
-		recordMap=new TreeMap<String,RecordStore>();
+		recordMap=new TreeMap<>();
 	}
 	
 	public Map<String,RecordStore> getTable(){
@@ -16,8 +15,10 @@ public class RecordStoreTable {
 	}
 	
 	public boolean addRecordStore(RecordStore rs){
-		if(recordMap.containsKey(rs.getRecIdent()))return false;
-		recordMap.put(rs.getRecIdent(), rs);
+		if(recordMap.containsKey(rs.getRecIdent()))
+			return false;
+
+		recordMap.put(rs.getRecIdent().toString(), rs);
 		return true;
 		
 	}

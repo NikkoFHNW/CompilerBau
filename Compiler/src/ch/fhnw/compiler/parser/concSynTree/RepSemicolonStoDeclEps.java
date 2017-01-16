@@ -8,7 +8,7 @@ public class RepSemicolonStoDeclEps extends RepSemicolonStoDecl implements IConc
 		super(null, null);
 	}
 	
-	public ch.fhnw.compiler.parser.abs.IAbs.IStoDecl toAbstrSyntax(){
+	public IAbs.IStoDecl toAbstrSyntax(){
 		return null;
 	}
 }

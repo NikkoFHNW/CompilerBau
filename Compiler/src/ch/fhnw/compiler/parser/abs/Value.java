@@ -6,17 +6,22 @@ import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 public class Value implements IAbs.IExpr {
     Boolean boolValue;
     Integer intValue;
+    int line;
 
-    public Value(Boolean boolValue) {
+    public Value(Boolean boolValue, int line) {
         this.boolValue = boolValue;
     }
 
-    public Value(Integer intValue) {
+    public Value(Integer intValue, int line) {
         this.intValue = intValue;
     }
 
     public boolean getBoolValue() {
         return boolValue;
+    }
+
+    public int getBoolAsInt() {
+        return boolValue ? 1 : 0;
     }
 
     public int getIntValue() {

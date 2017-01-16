@@ -1,10 +1,13 @@
 package ch.fhnw.compiler.context;
 
+import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Type;
 
 public class Scope {
     private StoreTable storeTable;
     private RecordStoreTable recStoTable;
+
+    private Scope parent;
 
 	public Scope() {
         this(new StoreTable(),new RecordStoreTable());
@@ -30,8 +33,16 @@ public class Scope {
     public StoreTable getStoreTable() {
         return storeTable;
     }
-    
-    public Type getType( String ident) {
+
+    public Scope getParent() {
+        return parent;
+    }
+
+    public void setParent(Scope parent) {
+        this.parent = parent;
+    }
+
+    public Type getType(String ident) {
         return storeTable.getType(ident);
     }
     
@@ -46,5 +57,13 @@ public class Scope {
             }
         }
         return true;
+    }
+
+    public void returnToParentScope() {
+        Compiler.setScope(parent);
+    }
+
+    public int getVarCount() {
+        return storeTable.getCount();
     }
 }

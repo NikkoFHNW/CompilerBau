@@ -12,9 +12,9 @@ public class ProcDecl implements IDecl {
 	 TokenTupel ident;
 	 IParam param;
 	 IGlobImp globImp;
-	 ICpsDecl cpsDecl;
+	 IDecl cpsDecl;
 	 ICmd cmd;
-	public ProcDecl(TokenTupel tt, IParam param, IGlobImp globImp, ICpsDecl cpsd, ICmd cmd){
+	public ProcDecl(TokenTupel tt, IParam param, IGlobImp globImp, IDecl cpsd, ICmd cmd){
 		ident=tt;
 		this.param=param;
 		this.globImp=globImp;

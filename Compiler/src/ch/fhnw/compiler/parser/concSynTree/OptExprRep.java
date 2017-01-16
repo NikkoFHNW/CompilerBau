@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser.concSynTree;
 
+import ch.fhnw.compiler.error.GrammarError;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 import java.util.LinkedList;
@@ -13,7 +14,7 @@ public class OptExprRep implements IConcSyn.IOptExprRep{
     }
 
     @Override
-    public List<IAbs.IExpr> toAbstrSyntax() {
+    public List<IAbs.IExpr> toAbstrSyntax() throws GrammarError {
         List<IAbs.IExpr> result = new LinkedList<>();
         for (Expr expr : expressions)
             result.add(expr.toAbstrSyntax());
