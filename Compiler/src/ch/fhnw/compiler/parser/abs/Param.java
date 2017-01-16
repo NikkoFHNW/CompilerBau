@@ -52,31 +52,33 @@ public class Param implements IAbs.IParam {
 		//Erste variante, misachtet bisschen die struktur (ungebrauchte checks bei childs)
 		//aber changemode wird contextuell gespeichert resp. beachtet.
 		if(routine==null){//Progparams
-            isProgParam = true;
-
-			String ident ="";
-			Type type = null;
-			boolean isC =false;
-			if(optChangeMode!=null)
-			    isC = optChangeMode.getMode().equals(Mode.CONST);
+//            isProgParam = true;
+//
+//			String ident ="";
+//			Type type = null;
+//			boolean isC =false;
+//			if(optChangeMode!=null)
+//			    isC = optChangeMode.getMode().equals(Mode.CONST);
+//			
+//			if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
+//				ch.fhnw.compiler.parser.abs.TypedIdent ti = (ch.fhnw.compiler.parser.abs.TypedIdent) typedIdentOrRecParam;
+//				ident = ti.getIdent().getStringVal();
+//				type = ti.getType().getType();
+//				
+//			}else if(typedIdentOrRecParam instanceof ParamRecord){
+//                //in progparams keinde recidents
+//				throw new ContextError("no recidents as progparams", typedIdentOrRecParam.getLine());
+//			}
+//			
+//			Store sto = new Store(ident, type, isC);
+//			sto.setReference(optMechMode.getMode().equals(Mode.REF));
+//			
+//			if(!Compiler.getScope().getStoreTable().addStore(
+//					sto)){
+//				throw new ContextError("already declared parameter " + ident,optChangeMode.getLineNr() );
+//			}
 			
-			if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
-				ch.fhnw.compiler.parser.abs.TypedIdent ti = (ch.fhnw.compiler.parser.abs.TypedIdent) typedIdentOrRecParam;
-				ident = ti.getIdent().getStringVal();
-				type = ti.getType().getType();
-				
-			}else if(typedIdentOrRecParam instanceof ParamRecord){
-                //in progparams keinde recidents
-				throw new ContextError("no recidents as progparams", typedIdentOrRecParam.getLine());
-			}
-			
-			Store sto = new Store(ident, type, isC);
-			sto.setReference(optMechMode.getMode().equals(Mode.REF));
-			
-			if(!Compiler.getScope().getStoreTable().addStore(
-					sto)){
-				throw new ContextError("already declared parameter " + ident,optChangeMode.getLineNr() );
-			}
+			throw new ContextError("routineless Parameter.", typedIdentOrRecParam.getLine());
 		
 		}else{
 
