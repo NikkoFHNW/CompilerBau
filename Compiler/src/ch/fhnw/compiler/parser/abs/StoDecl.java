@@ -1,6 +1,7 @@
 package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Scope;
 import ch.fhnw.compiler.scanner.data.Mode;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
@@ -26,7 +27,7 @@ public class StoDecl implements IAbs.IStoDecl {
 		TypedIdent temp = (TypedIdent) typedId;
 		boolean isC = false;
 		if(cm!=null)cm.getMode().equals(Mode.CONST);
-		return new ch.fhnw.compiler.context.Store(temp.getIdent().toString(), temp.getType().getType(),isC );
+		return new ch.fhnw.compiler.context.Store(temp.getIdent().getStringVal(), temp.getType().getType(),isC );
 	}
 	
 	@Override
@@ -34,6 +35,7 @@ public class StoDecl implements IAbs.IStoDecl {
 		// TODO Auto-generated method stub
 		TypedIdent temp = (TypedIdent) typedId;
 		ch.fhnw.compiler.context.Store sto = getStore();
+		Scope x = Compiler.getScope();
 		if(!Compiler.getScope().addStore(sto)){
 			throw new ContextError("already declared " + temp.getIdent().toString(), typedId.getLine());
 		}

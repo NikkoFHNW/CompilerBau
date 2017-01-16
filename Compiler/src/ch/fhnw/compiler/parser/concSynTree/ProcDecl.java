@@ -6,12 +6,12 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 
 public class ProcDecl implements IConcSyn.IProcDecl {
     TokenTupel ident;
-    ParamList param;
+    Param param;
     OptGlobalglobImps optGlobalglobImps;
     OptLocalcpsStoDecl optLocalcpsStoDecl;
     CpsCmd cpsCmd;
 
-    public ProcDecl(TokenTupel ident, ParamList param, OptGlobalglobImps optGlobalglobImps, OptLocalcpsStoDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
+    public ProcDecl(TokenTupel ident, Param param, OptGlobalglobImps optGlobalglobImps, OptLocalcpsStoDecl optLocalcpsStoDecl, CpsCmd cpscmd) {
         this.ident = ident;
         this.param = param;
         this.optGlobalglobImps = optGlobalglobImps;

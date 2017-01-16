@@ -23,27 +23,21 @@ public class RepRecordData  implements IConcSyn.IRepRecData {
         } else {
             this.next.setNext(next);
         }
-
     }
 
 
 
 	@Override
-	public ch.fhnw.compiler.parser.abs.IAbs.IDecl toAbstrSyntax(ch.fhnw.compiler.parser.abs.IAbs.IDecl repRecD) {
-		// TODO Auto-generated method stub
-    	if(next != null){
+	public IAbs.IRecData toAbstrSyntax() {
+        if(next != null){
 //    		StoDecl sd = new StoDecl(cm, typedId)
 //    		RecordDecl rd = new RecordDecl(ident, next.toAbstrSyntax());
-    		RecordData rd = new RecordData(ident, type, opc.toAbstrSyntax(), (IAbs.IRecData)next);
-    		return next.toAbstrSyntax(rd);
-    	}else{
-    		return new RecordData(ident,type,opc.toAbstrSyntax(),null);
-    	}
+//    		RecordData rd =
+            return new RecordData(ident, type, opc.toAbstrSyntax(), next.toAbstrSyntax());
+//    		return next.toAbstrSyntax(rd);
+        }else{
+            return new RecordData(ident,type,opc.toAbstrSyntax(),null);
+        }
 	}
 
-	@Override
-	public IAbs.IRecData toAbstrSyntax() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

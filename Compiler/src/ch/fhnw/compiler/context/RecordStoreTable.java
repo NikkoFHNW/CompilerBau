@@ -27,6 +27,4 @@ public class RecordStoreTable {
 		return recordMap.get(s);
 	}
 
-	
-	
 }

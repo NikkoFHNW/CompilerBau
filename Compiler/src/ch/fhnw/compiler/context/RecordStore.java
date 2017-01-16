@@ -13,9 +13,7 @@ public class RecordStore{
 	  
 	  public RecordStore(String recIdent, Map<String,Type> fields){
 		  this(recIdent);
-		  
 		  fieldListMap = fields;
-	
 	  }
 	  
 	  public String getRecIdent() {
@@ -28,7 +26,7 @@ public class RecordStore{
 
 	public RecordStore(String recIdent){
 		this.recIdent=recIdent;  
-		this.fieldListMap = new TreeMap<String, Type>();
+		this.fieldListMap = new TreeMap<>();
 	  }
 
 	  

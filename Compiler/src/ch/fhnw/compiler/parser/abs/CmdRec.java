@@ -29,7 +29,6 @@ public class CmdRec implements IAbs.ICmd {
     public void check(boolean canInit) throws ContextError {
 
 
-
     }
 
     @Override
@@ -55,11 +54,11 @@ public class CmdRec implements IAbs.ICmd {
 
 	@Override
 	public void check() throws ContextError {
-		// TODO Auto-generated method stub
-		RecordStore rs=Compiler.getScope().getRecordStoreTable().getRecordStore(recident.toString());
-		if(rs==null)throw new ContextError("Rectype " + recident+" doesn't exist.", this.ident.getLineNr());
+		RecordStore rs=Compiler.getScope().getRecordStoreTable().getRecordStore(recident.getStringVal());
+		if(rs==null)
+			throw new ContextError("Rectype " + recident+" doesn't exist.", this.ident.getLineNr());
 		
-		Store sto = new Store(ident.toString(), null, false);
+		Store sto = new Store(ident.getStringVal(), null, false);
 		sto.setRecType(recident.getStringVal());
 		if(!Compiler.getScope().getStoreTable().addStore(sto)){
 			throw new ContextError("already declared " + ident +".", ident.getLineNr());
@@ -69,17 +68,20 @@ public class CmdRec implements IAbs.ICmd {
 		List<Type> usedTypes = new ArrayList<Type>();
 		for(int x =0;x<recCons.size();x++){
 			switch(recCons.get(x).getConcType()){
-			case BOOLEAN: usedTypes.add(Type.BOOL);
-			break;
+				case BOOLEAN: usedTypes.add(Type.BOOL);
+				break;
 			case INT: usedTypes.add(Type.INT32);
-			break;
+				break;
 			case STRING:
-			String tS = recCons.get(x).toString();
-			Type t = Compiler.getScope().getStoreTable().getType(tS);
-			if(t==null)throw new ContextError("no variable called " +tS, ident.getLineNr());
-			usedTypes.add(t);
-			break;
-			default:throw new ContextError("unsupported type in Recconstr", ident.getLineNr());
+				String tS = recCons.get(x).getStringVal();
+				Type t = Compiler.getScope().getStoreTable().getType(tS);
+				if(t==null)
+					throw new ContextError("no variable called " +tS, ident.getLineNr());
+				usedTypes.add(t);
+				break;
+			default:
+				throw
+					new ContextError("unsupported type in Recconstr", ident.getLineNr());
 
 			}
 		}

@@ -59,11 +59,14 @@ public class RecordExpr implements IAbs.IExpr{
     	    throw new ContextError("store missing rectype (RecordExpr error)",ident1.getLineNr());
 
         RecordStore rs2 = Compiler.getScope().getRecordStoreTable().getRecordStore(s1.getRecType());
+
         if(rs2 == null)
             throw new ContextError("Recordtype " +s1.getRecType()+" not defined here", ident1.getLineNr());
-    	Type t=rs2.getFieldType(ident2.toString());
+
+    	Type t = rs2.getFieldType(ident2.getStringVal());
+
     	if(t==null){
-    		throw new ContextError(rs2.getRecIdent() + " has no field named "+ident2.toString(), ident2.getLineNr());
+    		throw new ContextError(rs2.getRecIdent() + " has no field named "+ident2.getStringVal(), ident2.getLineNr());
     	}
     	res = new TokenTupel(Terminal.TYPE, t);
         

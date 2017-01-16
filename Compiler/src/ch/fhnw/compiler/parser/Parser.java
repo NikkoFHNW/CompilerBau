@@ -1,5 +1,6 @@
 package ch.fhnw.compiler.parser;
 
+import ch.fhnw.compiler.parser.abs.IAbs;
 import ch.fhnw.compiler.parser.concSynTree.*;
 import ch.fhnw.compiler.error.*;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn.ICpsDecl;
@@ -41,7 +42,7 @@ public class Parser implements IParser {
         if (terminal == Terminal.PROGRAM) {
             consume(Terminal.PROGRAM);
             TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-            ProgParamList progParamList = (ProgParamList) progParamList();
+            ProgramParam progParamList = (ProgramParam) progParamList();
 //            OptGlobalCpsDecl optGlobalCpsDecl = (OptGlobalCpsDecl) optGlobalcpsDecl();
             IDecl optGlobalCpsDecl = (IDecl) optGlobalcpsDecl();
             consume(Terminal.DO);
@@ -113,7 +114,7 @@ public class Parser implements IParser {
 			consume(Terminal.RETURNS);
 			StoDecl stoDecl = (StoDecl) stoDecl();
 			OptGlobalglobImps optGlobalglobImps = (OptGlobalglobImps) optGlobalglobImps();
-			IDecl optLocalcpsStoDecl = (IDecl) optLocalcpsStoDecl();
+			IConcSyn.IStoDecl optLocalcpsStoDecl = (IConcSyn.IStoDecl) optLocalcpsStoDecl();
 			consume(Terminal.DO);
 			CpsCmd cpsCmd = (CpsCmd) cpsCmd();
 			consume(Terminal.ENDFUN);
@@ -179,7 +180,7 @@ public class Parser implements IParser {
 	private IConcSyn procDecl() throws GrammarError{
 		consume(Terminal.PROC);
 		TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-		ParamList paramList = (ParamList) param();
+		Param paramList = (Param) paramList();
 		OptGlobalglobImps optggi = (OptGlobalglobImps) optGlobalglobImps();
 		OptLocalcpsStoDecl olcsd = (OptLocalcpsStoDecl) optLocalcpsStoDecl();
 		consume(Terminal.DO);
@@ -262,9 +263,10 @@ public class Parser implements IParser {
 	private IConcSyn progParamList() throws GrammarError{
 //[[T LPAREN, N optProgParamRepCommaProgParam, T RPAREN]]
 		consume(Terminal.LPAREN);
-		OptProgParamRepCommaProgParam optPro = (OptProgParamRepCommaProgParam) optProgParamRepCommaProgParam();
-		consume(Terminal.RPAREN);
-		return new ProgParamList(optPro);
+//		OptProgParamRepCommaProgParam optPro = (OptProgParamRepCommaProgParam) optProgParamRepCommaProgParam();
+		ProgramParam programParam = (ProgramParam) progParam();
+        consume(Terminal.RPAREN);
+		return programParam;
 	}
 	private IConcSyn optProgParamRepCommaProgParam() throws GrammarError{
 //[N progParam, N repCommaProgParam], []]
@@ -295,35 +297,36 @@ public class Parser implements IParser {
 	private IConcSyn progParam() throws GrammarError{
 //[[N optFlowMode, N optChangeMode, N typedIdent],[N recordParam]]
 
-		switch(terminal){
-		case FLOWMODE:
-		case CHANGEMODE:
-		case IDENT:
-			OptFlowMode optFlow = (OptFlowMode) optFlowMode();
+//		switch(terminal){
+//		case FLOWMODE:
+//		case CHANGEMODE:
+//		case IDENT:
+//            consume(Terminal.LPAREN);
+            OptFlowMode optFlow = (OptFlowMode) optFlowMode();
 			OptChangeMode optChange = (OptChangeMode) optChangeMode();
-			TypedIdent tpyedIdent = (TypedIdent) typedIdent();
-
+			IParam tpyedIdent = (IParam) typedIdentOrRecordParam();
             ProgramParam next = null;
-
             try {
                 consume(Terminal.COMMA);
                 next = (ProgramParam) progParam();
             } catch (GrammarError e) {
                 //don worry.. be happy..
             }
-
+//            consume(Terminal.RPAREN);
 			return new ProgramParam(optFlow, optChange, tpyedIdent, next);
-		case DOT:
-			return recordParam();
-		default: throw new GrammarError("progParam", 0);
-		}
+
+//		case DOT:
+//			return recordParam();
+//		default: throw new GrammarError("progParam", 0);
+//		}
 	}
 	private IConcSyn paramList() throws GrammarError{
 //[[T LPAREN, N optParamRepCommaParam, T RPAREN]]
 		consume(Terminal.LPAREN);
-		OptParamRepCommaParam optP = (OptParamRepCommaParam) optParamRepCommaParam();
+        Param param = (Param) param();
+//		OptParamRepCommaParam optP = (OptParamRepCommaParam) optParamRepCommaParam();
 		consume(Terminal.RPAREN);
-		return new ParamList(optP);
+		return param;
 	}
 	private IConcSyn optParamRepCommaParam() throws GrammarError{
 // [[N param, N repCommaParam], []]
@@ -368,7 +371,7 @@ public class Parser implements IParser {
 //			return recordParam();
 //		default: throw new GrammarError("param", 0);
 //		}
-		consume(Terminal.LPAREN);
+
 		OptFlowMode optFl = (OptFlowMode) optFlowMode();
 		OptMechMode optM = (OptMechMode) optMechMode();
 		OptChangeMode optC = (OptChangeMode) optChangeMode();
@@ -380,7 +383,6 @@ public class Parser implements IParser {
 		} catch (GrammarError e) {
 			//chill
 		}
-		consume(Terminal.RPAREN);
 		return new Param(optFl, optM, optC, param, next);
 		
 	}
@@ -810,7 +812,6 @@ public class Parser implements IParser {
                 head.setNext(current);
             }
 		}
-
 		return head;
 	}
 

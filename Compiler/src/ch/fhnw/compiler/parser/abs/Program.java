@@ -10,9 +10,9 @@ import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 public class Program implements IAbs.IProgram {
 
     TokenTupel ident;
-    IDecl cpsDecl;
+    IParam params;  //optional
+    IDecl cpsDecl;  //optional
     ICmd cmd;
-    IParam params;
 
     public Program(TokenTupel ident, IDecl cpsDecl, ICmd cmd, IParam params) {
         this.ident = ident;
@@ -28,8 +28,10 @@ public class Program implements IAbs.IProgram {
 //    	cpsDecl.check(-1);
     	Compiler.setScope(new Scope(Compiler.getGlobalStoreTable(),Compiler.getRecordStoreTable()));
     	
-    	if(params!=null)params.check(null);
-    	if(cpsDecl!=null)cpsDecl.checkDeclaration();
+    	if(params!=null)
+    	    params.check(null);
+    	if(cpsDecl!=null)
+    	    cpsDecl.checkDeclaration();
     	cmd.check();
     	
     }

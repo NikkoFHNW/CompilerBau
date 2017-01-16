@@ -5,16 +5,16 @@ import ch.fhnw.compiler.parser.abs.CmdAssi;
 import ch.fhnw.compiler.parser.abs.IAbs;
 
 public class CmdBecomes extends AbstractCmd {
-    Expr expr1;
-    Expr expr2;
+    Expr exprL;
+    Expr exprR;
 
-    public CmdBecomes(Expr expr1, Expr expr2) {
-        this.expr1 = expr1;
-        this.expr2 = expr2;
+    public CmdBecomes(Expr exprL, Expr exprR) {
+        this.exprL = exprL;
+        this.exprR = exprR;
     }
 
     @Override
     public IAbs.ICmd toAbstrSyntax() throws GrammarError {
-        return new CmdAssi(expr1.toAbstrSyntax(), expr2.toAbstrSyntax());
+        return new CmdAssi(exprR.toAbstrSyntax(), exprL.toAbstrSyntax());
     }
 }
