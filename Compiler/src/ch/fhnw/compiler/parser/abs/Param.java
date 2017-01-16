@@ -71,7 +71,10 @@ public class Param implements IAbs.IParam {
 			}
 			
 			Store sto = new Store(ident, type, isC);
-			sto.setReference(optMechMode.getMode().equals(Mode.REF));
+			if (optMechMode != null)
+                sto.setReference(optMechMode.getMode().equals(Mode.REF));
+            else
+                sto.setReference(false);
 			
 			if(!Compiler.getScope().getStoreTable().addStore(
 					sto)){

@@ -14,6 +14,7 @@ public class ProgramParam implements IConcSyn.IParam {
         this.optFlowMode = optFlowMode;
         this.optChangeMode = optChangeMode;
         this.typedIdent = typedIdent;
+        this.next = next;
     }
 
     @Override

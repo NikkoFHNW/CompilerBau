@@ -110,7 +110,7 @@ public class Parser implements IParser {
 			System.out.println("funDecl ::= FUN ident ParamList Returns StoDecl OptGlobalglobImps OptLocalcpsStoDecl");
 			consume(Terminal.FUN);
 			TokenTupel ident = (TokenTupel) consume(Terminal.IDENT);
-            Param param = (Param) param();
+            Param param = (Param) paramList();
 			consume(Terminal.RETURNS);
 			StoDecl stoDecl = (StoDecl) stoDecl();
 			OptGlobalglobImps optGlobalglobImps = (OptGlobalglobImps) optGlobalglobImps();
@@ -294,6 +294,7 @@ public class Parser implements IParser {
 
 		}
 	}
+
 	private IConcSyn progParam() throws GrammarError{
 //[[N optFlowMode, N optChangeMode, N typedIdent],[N recordParam]]
 
@@ -307,6 +308,7 @@ public class Parser implements IParser {
 			IParam tpyedIdent = (IParam) typedIdentOrRecordParam();
             ProgramParam next = null;
             try {
+                System.out.println("test");
                 consume(Terminal.COMMA);
                 next = (ProgramParam) progParam();
             } catch (GrammarError e) {
@@ -355,6 +357,7 @@ public class Parser implements IParser {
 		}
 
 	}
+
 	private IConcSyn param()throws GrammarError{
 //		[[N optFlowMode, N optMechMode, N optChangeMode, N typedIdent],[N recordParam]]
 //		switch(terminal){
@@ -393,7 +396,7 @@ public class Parser implements IParser {
 			return recordParam(); 
 		case IDENT:
 			return typedIdent();
-		default: throw new GrammarError("tyoedIdentOrRecordParam", token.getLineNr());
+		default: throw new GrammarError("tyoedIdentOrRecordParam, term: "+terminal.toString(), token.getLineNr());
 		}
 		
 	}
