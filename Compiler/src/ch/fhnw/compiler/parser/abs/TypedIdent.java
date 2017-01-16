@@ -36,8 +36,13 @@ public class TypedIdent implements IAbs.IParam {
 	}
 	
 	@Override
-	public String toString(String indent) {
+	public String toString() {
 		return ident.getStringVal();
+	}
+
+	@Override
+	public String toString(String indent) {
+		return null;
 	}
 
 	@Override

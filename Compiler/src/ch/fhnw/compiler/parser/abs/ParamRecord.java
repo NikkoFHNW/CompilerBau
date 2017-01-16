@@ -44,8 +44,13 @@ public class ParamRecord implements IAbs.IParam {
 //    }
 
     @Override
+    public String toString() {
+        return ident.getStringVal();
+    }
+
+    @Override
     public String toString(String indent) {
-        return ident.toString();
+        return null;
     }
 
     @Override

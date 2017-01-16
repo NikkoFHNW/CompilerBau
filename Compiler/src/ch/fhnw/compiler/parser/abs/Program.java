@@ -32,6 +32,7 @@ public class Program implements IAbs.IProgram {
     	    params.check(null);
     	if(cpsDecl!=null)
     	    cpsDecl.checkDeclaration();
+
     	cmd.check();
     	
     }

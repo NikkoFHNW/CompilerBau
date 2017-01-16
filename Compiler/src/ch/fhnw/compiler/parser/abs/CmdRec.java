@@ -2,6 +2,7 @@ package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.context.RecordStore;
+import ch.fhnw.compiler.context.Scope;
 import ch.fhnw.compiler.context.Store;
 import ch.fhnw.compiler.parser.concSynTree.IConcSyn;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
@@ -34,7 +35,7 @@ public class CmdRec implements IAbs.ICmd {
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
         int loc1 = loc;
-        Store store = Compiler.getGlobalStoreTable().getStore(ident.toString());
+        Store store = Compiler.getGlobalStoreTable().getStore(ident.getStringVal());
         RecordStore recordStore = Compiler.getRecordStoreTable().getRecordStore(recident.toString());
         loc1 = store.codeLoad(loc1);
         Compiler.getCodeArray().put(loc1++, new IInstructions.Store());
@@ -59,6 +60,7 @@ public class CmdRec implements IAbs.ICmd {
 			throw new ContextError("Rectype " + recident+" doesn't exist.", this.ident.getLineNr());
 		
 		Store sto = new Store(ident.getStringVal(), null, false);
+		sto.initialize();
 		sto.setRecType(recident.getStringVal());
 		if(!Compiler.getScope().getStoreTable().addStore(sto)){
 			throw new ContextError("already declared " + ident +".", ident.getLineNr());
@@ -75,6 +77,8 @@ public class CmdRec implements IAbs.ICmd {
 			case STRING:
 				String tS = recCons.get(x).getStringVal();
 				Type t = Compiler.getScope().getStoreTable().getType(tS);
+				Scope l = Compiler.getScope();
+				Scope g = Compiler.getGlobalScope();
 				if(t==null)
 					throw new ContextError("no variable called " +tS, ident.getLineNr());
 				usedTypes.add(t);
@@ -94,13 +98,18 @@ public class CmdRec implements IAbs.ICmd {
 		Type[] expectedTypes = new Type[expectedTypesC.size()];
 		expectedTypesC.toArray(expectedTypes);
 
+		Type[] tArr = new Type[expectedTypes.length];
+		for (int i = 0; i < expectedTypes.length; i++) {
+			tArr[i] = expectedTypes[expectedTypes.length-1-i];
+		}
+
 		if(expectedTypesC.size()!=usedTypes.size())
 			throw new ContextError("number of fields used doesn't match the record constructor (2)", ident.getLineNr());
 
 		for(int x=0;x<usedTypes.size();x++){
-			if(!usedTypes.get(x).equals(expectedTypes[x])){
+			if(!usedTypes.get(x).equals(tArr[x])){
 				throw new ContextError("type missmatch in record constructor"
-						+"expected: "+expectedTypes[x]+" actual: " + usedTypes.get(x), ident.getLineNr());
+						+"expected: "+tArr[x]+" actual: " + usedTypes.get(x), ident.getLineNr());
 			}
 		}
 

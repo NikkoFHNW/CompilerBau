@@ -12,4 +12,7 @@ public class RecordParameter extends Parameter{
 		this.recIdent=recIdent;
 	}
 
+	public String getRecIdent() {
+		return recIdent;
+	}
 }

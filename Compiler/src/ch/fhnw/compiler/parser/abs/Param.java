@@ -21,6 +21,7 @@ public class Param implements IAbs.IParam {
     TokenTupel optChangeMode;
     IParam typedIdentOrRecParam;
     private Store store;
+
     IParam next;
 
     boolean isProgParam = false;
@@ -162,7 +163,6 @@ public class Param implements IAbs.IParam {
 	                optChangeMode.getMode(),
 	                type));
 	}*/
-		
 
 	}
 
@@ -202,12 +202,14 @@ public class Param implements IAbs.IParam {
 
         if(isProgParam || typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent) {
             TypedIdent typedIdent = (TypedIdent) typedIdentOrRecParam;
-            store = Compiler.getGlobalStoreTable().getStore(typedIdent.toString());
+            store = Compiler.getScope().getStoreTable().getStore(typedIdent.toString());
 
 
         } else if (typedIdentOrRecParam instanceof ParamRecord) {
                 ParamRecord paramRecord = (ParamRecord) typedIdentOrRecParam;
-                store = Compiler.getGlobalStoreTable().getStore(paramRecord.toString());
+                Scope x = Compiler.getScope();
+                String s = paramRecord.toString();
+                store = Compiler.getScope().getStoreTable().getStore(s);
         }
 
         codeArr.put(loc++, new IInstructions.AllocBlock(1));

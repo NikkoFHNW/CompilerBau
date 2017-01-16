@@ -47,10 +47,10 @@ public class FunDecl implements IAbs.IDecl {
 
 	@Override
 	public void checkDeclaration() throws ContextError {
-        Function func = new Function(ident.toString(), stoDecl.getType().getType());
+        Function func = new Function(ident.getStringVal(), stoDecl.getType().getType());
 		Compiler.setScope(func.getScope());
 		if(!Compiler.getRoutineTable().addRoutine(func)){
-			throw new ContextError("Function " + ident.toString() + " already declared", ident.getLineNr());
+			throw new ContextError("Function " + ident.getStringVal() + " already declared", ident.getLineNr());
 		}
 		pListHead.check(func);
 		
@@ -58,7 +58,6 @@ public class FunDecl implements IAbs.IDecl {
 		if(globImps!=null)globImps.check(func);
 		if(localCpsStoDecl!=null)localCpsStoDecl.checkDeclaration();
 		if(cpsCmd!=null)cpsCmd.check();
-		
 		
 		Compiler.setScope(Compiler.getGlobalScope());
 		
@@ -77,7 +76,7 @@ public class FunDecl implements IAbs.IDecl {
 		final int jumpLoc = loc++;
 		final ICodeArray codeArray =  Compiler.getCodeArray();
 
-		Routine routine = Compiler.getRoutineTable().getRoutine(ident.toString());
+		Routine routine = Compiler.getRoutineTable().getRoutine(ident.getStringVal());
 		Compiler.setScope(routine.getScope());
 		routine.setAddress(loc1);
 

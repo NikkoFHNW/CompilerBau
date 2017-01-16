@@ -3,9 +3,12 @@ package ch.fhnw.compiler.parser.abs;
 import java.util.List;
 
 import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.RecordParameter;
 import ch.fhnw.compiler.context.Routine;
+import ch.fhnw.compiler.context.Scope;
 import ch.fhnw.compiler.parser.abs.IAbs.ContextError;
 import ch.fhnw.compiler.parser.abs.IAbs.IExpr;
+import ch.fhnw.compiler.parser.concSynTree.RecordParam;
 import ch.fhnw.compiler.scanner.data.Terminal;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
@@ -53,9 +56,9 @@ public class ExprFunCall implements IAbs.IExpr {
 	public TokenTupel check() throws ContextError {
 		// TODO Auto-generated method stub
 		TokenTupel res =null;
-List<IExpr> li =routineCall.exprList;
+        List<IExpr> li =routineCall.exprList;
 		
-		Routine r =Compiler.getRoutineTable().getRoutine(routineCall.ident.toString());
+		Routine r =Compiler.getRoutineTable().getRoutine(routineCall.ident.getStringVal());
 		if(r==null)
 			throw new ContextError("no routine called " + routineCall.ident, routineCall.getLine());
 		
@@ -67,8 +70,21 @@ List<IExpr> li =routineCall.exprList;
 		for(int x=0;x<pList.size();x++){
 			Type needed = pList.get(x).getType();
 			Type have = li.get(x).checkR().getType();
+
+            if(needed==null) {
+                RecordParameter rp = (RecordParameter) pList.get(x);
+                String rtNeed = rp.getRecIdent();
+                if (have != null)
+                    throw new ContextError("Rec needed, not "+have.toString(), routineCall.getLine());
+
+                ExprStore rp2 = (ExprStore) li.get(x);
+                String rtActual =  Compiler.getScope().getStoreTable().getStore(rp2.ident).getRecType();
+
+                if (!rtNeed.equals(rtActual))
+                    throw new ContextError("two diff rec types. need: "+rtNeed+". actual: "+rtActual, routineCall.getLine());
+            }
 			
-			if(!needed.equals(have))
+			else if(!needed.equals(have))
 				throw new ContextError("Parameter missmatch. should be " +needed+ " but is "+have, routineCall.getLine());
 		}
 		

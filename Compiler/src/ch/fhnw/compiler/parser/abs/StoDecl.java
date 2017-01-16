@@ -64,9 +64,14 @@ public class StoDecl implements IAbs.IStoDecl {
 	}
 
 	@Override
-	public String toString(String indent) {
+	public String toString() {
 		// TODO Auto-generated method stub
 		return typedId.toString();
+	}
+
+	@Override
+	public String toString(String indent) {
+		return null;
 	}
 
 	@Override

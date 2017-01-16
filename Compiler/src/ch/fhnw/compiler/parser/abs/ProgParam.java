@@ -73,6 +73,10 @@ public class ProgParam implements IAbs.IParam{
 				sto)){
 			throw new ContextError("already declared parameter " + ident,optChangeMode.getLineNr() );
 		}
+
+		if (next != null) {
+			next.check(routine);
+		}
 	}
 
 	@Override
