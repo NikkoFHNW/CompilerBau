@@ -15,7 +15,9 @@ public class ProgParam implements IAbs.IParam{
 //    TokenTupel optMechMode;
     TokenTupel optChangeMode;
     IParam typedIdentOrRecParam;
+
     private Store store;
+
     IParam next;
     
     

@@ -20,9 +20,8 @@ public class ProgramParam implements IConcSyn.IParam {
     @Override
     public IAbs.IParam toAbstrSyntax() {
         if (next != null)
-            return new Param(optFlowMode.toAbstrSyntax(), null,  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax(), next.toAbstrSyntax());
+            return new ProgParam(optFlowMode.toAbstrSyntax(),  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax(), next.toAbstrSyntax());
 
-        return new Param(optFlowMode.toAbstrSyntax(), null,  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax(), null);
-
+        return new ProgParam(optFlowMode.toAbstrSyntax(),  optChangeMode.toAbstrSyntax(), typedIdent.toAbstrSyntax(), null);
     }
 }
