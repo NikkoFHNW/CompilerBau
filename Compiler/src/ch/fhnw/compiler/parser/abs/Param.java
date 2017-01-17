@@ -207,7 +207,6 @@ public class Param implements IAbs.IParam {
 
         } else if (typedIdentOrRecParam instanceof ParamRecord) {
                 ParamRecord paramRecord = (ParamRecord) typedIdentOrRecParam;
-                Scope x = Compiler.getScope();
                 String s = paramRecord.toString();
                 store = Compiler.getScope().getStoreTable().getStore(s);
         }

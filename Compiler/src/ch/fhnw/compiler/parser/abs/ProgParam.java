@@ -142,20 +142,23 @@ public class ProgParam implements IAbs.IParam{
             TypedIdent typedIdent = (TypedIdent) typedIdentOrRecParam;
             store = Compiler.getGlobalStoreTable().getStore(typedIdent.toString());
 
-
         }
-        
+
         codeArr.put(loc++, new IInstructions.AllocBlock(1));
         codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
-        
+
         if(store.getType().equals(Type.BOOL))
         	codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
+
         else if(store.getType().equals(Type.INT32))
         	codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
-        
+
         codeArr.put(loc++, new IInstructions.Deref());
         codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
         codeArr.put(loc++, new IInstructions.Store());
+
+        if (next != null)
+            loc = next.code(loc);
 
         return loc;
     }

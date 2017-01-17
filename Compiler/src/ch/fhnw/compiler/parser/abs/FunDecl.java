@@ -108,6 +108,7 @@ public class FunDecl implements IAbs.IDecl {
 
 		CmdCps currentCmd = (CmdCps) cpsCmd;
 		int cmdCount = 0;
+
 		while (currentCmd != null) {
 			cmdCount++;
 			loc = currentCmd.code(loc);
@@ -118,7 +119,6 @@ public class FunDecl implements IAbs.IDecl {
 				Compiler.getScope().getVarCount() - 4
 //				- globalImports.size()
 				- stoDeclCount;
-
 
 		final Store returnVal = Compiler.getScope().getStoreTable().getStore(stoDecl.toString());
 

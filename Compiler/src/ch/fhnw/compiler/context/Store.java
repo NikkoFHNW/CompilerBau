@@ -97,7 +97,6 @@ public class Store extends Symbol {
         if (reference) {
             Compiler.getCodeArray().put(loc1++, new IInstructions.Deref());
         }
-
         return loc1;
     }
     

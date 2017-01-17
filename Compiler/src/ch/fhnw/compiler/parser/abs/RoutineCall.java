@@ -47,6 +47,7 @@ public class RoutineCall implements IAbs.IExpr {
 
         Compiler.getCodeArray().put(loc1++, new IInstructions.AllocBlock(size)); //Block vs stack
         for (IExpr e : exprList) {
+//            System.out.println("exprCall");
             loc1 = e.code(loc1);
 
         }

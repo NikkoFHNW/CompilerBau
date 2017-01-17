@@ -11,7 +11,6 @@ import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions.Store;
 
 public class StoDecl implements IAbs.IStoDecl {
-	
 //	ChangeMode cm;
 	
 	TokenTupel cm;
@@ -38,7 +37,6 @@ public class StoDecl implements IAbs.IStoDecl {
 		if(!Compiler.getScope().addStore(sto)){
 			throw new ContextError("already declared " + temp.getIdent().toString(), typedId.getLine());
 		}
-		
 	}
 
 	@Override
@@ -49,9 +47,9 @@ public class StoDecl implements IAbs.IStoDecl {
 
 	@Override
 	public int code(int loc) throws CodeTooSmallError {
-//		int loc1 = loc;
-		Compiler.getCodeArray().put(loc++, new IInstructions.AllocBlock(1));
-		return loc;
+		int loc1 = loc;
+		Compiler.getCodeArray().put(loc1++, new IInstructions.AllocBlock(1));
+		return loc1;
 	}
 
 	@Override

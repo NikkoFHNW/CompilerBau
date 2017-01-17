@@ -27,7 +27,6 @@ public class Program implements IAbs.IProgram {
 
     @Override
     public void check() throws ContextError {
-    	
 //    	cpsDecl.checkDeclaration();
 //    	cpsDecl.check(-1);
         StoreTable st = Compiler.getGlobalStoreTable();
