@@ -134,7 +134,7 @@ public class ProgParam implements IAbs.IParam{
     public int code(int i) throws CodeTooSmallError {
         // TODO Auto-generated method stub
 
-        ICodeArray codeArr = Compiler.getCodeArray();
+    	ICodeArray codeArr = Compiler.getCodeArray();
         int loc = i;
         Store store = null;
 
@@ -144,15 +144,15 @@ public class ProgParam implements IAbs.IParam{
 
 
         }
-
+        
         codeArr.put(loc++, new IInstructions.AllocBlock(1));
         codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
-
+        
         if(store.getType().equals(Type.BOOL))
-            codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
+        	codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
         else if(store.getType().equals(Type.INT32))
-            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
-
+        	codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
+        
         codeArr.put(loc++, new IInstructions.Deref());
         codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
         codeArr.put(loc++, new IInstructions.Store());
