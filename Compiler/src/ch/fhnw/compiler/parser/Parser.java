@@ -308,7 +308,7 @@ public class Parser implements IParser {
 			IParam tpyedIdent = (IParam) typedIdentOrRecordParam();
             ProgramParam next = null;
             try {
-                System.out.println("test");
+//                System.out.println("test");
                 consume(Terminal.COMMA);
                 next = (ProgramParam) progParam();
             } catch (GrammarError e) {

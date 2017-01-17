@@ -65,7 +65,7 @@ public class CmdRec implements IAbs.ICmd {
 		Store sto = new Store(ident.getStringVal(), null, false);
 		sto.initialize();
 		sto.setRecType(recident.getStringVal());
-		if(!Compiler.getScope().getStoreTable().addStore(sto)){
+		if(!Compiler.getScope().addStore(sto)){
 			throw new ContextError("already declared " + ident +".", ident.getLineNr());
 		}
 		

@@ -59,7 +59,7 @@ public class RecordDecl implements IAbs.IDecl {
 	@Override
 	public int code(int loc) throws CodeTooSmallError {
 		// TODO Auto-generated method stub
-		return 0;
+		return loc;
 	}
 
 }

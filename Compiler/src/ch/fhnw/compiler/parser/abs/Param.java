@@ -131,7 +131,7 @@ public class Param implements IAbs.IParam {
                 tS.setRecType(rectype);
 			tS.setReference(optMechMode.getMode().equals(Mode.REF));
 			
-			if(!Compiler.getScope().getStoreTable().addStore(//Type null heisst type-> recident
+			if(!Compiler.getScope().addStore(//Type null heisst type-> recident
 					tS)){
 				throw new ContextError("no recidents as progparams", typedIdentOrRecParam.getLine());
 			}
@@ -217,6 +217,8 @@ public class Param implements IAbs.IParam {
         codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
         codeArr.put(loc++, new IInstructions.Store());
 
+        if (next != null)
+            loc = next.code(loc);
         return loc;
     }
 

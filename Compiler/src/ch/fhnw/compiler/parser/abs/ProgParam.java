@@ -61,20 +61,20 @@ public class ProgParam implements IAbs.IParam{
 		if(optChangeMode!=null)
 		    isC = optChangeMode.getMode().equals(Mode.CONST);
 		
-		if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
+//		if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent){
 			ch.fhnw.compiler.parser.abs.TypedIdent ti = (ch.fhnw.compiler.parser.abs.TypedIdent) typedIdentOrRecParam;
 			ident = ti.getIdent().getStringVal();
 			type = ti.getType().getType();
 			
-		}else if(typedIdentOrRecParam instanceof ParamRecord){
-          //in progparams keinde recidents
-			throw new ContextError("no recidents as progparams", typedIdentOrRecParam.getLine());
-		}
+//		}else if(typedIdentOrRecParam instanceof ParamRecord){
+//          //in progparams keinde recidents
+//			throw new ContextError("no recidents as progparams", typedIdentOrRecParam.getLine());
+//		}
 		
 		Store sto = new Store(ident, type, isC);
 //		sto.setReference(optMechMode.getMode().equals(Mode.REF));
 		
-		if(!Compiler.getScope().getStoreTable().addStore(
+		if(!Compiler.getScope().addStore(
 				sto)){
 			throw new ContextError("already declared parameter " + ident,optChangeMode.getLineNr() );
 		}
@@ -138,20 +138,20 @@ public class ProgParam implements IAbs.IParam{
         int loc = i;
         Store store = null;
 
-        if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent) {
+//        if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent) {
             TypedIdent typedIdent = (TypedIdent) typedIdentOrRecParam;
             store = Compiler.getGlobalStoreTable().getStore(typedIdent.toString());
 
-        }
+//        }
 
         codeArr.put(loc++, new IInstructions.AllocBlock(1));
         codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
 
-        if(store.getType().equals(Type.BOOL))
-        	codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
-
-        else if(store.getType().equals(Type.INT32))
-        	codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
+//        if(store.getType().equals(Type.BOOL))
+//        	codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
+//
+//        else if(store.getType().equals(Type.INT32))
+//        	codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
 
         codeArr.put(loc++, new IInstructions.Deref());
         codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));

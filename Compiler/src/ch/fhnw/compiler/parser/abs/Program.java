@@ -50,15 +50,16 @@ public class Program implements IAbs.IProgram {
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
 //        System.out.println("code prog");
 
-        int loc1 = cmd.code(loc);
-        Compiler.getCodeArray().put(loc1, new IInstructions.Stop());
+        int loc1 = loc;
+
+//        Compiler.getCodeArray().put(loc1, new IInstructions.Stop());
 
         if (params!= null) {
             loc1 = params.code(loc1);
         }
 
         if(cpsDecl != null)
-            loc1 = cpsDecl.code(loc1 + 1);
+            loc1 = cpsDecl.code(loc1);
 
         if (cmd != null)
             loc1 = cmd.code(loc1);

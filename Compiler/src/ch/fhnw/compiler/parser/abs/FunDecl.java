@@ -75,22 +75,22 @@ public class FunDecl implements IAbs.IDecl {
 
 		int loc1 = loc;
 
-		final int jumpLoc = loc++;
+		final int jumpLoc = loc1++;
 		final ICodeArray codeArray =  Compiler.getCodeArray();
 
 		Routine routine = Compiler.getRoutineTable().getRoutine(ident.getStringVal());
 		Compiler.setScope(routine.getScope());
 		routine.setAddress(loc1);
 
-		codeArray.put(loc++, new IInstructions.Enter(0,0));
+		codeArray.put(loc1++, new IInstructions.Enter(0,0));
 
-		loc = this.stoDecl.code(loc);
+		loc1 = this.stoDecl.code(loc1);
 
 		Param currentParam = (Param) this.pListHead;
 		int paramCount = 0;
 		while (currentParam != null) {
 			paramCount++;
-			loc = currentParam.code(loc);
+			loc1 = currentParam.code(loc1);
 			currentParam = (Param) currentParam.next;
 		}
 
@@ -102,16 +102,15 @@ public class FunDecl implements IAbs.IDecl {
 		int stoDeclCount = 0;
 		while (currentCpsDecl != null) {
 			stoDeclCount++;
-			loc = currentCpsDecl.code(loc);
+			loc1 = currentCpsDecl.code(loc1);
 			currentCpsDecl = (CpsDecl) currentCpsDecl.cpsDecl;
 		}
 
 		CmdCps currentCmd = (CmdCps) cpsCmd;
 		int cmdCount = 0;
-
 		while (currentCmd != null) {
 			cmdCount++;
-			loc = currentCmd.code(loc);
+			loc1 = currentCmd.code(loc1);
 			currentCmd = currentCmd.next;
 		}
 
