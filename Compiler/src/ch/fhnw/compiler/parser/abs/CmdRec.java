@@ -34,7 +34,9 @@ public class CmdRec implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        int loc1 = loc;
+//		System.out.println("code rec");
+
+		int loc1 = loc;
         Store store = Compiler.getGlobalStoreTable().getStore(ident.getStringVal());
         RecordStore recordStore = Compiler.getRecordStoreTable().getRecordStore(recident.getStringVal());
 

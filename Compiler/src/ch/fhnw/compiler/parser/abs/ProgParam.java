@@ -96,39 +96,69 @@ public class ProgParam implements IAbs.IParam{
 		return 0;
 	}
 
-	@Override
-	public int code(int i) throws CodeTooSmallError {
-         ICodeArray codeArr = Compiler.getCodeArray();
+//	@Override
+//	public int code(int i) throws CodeTooSmallError {
+//         ICodeArray codeArr = Compiler.getCodeArray();
+//        int loc = i;
+//        Store store = null;
+//
+//        if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent) {
+//            TypedIdent typedIdent = (TypedIdent) typedIdentOrRecParam;
+//            store = Compiler.getScope().getStoreTable().getStore(typedIdent.toString());
+//
+//
+//        } else if (typedIdentOrRecParam instanceof ParamRecord) {
+//            ParamRecord paramRecord = (ParamRecord) typedIdentOrRecParam;
+//            Scope x = Compiler.getScope();
+//            String s = paramRecord.toString();
+//            store = Compiler.getScope().getStoreTable().getStore(s);
+//        }
+//
+//        if (store.getType() == Type.INT32)
+//            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
+//
+//
+//
+//        codeArr.put(loc++, new IInstructions.AllocBlock(1));
+//        codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
+//        codeArr.put(loc++, new IInstructions.Deref());
+//        codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
+//        codeArr.put(loc++, new IInstructions.Store());
+//
+//        if (next != null)
+//            loc = next.code(loc);
+//
+//        return loc;
+//	}
+
+    public int code(int i) throws CodeTooSmallError {
+        // TODO Auto-generated method stub
+
+        ICodeArray codeArr = Compiler.getCodeArray();
         int loc = i;
         Store store = null;
 
         if(typedIdentOrRecParam instanceof ch.fhnw.compiler.parser.abs.TypedIdent) {
             TypedIdent typedIdent = (TypedIdent) typedIdentOrRecParam;
-            store = Compiler.getScope().getStoreTable().getStore(typedIdent.toString());
+            store = Compiler.getGlobalStoreTable().getStore(typedIdent.toString());
 
 
-        } else if (typedIdentOrRecParam instanceof ParamRecord) {
-            ParamRecord paramRecord = (ParamRecord) typedIdentOrRecParam;
-            Scope x = Compiler.getScope();
-            String s = paramRecord.toString();
-            store = Compiler.getScope().getStoreTable().getStore(s);
         }
-
-        if (store.getType() == Type.INT32)
-            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
-
-
 
         codeArr.put(loc++, new IInstructions.AllocBlock(1));
         codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
+
+        if(store.getType().equals(Type.BOOL))
+            codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
+        else if(store.getType().equals(Type.INT32))
+            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
+
         codeArr.put(loc++, new IInstructions.Deref());
         codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
         codeArr.put(loc++, new IInstructions.Store());
 
-        if (next != null)
-            loc = next.code(loc);
-
         return loc;
-	}
+    }
+
 
 }

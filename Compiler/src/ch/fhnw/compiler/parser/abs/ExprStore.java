@@ -62,7 +62,9 @@ public class ExprStore implements IAbs.IExpr {
 
     @Override
     public int code(final int loc) throws ICodeArray.CodeTooSmallError {
-        Store store = Compiler.getScope().getStoreTable().getStore(ident);
+//		System.out.println("code exprStore");
+
+		Store store = Compiler.getScope().getStoreTable().getStore(ident);
         return store.codeLoad(loc);
     }
 

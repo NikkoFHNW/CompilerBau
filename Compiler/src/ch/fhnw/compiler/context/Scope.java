@@ -47,6 +47,8 @@ public class Scope {
     }
     
     public boolean addStore(Store store){
+        store.setRelAdress(this.storeTable.getCount());
+//        store.setAddress();
     	return storeTable.addStore(store);
     }
     

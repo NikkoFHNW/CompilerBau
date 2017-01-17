@@ -33,7 +33,9 @@ public class ExprFunCall implements IAbs.IExpr {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-            return routineCall.code(loc);
+//        System.out.println("code exprFunCall");
+
+        return routineCall.code(loc);
     }
 
     @Override

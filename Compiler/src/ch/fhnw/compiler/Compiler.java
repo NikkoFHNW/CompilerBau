@@ -89,8 +89,8 @@ public class Compiler {
 
             System.out.println("\n--------------------------------------------------------------------\n");
             System.out.println(codeArray.toString());
-            VirtualMachine vm = new VirtualMachine(codeArray, 1000);
 
+            VirtualMachine vm = new VirtualMachine(codeArray, 1000);
 
         } catch (GrammarError e) {
  			// TODO Auto-generated catch block

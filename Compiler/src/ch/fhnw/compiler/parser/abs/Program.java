@@ -41,7 +41,8 @@ public class Program implements IAbs.IProgram {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        System.out.println("code prog");
+//        System.out.println("code prog");
+
         int loc1 = cmd.code(loc);
         Compiler.getCodeArray().put(loc1, new IInstructions.Stop());
 
@@ -52,7 +53,11 @@ public class Program implements IAbs.IProgram {
         if(cpsDecl != null)
             loc1 = cpsDecl.code(loc1 + 1);
 
-        Map<String, Routine> i = Compiler.getRoutineTable().getTable();
+        if (cmd != null)
+            loc1 = cmd.code(loc1);
+
+
+            Map<String, Routine> i = Compiler.getRoutineTable().getTable();
         for (Routine routine : Compiler.getRoutineTable().getTable().values()) {
             routine.codeCalls();
         }

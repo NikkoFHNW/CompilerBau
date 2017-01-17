@@ -40,7 +40,7 @@ public class CpsDecl implements IAbs.IDecl{
 
 	@Override
 	public int code(int loc) throws CodeTooSmallError {
-		System.out.println("code cpsDecl");
+//		System.out.println("code cpsDecl");
 
 		int loc1 = decl.code(loc);
 		if (cpsDecl == null)

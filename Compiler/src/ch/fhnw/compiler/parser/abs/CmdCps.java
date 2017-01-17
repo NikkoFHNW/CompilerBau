@@ -17,6 +17,8 @@ public class CmdCps implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
+//        System.out.println("code cpscmd");
+
         loc = cmd.code(loc);
 
         if (next == null)

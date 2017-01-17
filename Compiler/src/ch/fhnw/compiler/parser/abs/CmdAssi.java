@@ -3,6 +3,7 @@ package ch.fhnw.compiler.parser.abs;
 import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
+import ch.fhnw.lederer.virtualmachineFS2015.CodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
@@ -25,15 +26,15 @@ public class CmdAssi implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        System.out.println("code assi");
-        int loc1 = destination.code(loc);
+//        System.out.println("code assi");
+        CodeArray codeArray = Compiler.getCodeArray();
 
-        if (!(source instanceof ExprStore)) {
-            loc1 = destination.code(loc1);
-        } else {
-            loc1 = ((ExprStore) destination).codeRef(loc1);
-            Compiler.getCodeArray().put(loc1++, new IInstructions.Store());
-        }
+        int loc1 = loc;
+
+        loc1 = this.destination.code(loc1);
+        loc1 = this.source.code(loc1);
+        codeArray.put(loc1++, new IInstructions.Store());
+
         return loc1;
     }
 

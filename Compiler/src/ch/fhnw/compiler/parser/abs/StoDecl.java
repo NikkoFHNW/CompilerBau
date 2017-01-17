@@ -35,18 +35,9 @@ public class StoDecl implements IAbs.IStoDecl {
 		// TODO Auto-generated method stub
 		TypedIdent temp = (TypedIdent) typedId;
 		ch.fhnw.compiler.context.Store sto = getStore();
-		Scope x = Compiler.getScope();
 		if(!Compiler.getScope().addStore(sto)){
 			throw new ContextError("already declared " + temp.getIdent().toString(), typedId.getLine());
 		}
-//        if (temp.getType().getType() == Type.BOOL) {
-//            sto.setAddress(Compiler.getVM().BoolInitHeapCell());
-//            sto.setRelative(false);
-//        } else {
-//            sto.setAddress(Compiler.getVM().IntInitHeapCell());
-//            sto.setRelative(false);
-//        }
-		
 		
 	}
 
