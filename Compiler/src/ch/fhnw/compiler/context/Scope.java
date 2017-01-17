@@ -4,16 +4,17 @@ import ch.fhnw.compiler.Compiler;
 import ch.fhnw.compiler.scanner.data.Type;
 
 public class Scope {
+    int startPos;
     private StoreTable storeTable;
     private RecordStoreTable recStoTable;
 
     private Scope parent;
 
 	public Scope() {
-        this(new StoreTable(),new RecordStoreTable());
+        this(new StoreTable(),new RecordStoreTable(), 0);
     }
     
-    public Scope( StoreTable storeTable, RecordStoreTable recst) {
+    public Scope( StoreTable storeTable, RecordStoreTable recst, int startPos) {
         this.storeTable = storeTable;
         this.recStoTable=recst;
     }
@@ -48,7 +49,7 @@ public class Scope {
     
     public boolean addStore(Store store){
         store.setRelAdress(this.storeTable.getCount());
-//        store.setAddress();
+        store.setAddress(this.startPos+storeTable.getCount());
     	return storeTable.addStore(store);
     }
     
@@ -67,5 +68,9 @@ public class Scope {
 
     public int getVarCount() {
         return storeTable.getCount();
+    }
+
+    public int getStartPos() {
+        return startPos;
     }
 }

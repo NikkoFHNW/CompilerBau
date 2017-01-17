@@ -65,7 +65,7 @@ public class Compiler {
     }
 
     public static Scope getGlobalScope(){
-        return new Scope(globalStoreTable,recordStoreTable);
+        return new Scope(globalStoreTable,recordStoreTable, getScope().getStartPos()+globalStoreTable.getCount());
     }
 
     public static void setScope(Scope scope) {

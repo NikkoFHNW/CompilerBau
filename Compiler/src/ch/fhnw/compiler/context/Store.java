@@ -89,7 +89,7 @@ public class Store extends Symbol {
     public int codeRef(final int loc) throws ICodeArray.CodeTooSmallError {
         int loc1 = loc;
         if (relative) {
-            Compiler.getCodeArray().put(loc1++, new IInstructions.LoadAddrRel(address));
+            Compiler.getCodeArray().put(loc1++, new IInstructions.LoadAddrRel(relAdress));
         } else {
             Compiler.getCodeArray().put(loc1++, new IInstructions.LoadImInt(address));
         }

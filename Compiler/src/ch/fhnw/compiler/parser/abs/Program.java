@@ -1,8 +1,10 @@
 package ch.fhnw.compiler.parser.abs;
 
 import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.RecordStoreTable;
 import ch.fhnw.compiler.context.Routine;
 import ch.fhnw.compiler.context.Scope;
+import ch.fhnw.compiler.context.StoreTable;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
@@ -28,8 +30,14 @@ public class Program implements IAbs.IProgram {
     	
 //    	cpsDecl.checkDeclaration();
 //    	cpsDecl.check(-1);
-    	Compiler.setScope(new Scope(Compiler.getGlobalStoreTable(),Compiler.getRecordStoreTable()));
-    	
+        StoreTable st = Compiler.getGlobalStoreTable();
+        RecordStoreTable rst = Compiler.getRecordStoreTable();
+
+
+    	Compiler.setScope(new Scope(Compiler.getGlobalStoreTable(),Compiler.getRecordStoreTable(), 0));
+
+//    	Compiler.setScope(new Scope());
+
     	if(params!=null)
     	    params.check(null);
 
