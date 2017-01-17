@@ -7,7 +7,7 @@ import ch.fhnw.compiler.scanner.data.TokenTupel;
 import ch.fhnw.compiler.scanner.data.Type;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
-import com.sun.org.apache.xalan.internal.xsltc.runtime.Operators;
+//import com.sun.org.apache.xalan.internal.xsltc.runtime.Operators;
 
 public class ExprDyadic implements IAbs.IExpr {
     TokenTupel operator;
