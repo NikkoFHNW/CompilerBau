@@ -43,6 +43,8 @@ public class VirtualMachine implements IVirtualMachine {
     // - provides a reference to each routine incarnation
     private int fp;
 
+    int count = 0;
+
     public VirtualMachine(ICodeArray code, int storeSize)
             throws ExecutionError
     {
@@ -56,6 +58,7 @@ public class VirtualMachine implements IVirtualMachine {
     private void loadProgram(ICodeArray code) {
         this.code= new IExecInstr[code.getSize()];
         for (int i= 0; i < code.getSize(); i++) {
+            count++;
             this.code[i]= code.get(i).toExecInstr(this);
         }
     }
@@ -194,6 +197,7 @@ public class VirtualMachine implements IVirtualMachine {
     public class DerefExec extends Deref implements IExecInstr {
         public void execute()
         {
+            System.out.println("deref, count: "+count);
             int address= Data.intGet(store[sp - 1]);
             store[sp - 1]= store[address];
             pc= pc + 1;
@@ -205,6 +209,7 @@ public class VirtualMachine implements IVirtualMachine {
     public class StoreExec extends Store implements IExecInstr {
         public void execute()
         {
+            System.out.println("vm - progcounter: "+pc);
             int address= Data.intGet(store[sp - 2]);
             store[address]= store[sp - 1];
             sp= sp - 2;

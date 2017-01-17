@@ -37,6 +37,10 @@ public class ExprLiteral implements IAbs.IExpr {
         return loc + 1;
     }
 
+    public Value getValue() {
+        return value;
+    }
+
     @Override
     public String toString(String indent) {
         return null;

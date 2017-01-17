@@ -66,7 +66,7 @@ public class Parser implements IParser {
 			}
 			return consumedToken;
 		}else{
-			System.out.println("expected: "+ expectedTerm + " actual: " + terminal + "consume count: "+consCount + " linenr: "+ token.getLineNr());
+//			System.out.println("expected: "+ expectedTerm + " actual: " + terminal + "consume count: "+consCount + " linenr: "+ token.getLineNr());
 			throw new ch.fhnw.compiler.error.GrammarError(terminal,expectedTerm);
 		}
 	}

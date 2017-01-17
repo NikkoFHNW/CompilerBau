@@ -53,6 +53,14 @@ public class Value implements IAbs.IExpr {
     }
 
     @Override
+    public String toString() {
+        if (isBool())
+            return boolValue.toString();
+        else
+            return intValue.toString();
+    }
+
+    @Override
     public int getLine() {
         return 0;
     }

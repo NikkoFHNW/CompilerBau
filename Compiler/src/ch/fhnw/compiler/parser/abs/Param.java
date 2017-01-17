@@ -22,6 +22,8 @@ public class Param implements IAbs.IParam {
     IParam typedIdentOrRecParam;
     private Store store;
 
+    private Routine routine;
+
     IParam next;
 
     boolean isProgParam = false;
@@ -48,6 +50,7 @@ public class Param implements IAbs.IParam {
 
 	@Override
 	public void check(Routine routine) throws ContextError {
+        this.routine = routine;
 		// TODO Auto-generated method stub
         String rectype = null;
 		//Erste variante, misachtet bisschen die struktur (ungebrauchte checks bei childs)
@@ -211,10 +214,12 @@ public class Param implements IAbs.IParam {
                 store = Compiler.getScope().getStoreTable().getStore(s);
         }
 
+        int paramSlot =  this.routine.getParamList().indexOf(this);
+
         codeArr.put(loc++, new IInstructions.AllocBlock(1));
-        codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
+        codeArr.put(loc++, new IInstructions.LoadAddrRel(-paramSlot));
         codeArr.put(loc++, new IInstructions.Deref());
-        codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
+        codeArr.put(loc++, new IInstructions.LoadAddrRel(paramSlot));
         codeArr.put(loc++, new IInstructions.Store());
 
         if (next != null)

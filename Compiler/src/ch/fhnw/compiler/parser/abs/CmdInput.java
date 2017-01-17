@@ -1,7 +1,13 @@
 package ch.fhnw.compiler.parser.abs;
 
+import ch.fhnw.compiler.Compiler;
+import ch.fhnw.compiler.context.Store;
+import ch.fhnw.compiler.parser.concSynTree.FactorLiteral;
 import ch.fhnw.compiler.scanner.data.TokenTupel;
+import ch.fhnw.compiler.scanner.data.Type;
+import ch.fhnw.lederer.virtualmachineFS2015.CodeArray;
 import ch.fhnw.lederer.virtualmachineFS2015.ICodeArray;
+import ch.fhnw.lederer.virtualmachineFS2015.IInstructions;
 
 public class CmdInput implements IAbs.ICmd {
     IExpr expr;
@@ -17,7 +23,18 @@ public class CmdInput implements IAbs.ICmd {
 
     @Override
     public int code(int loc) throws ICodeArray.CodeTooSmallError {
-        return 0;
+        ExprStore exprStore = (ExprStore) this.expr;
+        CodeArray codeArr = Compiler.getCodeArray();
+
+        Store store = Compiler.getScope().getStoreTable().getStore(exprStore.ident);
+
+        if (store.getType() == Type.BOOL)
+            codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
+        else
+            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
+
+
+        return loc;
     }
 
     @Override

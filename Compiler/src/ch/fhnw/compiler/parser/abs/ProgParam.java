@@ -23,10 +23,13 @@ public class ProgParam implements IAbs.IParam{
 
     private Store store;
 
+    int count = 0;
+
     IParam next;
     
     
     public ProgParam(TokenTupel optFlowMode,  TokenTupel optChangeMode, IParam typedIdentOrRecParam, IParam next) {
+        count++;
 		// TODO Auto-generated constructor stub
         this.optFlowMode = optFlowMode;
 //        this.optMechMode = optMechMode;
@@ -145,17 +148,15 @@ public class ProgParam implements IAbs.IParam{
 //        }
 
         codeArr.put(loc++, new IInstructions.AllocBlock(1));
-        codeArr.put(loc++, new IInstructions.LoadAddrRel(-store.getAddress()));
+        codeArr.put(loc++, new IInstructions.LoadAddrRel(-this.count));
+        codeArr.put(loc++, new IInstructions.Deref());
+        codeArr.put(loc++, new IInstructions.LoadAddrRel(this.count));
+        codeArr.put(loc++, new IInstructions.Store());
 
 //        if(store.getType().equals(Type.BOOL))
-//        	codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
-//
+//            codeArr.put(loc++, new IInstructions.InputBool(store.getIdent()));
 //        else if(store.getType().equals(Type.INT32))
-//        	codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
-
-        codeArr.put(loc++, new IInstructions.Deref());
-        codeArr.put(loc++, new IInstructions.LoadAddrRel(store.getAddress()));
-        codeArr.put(loc++, new IInstructions.Store());
+//            codeArr.put(loc++, new IInstructions.InputInt(store.getIdent()));
 
         if (next != null)
             loc = next.code(loc);

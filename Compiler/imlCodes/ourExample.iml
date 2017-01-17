@@ -16,6 +16,7 @@ global
     endfun
     
 do
+debugin id;
 Guest g1 := (id,daysOfStay,checkedIn);
  occupied init := checkIn(g1)
 endprogram

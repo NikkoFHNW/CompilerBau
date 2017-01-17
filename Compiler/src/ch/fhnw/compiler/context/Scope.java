@@ -48,9 +48,7 @@ public class Scope {
     }
     
     public boolean addStore(Store store){
-        if (store.getIdent().equals("id")) {
-            System.out.println("bla");
-        }
+
         store.setRelAdress(this.storeTable.getCount());
         store.setAddress(this.startPos+storeTable.getCount());
     	return storeTable.addStore(store);

@@ -77,18 +77,35 @@ public class Compiler {
 
 	public void compile(String filename){
     	 ITokenList tList = Scanner.scan("Compiler/imlCodes/"+filename);
+        System.out.println("\n--------------------------------------------------------------------\n");
+        System.out.println("\n                     Token List\n");
+        System.out.println("\n--------------------------------------------------------------------\n");
+
          System.out.println(tList.toString());
 
  		Parser parser = new Parser(tList);
  		try {
- 			Program prog = parser.parse();
- 			ch.fhnw.compiler.parser.abs.IAbs.IProgram absProg = prog.toAbstrSyntax();
+            System.out.println("\n--------------------------------------------------------------------\n");
+            System.out.println("\n                     Concrete Synthax Tree\n");
+            System.out.println("\n--------------------------------------------------------------------\n");
+
+            Program prog = parser.parse();
+
+//            System.out.println("\n--------------------------------------------------------------------\n");
+//            System.out.println("\nAbstract Synthax Tree\n");
+
+            ch.fhnw.compiler.parser.abs.IAbs.IProgram absProg = prog.toAbstrSyntax();
  			absProg.check();
             absProg.code(0);
             codeArray.resize();
 
             System.out.println("\n--------------------------------------------------------------------\n");
+            System.out.println("\n                     VM Code\n");
+            System.out.println("\n--------------------------------------------------------------------\n");
+
             System.out.println(codeArray.toString());
+
+
 
             VirtualMachine vm = new VirtualMachine(codeArray, 1000);
 
